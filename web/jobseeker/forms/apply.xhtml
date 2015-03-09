@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <f:metadata>
+        <f:viewParam name="jobid" value="#{addToApplyListBean.jobID}" />
+        <f:event type="preRenderView" listener="#{addToApplyListBean.add}" />
+    </f:metadata>
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>        
+        <title>Apply for job</title>
+    </h:head>
+    <body></body>
+</html>
+

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <f:metadata>
+        <f:viewParam name="jobid" value="#{loginJobseekerBean.jobID}" />
+    </f:metadata>
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <title>Jobseeker Login</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGrid id="grid" columns="3" cellpadding="2" style="text-align: right" >
+                <h:outputText value="User: *"/>
+                <p:inputText  id="username" value="#{loginJobseekerBean.userName}" required="true" requiredMessage="field empty" />
+                <p:message for="username" display="icon" /> 
+                
+                <h:outputText value="password: *"/>
+                <p:password id="password" value="#{loginJobseekerBean.password}" required="true" requiredMessage="field empty" />
+                <p:message for="password" display="icon" /> 
+            </h:panelGrid>
+            
+            <p:commandButton value="Login" update="grid" action="#{loginJobseekerBean.login()}" />
+        </h:form>
+    </h:body>
+</html>
+

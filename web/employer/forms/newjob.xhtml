@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"      
+      >
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>        
+        <title>Add new job</title>
+    </h:head>
+    <h:body>
+        <ui:include src="titlebar.xhtml" />
+        <h:form>                
+            <h:panelGrid id="grid" columns="3" cellpadding="2" style="text-align: right" >
+                <h:outputText value="Job Title: *"/>
+                <p:inputText  id="jobtitle" value="#{newJobBean.title}" required="true" requiredMessage="field empty" />
+                <p:message for="jobtitle" display="icon" />
+                
+                <h:outputText value="Link to Advertisement: *"/>
+                <p:inputText  id="advertisement" value="#{newJobBean.advertisementLink}" required="true" requiredMessage="field empty" />
+                <p:message for="advertisement" display="icon" />
+                <f:facet name="footer">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <p:commandButton id="submit" value="Submit" update="grid,formlink" action="#{newJobBean.submit()}" />
+                    </h:panelGroup>
+                </f:facet>
+            </h:panelGrid>
+            <div>
+                Link to job advertisement:
+            </div>
+            <div>
+                <h:outputText id="formlink" value="#{newJobBean.formLink}" />
+            </div>
+        </h:form>
+    </h:body>
+</html>
+
