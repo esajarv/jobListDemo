@@ -20,10 +20,13 @@
                 
                 <h:outputText value="password: *"/>
                 <p:password id="password" value="#{loginJobseekerBean.password}" required="true" requiredMessage="field empty" />
-                <p:message for="password" display="icon" /> 
+                <p:message for="password" display="icon" />
+                <f:facet name="footer">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <p:commandButton value="Login" update="grid" action="#{loginJobseekerBean.login()}" />
+                    </h:panelGroup>
+                </f:facet>
             </h:panelGrid>
-            
-            <p:commandButton value="Login" update="grid" action="#{loginJobseekerBean.login()}" />
         </h:form>
     </h:body>
 </html>
