@@ -14,43 +14,16 @@ import javax.faces.context.FacesContext;
  */
 @Stateless
 public class LoginManager {
-    private String userName;
-    private String password;
-    
-    public boolean authenticate() {
+    public boolean authenticate(Login login) {
         //todo: query database.
-        if (getUserName().compareTo("user") == 0 && getPassword().compareTo("user") == 0) {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", userName);
+        if (login.getUsername().compareTo("user") == 0 && login.getPassword().compareTo("user") == 0) {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", login.getUsername());
             return true;
         }
         return false;
     }
-
-    /**
-     * @return the userName
-     */
-    public String getUserName() {
-        return userName;
-    }
-
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    /**
-     * @return the password
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * @param password the password to set
-     */
-    public void setPassword(String password) {
-        this.password = password;
+    
+    public void register(Login login) {
+        //todo:
     }
 }

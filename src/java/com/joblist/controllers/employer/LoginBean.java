@@ -5,6 +5,7 @@
  */
 package com.joblist.controllers.employer;
 
+import com.joblist.model.Login;
 import com.joblist.model.LoginManager;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -17,6 +18,7 @@ import javax.inject.Named;
 @Named(value = "loginEmployerBean")
 @RequestScoped
 public class LoginBean {
+    private final Login login = new Login();
     @EJB LoginManager loginManager;
 
     /**
@@ -29,32 +31,32 @@ public class LoginBean {
      * @return the userName
      */
     public String getUserName() {
-        return loginManager.getUserName();
+        return login.getUsername();
     }
 
     /**
      * @param userName the userName to set
      */
     public void setUserName(String userName) {
-        loginManager.setUserName(userName);
+        login.setUsername(userName);
     }
 
     /**
      * @return the password
      */
     public String getPassword() {
-        return loginManager.getPassword();
+        return login.getPassword();
     }
 
     /**
      * @param password the password to set
      */
     public void setPassword(String password) {
-        loginManager.setPassword(password);
+        login.setPassword(password);
     }
     
     public String login() {
-        if (loginManager.authenticate()) {
+        if (loginManager.authenticate(login)) {
             return "forms/home?faces-redirect=true";
         }
         return null;

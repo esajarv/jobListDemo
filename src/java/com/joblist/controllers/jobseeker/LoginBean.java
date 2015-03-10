@@ -5,6 +5,7 @@
  */
 package com.joblist.controllers.jobseeker;
 
+import com.joblist.model.Login;
 import com.joblist.model.LoginManager;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -19,6 +20,8 @@ import javax.inject.Named;
 @RequestScoped
 public class LoginBean implements Serializable{
     @EJB LoginManager loginManager;
+    private final Login login = new Login();
+    private final Login registerLogin = new Login();
 
     private String jobID;
 
@@ -32,34 +35,34 @@ public class LoginBean implements Serializable{
      * @return the userName
      */
     public String getUserName() {
-        return loginManager.getUserName();
+        return login.getUsername();
     }
 
     /**
      * @param userName the userName to set
      */
     public void setUserName(String userName) {
-        loginManager.setUserName(userName);
+        login.setUsername(userName);
     }
 
     /**
      * @return the password
      */
     public String getPassword() {
-        return loginManager.getPassword();
+        return login.getPassword();
     }
 
     /**
      * @param password the password to set
      */
     public void setPassword(String password) {
-        loginManager.setPassword(password);
+        login.setPassword(password);
     }
     
     public String login()
     {
         System.out.println("login: jobID = " + jobID);
-        if (loginManager.authenticate()) {
+        if (loginManager.authenticate(login)) {
             if (jobID != null && !jobID.isEmpty()) {
                 return "forms/apply?faces-redirect=true&jobid=" + jobID;
             }
@@ -69,7 +72,27 @@ public class LoginBean implements Serializable{
         }
         return null;
     }
-
+    
+    public String getRegisterUserName() {
+        return registerLogin.getUsername();
+    }
+    
+    public void setRegisterUserName(String userName) {
+        registerLogin.setUsername(userName);
+    }
+    
+    public String getRegisterPassword() {
+        return registerLogin.getPassword();
+    }
+    
+    public void setRegisterPassword(String password) {
+        registerLogin.setPassword(password);
+    }
+    
+    public void register() {
+        loginManager.register(registerLogin);
+    }
+    
     /**
      * @return the jobId
      */

@@ -13,7 +13,8 @@
     </h:head>
     <h:body>
         <h:form>
-            <h:panelGrid id="grid" columns="3" cellpadding="2" style="text-align: right" >
+            <h2>Log in</h2>
+            <h:panelGrid id="login_grid" columns="3" cellpadding="2" style="text-align: right" >
                 <h:outputText value="User: *"/>
                 <p:inputText  id="username" value="#{loginJobseekerBean.userName}" required="true" requiredMessage="field empty" />
                 <p:message for="username" display="icon" /> 
@@ -23,9 +24,32 @@
                 <p:message for="password" display="icon" />
                 <f:facet name="footer">
                     <h:panelGroup style="display:block; text-align:center">
-                        <p:commandButton value="Login" update="grid" action="#{loginJobseekerBean.login()}" />
+                        <p:commandButton value="Login" update="login_grid" action="#{loginJobseekerBean.login()}" />
                     </h:panelGroup>
                 </f:facet>
+            </h:panelGrid>
+            
+            <p:spacer height="10" />
+            <p:separator />
+            
+            <h2>Register</h2>
+            <h:panelGrid id="register_grid" columns="3" cellpadding="2" style="text-align: right" >
+                <h:outputText value="User name: *"/>
+                <p:inputText  id="register_username" value="#{loginJobseekerBean.registerUserName}" required="true" requiredMessage="field empty" />
+                <p:message for="register_username" display="icon" />
+                
+                <h:outputLabel for="pwd1" value="Password: *" />
+                <p:password id="pwd1" value="#{loginJobseekerBean.registerPassword}" match="pwd2" label="Password 1" required="true" />
+                <p:message for="pwd1" display="icon" />
+ 
+                <h:outputLabel for="pwd2" value="retype Password 2: *" />
+                <p:password id="pwd2" value="#{loginJobseekerBean.registerPassword}" label="Password 2" required="true" />
+                <p:message for="pwd2" display="icon" />
+                <f:facet name="footer">
+                    <h:panelGroup style="display:block; text-align:center">
+                        <p:commandButton value="Register" update="register_grid" action="#{loginJobseekerBean.register()}" />
+                    </h:panelGroup>
+                </f:facet>                
             </h:panelGrid>
         </h:form>
     </h:body>
