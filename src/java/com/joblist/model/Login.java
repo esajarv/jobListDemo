@@ -24,6 +24,7 @@ public class Login implements Serializable {
     
     private String username;
     private String password;
+    private String email;
     private boolean wizardDone;
 
     public Long getId() {
@@ -99,5 +100,19 @@ public class Login implements Serializable {
      */
     public void setWizardDone(boolean wizardDone) {
         this.wizardDone = wizardDone;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

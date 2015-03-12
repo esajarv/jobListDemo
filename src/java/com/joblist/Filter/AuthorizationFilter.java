@@ -53,6 +53,7 @@ public class AuthorizationFilter implements Filter {
             HttpServletResponse response, 
             String path) throws IOException{
         if (isAJAXRequest(request)) {
+            System.out.println("AuthorizationFilter: ajax request");
             StringBuilder sb = new StringBuilder();
             sb.append("");
             response.setHeader("Cache-Control", "no-cache");
@@ -79,10 +80,9 @@ public class AuthorizationFilter implements Filter {
     public void doFilter(ServletRequest request, 
                          ServletResponse response, 
                          FilterChain chain) throws IOException, ServletException {
-        //sendRedirect(req.getContextPath() + "/facese/login.xhtml")
+
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         System.out.println("AuthorizationFilter.doFilter: " + httpServletRequest.getRequestURI());
-        
         HttpSession session = httpServletRequest.getSession(false);
         Object userObj = null;
         if (session != null) {

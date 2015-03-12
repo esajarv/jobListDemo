@@ -3,54 +3,61 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      >
     <f:metadata>
         <f:viewParam name="jobid" value="#{loginJobseekerBean.jobID}" />
     </f:metadata>
     <h:head>
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-        <title>Jobseeker Login</title>
+        <title>Job seeker Login</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h2>Log in</h2>
-            <h:panelGrid id="login_grid" columns="3" cellpadding="2" style="text-align: right" >
-                <h:outputText value="User: *"/>
-                <p:inputText  id="username" value="#{loginJobseekerBean.userName}" required="true" requiredMessage="field empty" />
-                <p:message for="username" display="icon" /> 
-                
-                <h:outputText value="password: *"/>
-                <p:password id="password" value="#{loginJobseekerBean.password}" required="true" requiredMessage="field empty" />
-                <p:message for="password" display="icon" />
-                <f:facet name="footer">
-                    <h:panelGroup style="display:block; text-align:center">
-                        <p:commandButton value="Login" update="login_grid" action="#{loginJobseekerBean.login()}" />
-                    </h:panelGroup>
-                </f:facet>
-            </h:panelGrid>
-            
-            <p:spacer height="10" />
-            <p:separator />
-            
-            <h2>Register</h2>
-            <h:panelGrid id="register_grid" columns="3" cellpadding="2" style="text-align: right" >
-                <h:outputText value="User name: *"/>
-                <p:inputText  id="register_username" value="#{loginJobseekerBean.registerUserName}" required="true" requiredMessage="field empty" />
-                <p:message for="register_username" display="icon" />
-                
-                <h:outputLabel for="pwd1" value="Password: *" />
-                <p:password id="pwd1" value="#{loginJobseekerBean.registerPassword}" match="pwd2" label="Password 1" required="true" />
-                <p:message for="pwd1" display="icon" />
- 
-                <h:outputLabel for="pwd2" value="retype Password 2: *" />
-                <p:password id="pwd2" value="#{loginJobseekerBean.registerPassword}" label="Password 2" required="true" />
-                <p:message for="pwd2" display="icon" />
-                <f:facet name="footer">
-                    <h:panelGroup style="display:block; text-align:center">
-                        <p:commandButton value="Register" update="register_grid" action="#{loginJobseekerBean.register()}" />
-                    </h:panelGroup>
-                </f:facet>                
-            </h:panelGrid>
+        <h:form id="form">
+            <p:tabView id="tabview">
+                <p:tab id="login_tab" title="Log in">
+                    <h:panelGrid id="login_grid" columns="3" cellpadding="2" style="text-align: right; margin-left: auto; margin-right: auto" >
+                        <h:outputText value="User: *"/>
+                        <p:inputText  id="username" value="#{loginJobseekerBean.userName}" required="true" requiredMessage="field empty" />
+                        <p:message for="username" display="icon" /> 
+
+                        <h:outputText value="Password: *"/>
+                        <p:password id="password" value="#{loginJobseekerBean.password}" required="true" requiredMessage="field empty" />
+                        <p:message for="password" display="icon" />
+                        <f:facet name="footer">
+                            <h:panelGroup style="display:block; text-align:center">
+                                <p:commandButton id="login_button" value="Login" 
+                                                 update="login_grid" process="login_grid" action="#{loginJobseekerBean.login()}" />
+                            </h:panelGroup>
+                        </f:facet>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab id="register_tab" title="Register">
+                    <h:panelGrid id="register_grid" columns="3" cellpadding="2" style="text-align: right; margin-left: auto; margin-right: auto" >
+                        <h:outputLabel value="User: *" />
+                        <p:inputText id="register_username" value="#{registerBean.userName}" required="true" requiredMessage="field empty" />
+                        <p:message for="register_username" display="icon" />
+
+                        <h:outputText value="Email: *"/>
+                        <p:inputText  id="register_email" value="#{registerBean.email}" required="true" requiredMessage="field empty" />
+                        <p:message for="register_email" display="icon" />
+
+                        <h:outputLabel for="pwd1" value="Password: *" />
+                        <p:password id="pwd1" value="#{registerBean.password}" match="pwd2" label="Password 1" required="true" />
+                        <p:message for="pwd1" display="icon" />
+
+                        <h:outputLabel for="pwd2" value="Retype password: *" />
+                        <p:password id="pwd2" value="#{registerBean.password}" label="Password 2" required="true" />
+                        <p:message for="pwd2" display="icon" />
+                        <f:facet name="footer">
+                            <h:panelGroup style="display:block; text-align:center">
+                                <p:commandButton id="register_button" value="Register" 
+                                                 update="register_grid" process="register_grid" action="#{registerBean.register()}" />
+                            </h:panelGroup>
+                        </f:facet>
+                    </h:panelGrid> 
+                </p:tab>
+            </p:tabView>
         </h:form>
     </h:body>
 </html>

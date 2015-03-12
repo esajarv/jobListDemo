@@ -21,7 +21,6 @@ import javax.inject.Named;
 public class LoginBean implements Serializable{
     @EJB LoginManager loginManager;
     private final Login login = new Login();
-    private final Login registerLogin = new Login();
 
     private String jobID;
 
@@ -66,31 +65,12 @@ public class LoginBean implements Serializable{
             if (jobID != null && !jobID.isEmpty()) {
                 return "forms/apply?faces-redirect=true&jobid=" + jobID;
             }
-            //todo: hae tietokannasta tieto, onko wizard tehty.
+            if (login.isWizardDone()) {
+                return "forms/home?faces-redirect=true";
+            }
             return "forms/wizard?faces-redirect=true";
-            //return "forms/home?faces-redirect=true";
         }
         return null;
-    }
-    
-    public String getRegisterUserName() {
-        return registerLogin.getUsername();
-    }
-    
-    public void setRegisterUserName(String userName) {
-        registerLogin.setUsername(userName);
-    }
-    
-    public String getRegisterPassword() {
-        return registerLogin.getPassword();
-    }
-    
-    public void setRegisterPassword(String password) {
-        registerLogin.setPassword(password);
-    }
-    
-    public void register() {
-        loginManager.register(registerLogin);
     }
     
     /**
