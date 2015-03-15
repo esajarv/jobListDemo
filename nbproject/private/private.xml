@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/koulutus/NetBeansProjects/joblist/src/java/com/joblist/controllers/jobseeker/AddToApplyListBean.java</file>
-            <file>file:/home/koulutus/NetBeansProjects/joblist/src/java/com/joblist/model/Login.java</file>
-            <file>file:/home/koulutus/NetBeansProjects/joblist/src/java/com/joblist/Filter/AuthorizationFilter.java</file>
-            <file>file:/home/koulutus/NetBeansProjects/joblist/src/java/com/joblist/controllers/jobseeker/RegisterBean.java</file>
-            <file>file:/home/koulutus/NetBeansProjects/joblist/src/java/com/joblist/model/LoginManager.java</file>
-            <file>file:/home/koulutus/NetBeansProjects/joblist/src/java/com/joblist/model/LoginInfo.java</file>
-            <file>file:/home/koulutus/NetBeansProjects/joblist/web/jobseeker/login.xhtml</file>
-            <file>file:/home/koulutus/NetBeansProjects/joblist/src/java/com/joblist/controllers/jobseeker/LoginBean.java</file>
+            <file>file:/home/esa/NetBeansProjects/joblist/src/java/com/joblist/model/Login.java</file>
+            <file>file:/home/esa/NetBeansProjects/joblist/src/java/com/joblist/controllers/jobseeker/RegisterBean.java</file>
+            <file>file:/home/esa/NetBeansProjects/joblist/src/java/com/joblist/model/facades/LoginFacade.java</file>
+            <file>file:/home/esa/NetBeansProjects/joblist/src/java/com/joblist/model/facades/LoginFacadeLocal.java</file>
+            <file>file:/home/esa/NetBeansProjects/joblist/src/java/com/joblist/model/LoginManager.java</file>
         </group>
     </open-files>
 </project-private>

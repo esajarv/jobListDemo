@@ -35,7 +35,7 @@
                 <p:tab id="register_tab" title="Register">
                     <h:panelGrid id="register_grid" columns="3" cellpadding="2" style="text-align: right; margin-left: auto; margin-right: auto" >
                         <h:outputLabel value="User: *" />
-                        <p:inputText id="register_username" value="#{registerBean.userName}" required="true" requiredMessage="field empty" />
+                        <p:inputText id="register_username" binding="#{registerBean.userNameInput}" value="#{registerBean.userName}" required="true" requiredMessage="field empty" />
                         <p:message for="register_username" display="icon" />
 
                         <h:outputText value="Email: *"/>

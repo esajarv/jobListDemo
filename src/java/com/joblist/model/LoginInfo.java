@@ -18,25 +18,28 @@ import javax.faces.context.FacesContext;
  */
 @SessionScoped
 public class LoginInfo implements Serializable{
-    final private String userName;
+    private Login login;
     final private Map<String, Integer> jobs = new TreeMap<>();
     final private Map<Integer, String> jobIDs = new HashMap<>();
-    private boolean wizardDone;
     
     public LoginInfo() {
         System.out.println("construct LoginInfo");
         Map<String,Object> sessionMap = 
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        userName = sessionMap.get("username").toString();
-        System.out.println("LoginInfo.LoginInfo: username = " + userName);
+        login = (Login) sessionMap.get("login");
+        System.out.println("LoginInfo.LoginInfo: username = " + login.getUsername());
     }
     
     public void logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     }
+    
+    public Login getLogin() {
+        return login;
+    }
 
     public String getUserName() {
-        return userName;
+        return login.getUsername();
     }
     public Iterable<Map.Entry<String,Integer>> getJobs() {
         return jobs.entrySet();
@@ -76,13 +79,7 @@ public class LoginInfo implements Serializable{
      * @return the wizardDone
      */
     public boolean isWizardDone() {
-        return wizardDone;
+        return login.isWizardDone();
     }
 
-    /**
-     * @param wizardDone the wizardDone to set
-     */
-    public void setWizardDone(boolean wizardDone) {
-        this.wizardDone = wizardDone;
-    }
 }

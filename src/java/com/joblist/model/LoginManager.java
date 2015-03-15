@@ -5,6 +5,8 @@
  */
 package com.joblist.model;
 
+import com.joblist.model.facades.LoginFacadeLocal;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 
@@ -14,16 +16,26 @@ import javax.faces.context.FacesContext;
  */
 @Stateless
 public class LoginManager {
-    public boolean authenticate(Login login) {
-        //todo: query database.
-        if (login.getUsername().compareTo("user") == 0 && login.getPassword().compareTo("user") == 0) {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("username", login.getUsername());
-            return true;
+    @EJB
+    LoginFacadeLocal loginFacade;
+    
+    public Login authenticate(Login login) {
+        Login f = loginFacade.find(login.getUsername());
+        if (f == null) {
+            return null;
         }
-        return false;
+        if (login.getPassword().compareTo(f.getPassword()) == 0) {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("login", f);
+            return f;
+        }
+        return null;
+    }
+    
+    public boolean isUserNameReserved(String userName) {
+        return loginFacade.find(userName) != null;
     }
     
     public void register(Login login) {
-        //todo:
+        loginFacade.create(login);
     }
 }

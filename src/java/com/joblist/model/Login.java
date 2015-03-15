@@ -7,9 +7,8 @@ package com.joblist.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -18,38 +17,29 @@ import javax.persistence.Id;
 @Entity
 public class Login implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     
+    @Id
     private String username;
     private String password;
     private String email;
-    private boolean wizardDone;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @OneToOne
+    private JobSeeker jobSeeker;
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (username != null ? username.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Login)) {
             return false;
         }
         Login other = (Login) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.username == null && other.username != null) || 
+                (this.username != null && !this.username.equals(other.username))) {
             return false;
         }
         return true;
@@ -57,7 +47,7 @@ public class Login implements Serializable {
 
     @Override
     public String toString() {
-        return "com.joblist.model.Login[ id=" + id + " ]";
+        return "com.joblist.model.Login[ username=" + username + " ]";
     }
 
     /**
@@ -92,14 +82,7 @@ public class Login implements Serializable {
      * @return the wizardDone
      */
     public boolean isWizardDone() {
-        return wizardDone;
-    }
-
-    /**
-     * @param wizardDone the wizardDone to set
-     */
-    public void setWizardDone(boolean wizardDone) {
-        this.wizardDone = wizardDone;
+        return jobSeeker != null;
     }
 
     /**
@@ -114,5 +97,19 @@ public class Login implements Serializable {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    /**
+     * @return the jobSeeker
+     */
+    public JobSeeker getJobSeeker() {
+        return jobSeeker;
+    }
+
+    /**
+     * @param jobSeeker the jobSeeker to set
+     */
+    public void setJobSeeker(JobSeeker jobSeeker) {
+        this.jobSeeker = jobSeeker;
     }
 }

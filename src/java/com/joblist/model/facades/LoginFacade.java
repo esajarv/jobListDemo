@@ -16,7 +16,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class LoginFacade extends AbstractFacade<Login> implements LoginFacadeLocal {
-    @PersistenceContext(unitName = "JoblistPU")
+    @PersistenceContext(unitName="JoblistPU")
     private EntityManager em;
 
     @Override

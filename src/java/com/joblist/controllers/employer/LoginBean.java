@@ -56,7 +56,7 @@ public class LoginBean {
     }
     
     public String login() {
-        if (loginManager.authenticate(login)) {
+        if (loginManager.authenticate(login) != null) {
             return "forms/home?faces-redirect=true";
         }
         return null;

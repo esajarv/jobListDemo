@@ -5,10 +5,13 @@
  */
 package com.joblist.controllers.jobseeker;
 
-import com.joblist.model.Jobseeker;
+import com.joblist.model.JobSeeker;
+import com.joblist.model.Login;
 import com.joblist.model.LoginInfo;
+import com.joblist.model.facades.LoginFacadeLocal;
 import javax.inject.Named;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -28,13 +31,17 @@ import org.primefaces.model.UploadedFile;
 public class WizardBean implements Serializable {
     @Inject LoginInfo loginInfo;
     
-    private Jobseeker applicant = new Jobseeker();
+    @EJB
+    LoginFacadeLocal loginFacade;
+    
+    private JobSeeker applicant;
     private UploadedFile CV;
     
     public WizardBean() {
+        applicant = new JobSeeker();
     }
 
-    public Jobseeker getApplicant() {
+    public JobSeeker getApplicant() {
         return applicant;
     }
     
@@ -52,7 +59,9 @@ public class WizardBean implements Serializable {
     }
     
     public String save() {
-        loginInfo.setWizardDone(true);
+        Login l = loginInfo.getLogin();
+        l.setJobSeeker(applicant);
+        loginFacade.edit(l);
         return "home.xhtml";
     }
      

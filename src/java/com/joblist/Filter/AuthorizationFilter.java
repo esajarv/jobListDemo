@@ -86,7 +86,7 @@ public class AuthorizationFilter implements Filter {
         HttpSession session = httpServletRequest.getSession(false);
         Object userObj = null;
         if (session != null) {
-            userObj = session.getAttribute("username");
+            userObj = session.getAttribute("login");
         }
         if (userObj == null) {
             if (loginPagePath != null) {

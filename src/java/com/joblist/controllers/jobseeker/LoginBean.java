@@ -20,7 +20,7 @@ import javax.inject.Named;
 @RequestScoped
 public class LoginBean implements Serializable{
     @EJB LoginManager loginManager;
-    private final Login login = new Login();
+    private Login login = new Login();
 
     private String jobID;
 
@@ -61,7 +61,9 @@ public class LoginBean implements Serializable{
     public String login()
     {
         System.out.println("login: jobID = " + jobID);
-        if (loginManager.authenticate(login)) {
+        Login tmp = loginManager.authenticate(login);
+        if (tmp != null) {
+            login = tmp;
             if (jobID != null && !jobID.isEmpty()) {
                 return "forms/apply?faces-redirect=true&jobid=" + jobID;
             }
