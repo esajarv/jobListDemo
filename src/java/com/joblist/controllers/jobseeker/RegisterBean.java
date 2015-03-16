@@ -24,6 +24,7 @@ public class RegisterBean {
     @EJB LoginManager loginManager;
     private final Login login = new Login();
     private UIComponent userNameInput;
+    private int tabActiveIndex;
     
     public UIComponent getUserNameInput() {
         return userNameInput;
@@ -53,7 +54,7 @@ public class RegisterBean {
 
     public void setEmail(String email) {
         login.setEmail(email);
-    }    
+    }
     
     public String getPassword() {
         return login.getPassword();
@@ -71,7 +72,22 @@ public class RegisterBean {
                     FacesContext.getCurrentInstance()), msg);
         } else {
             loginManager.register(login);
+            tabActiveIndex = 0;
         }
-        return null;
+        return "login";
+    }
+
+    /**
+     * @return the tabActiveIndex
+     */
+    public int getTabActiveIndex() {
+        return tabActiveIndex;
+    }
+
+    /**
+     * @param tabActiveIndex the tabActiveIndex to set
+     */
+    public void setTabActiveIndex(int tabActiveIndex) {
+        this.tabActiveIndex = tabActiveIndex;
     }
 }

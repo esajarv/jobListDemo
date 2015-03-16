@@ -21,7 +21,6 @@ import javax.inject.Named;
 public class LoginBean implements Serializable{
     @EJB LoginManager loginManager;
     private Login login = new Login();
-
     private String jobID;
 
     /**

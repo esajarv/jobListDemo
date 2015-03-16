@@ -14,7 +14,7 @@
     </h:head>
     <h:body>
         <h:form id="form">
-            <p:tabView id="tabview">
+            <p:tabView id="tabview" activeIndex="#{registerBean.tabActiveIndex}">
                 <p:tab id="login_tab" title="Log in">
                     <h:panelGrid id="login_grid" columns="3" cellpadding="2" style="text-align: right; margin-left: auto; margin-right: auto" >
                         <h:outputText value="User: *"/>
@@ -52,7 +52,7 @@
                         <f:facet name="footer">
                             <h:panelGroup style="display:block; text-align:center">
                                 <p:commandButton id="register_button" value="Register" 
-                                                 update="register_grid" process="register_grid" action="#{registerBean.register()}" />
+                                                 update="register_grid,tabview" process="register_grid" action="#{registerBean.register()}" />
                             </h:panelGroup>
                         </f:facet>
                     </h:panelGrid> 

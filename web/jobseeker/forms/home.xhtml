@@ -5,6 +5,9 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       >
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{titleBarBean.show(true)}" />
+    </f:metadata>
     <h:head>
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>        
         <title>home</title>
