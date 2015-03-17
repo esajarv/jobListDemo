@@ -5,7 +5,7 @@
  */
 package com.joblist.model.facades;
 
-import com.joblist.model.Login;
+import com.joblist.model.JobSeekerLogin;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -14,19 +14,19 @@ import javax.ejb.Local;
  * @author koulutus
  */
 @Local
-public interface LoginFacadeLocal {
+public interface JobSeekerLoginFacadeLocal {
 
-    void create(Login login);
+    void create(JobSeekerLogin login);
 
-    void edit(Login login);
+    void edit(JobSeekerLogin login);
 
-    void remove(Login login);
+    void remove(JobSeekerLogin login);
 
-    Login find(Object id);
+    JobSeekerLogin find(Object id);
 
-    List<Login> findAll();
+    List<JobSeekerLogin> findAll();
 
-    List<Login> findRange(int[] range);
+    List<JobSeekerLogin> findRange(int[] range);
 
     int count();
     

@@ -5,8 +5,8 @@
  */
 package com.joblist.controllers.jobseeker;
 
-import com.joblist.model.Login;
-import com.joblist.model.LoginManager;
+import com.joblist.model.JobSeekerLogin;
+import com.joblist.model.JobSeekerLoginManager;
 import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -19,8 +19,8 @@ import javax.inject.Named;
 @Named(value = "loginJobseekerBean")
 @RequestScoped
 public class LoginBean implements Serializable{
-    @EJB LoginManager loginManager;
-    private Login login = new Login();
+    @EJB JobSeekerLoginManager loginManager;
+    private JobSeekerLogin login = new JobSeekerLogin();
     private String jobID;
 
     /**
@@ -60,7 +60,7 @@ public class LoginBean implements Serializable{
     public String login()
     {
         System.out.println("login: jobID = " + jobID);
-        Login tmp = loginManager.authenticate(login);
+        JobSeekerLogin tmp = loginManager.authenticate(login);
         if (tmp != null) {
             login = tmp;
             if (jobID != null && !jobID.isEmpty()) {

@@ -6,9 +6,9 @@
 package com.joblist.controllers.jobseeker;
 
 import com.joblist.model.JobSeeker;
-import com.joblist.model.Login;
-import com.joblist.model.LoginInfo;
-import com.joblist.model.facades.LoginFacadeLocal;
+import com.joblist.model.JobSeekerLogin;
+import com.joblist.model.JobSeekerLoginInfo;
+import com.joblist.model.facades.JobSeekerLoginFacadeLocal;
 import javax.inject.Named;
 import java.io.Serializable;
 import javax.ejb.EJB;
@@ -29,10 +29,10 @@ import org.primefaces.model.UploadedFile;
 @Named(value = "wizardBean")
 @SessionScoped
 public class WizardBean implements Serializable {
-    @Inject LoginInfo loginInfo;
+    @Inject JobSeekerLoginInfo loginInfo;
     
     @EJB
-    LoginFacadeLocal loginFacade;
+    JobSeekerLoginFacadeLocal loginFacade;
     
     private JobSeeker applicant;
     private UploadedFile CV;
@@ -59,7 +59,7 @@ public class WizardBean implements Serializable {
     }
     
     public String save() {
-        Login l = loginInfo.getLogin();
+        JobSeekerLogin l = loginInfo.getLogin();
         l.setJobSeeker(applicant);
         loginFacade.edit(l);
         return "home.xhtml";

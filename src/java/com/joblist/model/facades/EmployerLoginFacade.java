@@ -5,18 +5,18 @@
  */
 package com.joblist.model.facades;
 
-import com.joblist.model.Login;
+import com.joblist.model.EmployerLogin;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author koulutus
+ * @author esa
  */
 @Stateless
-public class LoginFacade extends AbstractFacade<Login> implements LoginFacadeLocal {
-    @PersistenceContext(unitName="JoblistPU")
+public class EmployerLoginFacade extends AbstractFacade<EmployerLogin> implements EmployerLoginFacadeLocal {
+    @PersistenceContext(unitName = "JoblistPU")
     private EntityManager em;
 
     @Override
@@ -24,8 +24,8 @@ public class LoginFacade extends AbstractFacade<Login> implements LoginFacadeLoc
         return em;
     }
 
-    public LoginFacade() {
-        super(Login.class);
+    public EmployerLoginFacade() {
+        super(EmployerLogin.class);
     }
     
 }

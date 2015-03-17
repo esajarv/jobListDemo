@@ -5,8 +5,8 @@
  */
 package com.joblist.controllers.jobseeker;
 
-import com.joblist.model.Login;
-import com.joblist.model.LoginManager;
+import com.joblist.model.JobSeekerLogin;
+import com.joblist.model.JobSeekerLoginManager;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -21,8 +21,8 @@ import javax.faces.context.FacesContext;
 @Named(value = "registerBean")
 @RequestScoped
 public class RegisterBean {
-    @EJB LoginManager loginManager;
-    private final Login login = new Login();
+    @EJB JobSeekerLoginManager loginManager;
+    private final JobSeekerLogin login = new JobSeekerLogin();
     private UIComponent userNameInput;
     private int tabActiveIndex;
     

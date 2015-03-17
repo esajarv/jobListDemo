@@ -5,9 +5,11 @@
  */
 package com.joblist.controllers.jobseeker;
 
-import com.joblist.model.LoginInfo;
+import com.joblist.model.JobSeekerLoginInfo;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,7 +21,9 @@ import javax.inject.Named;
 @Named(value = "jobFormBean")
 @SessionScoped
 public class JobFormBean implements Serializable{
-    @Inject LoginInfo loginInfo;
+    @Inject JobSeekerLoginInfo loginInfo;
+    final private Map<String, Integer> jobs = new TreeMap<>();
+    final private Map<Integer, String> jobIDs = new HashMap<>();    
     
     /**
      * Creates a new instance of JobFormBean
@@ -28,11 +32,11 @@ public class JobFormBean implements Serializable{
     }
     
     public boolean getLoggedWithJob() {
-        return loginInfo.hasJobs();
+        return !jobIDs.isEmpty();
     }
     
     public Iterable<Map.Entry<String,Integer>> getJobs() {
-        return loginInfo.getJobs();
+        return jobs.entrySet();
     }
     
     public String logout() {
@@ -42,15 +46,36 @@ public class JobFormBean implements Serializable{
     }
     
     public void applyJob(Integer jobID) {
-        //todo:
-        loginInfo.removeJob(jobID);
-    }
-    
-    public void removeJob(Integer jobID) {
-        loginInfo.removeJob(jobID);
+        removeJob(jobID);
     }
     
     public String getUser() {
         return loginInfo.getUserName();
+    }
+    
+    public void removeJob(Integer jobID) {
+        String name = jobIDs.remove(jobID);
+        jobs.remove(name);
+    }
+    
+    public void addJobID(Integer jobID) {
+        String name = "Web developer: " + jobID;
+        jobIDs.put(jobID, name);
+        jobs.put(name, jobID);
+    }
+    
+    public void addJobID(String jobID) {
+        Integer iJob = parseJob(jobID);
+        if (iJob != null) {
+            addJobID(iJob);
+        }
+    }
+    
+    private Integer parseJob(Object jobID) {
+        Integer j = null;
+        try {
+            j = Integer.parseInt(jobID.toString());
+        } catch(NumberFormatException e) {}
+        return j;
     }
 }

@@ -5,7 +5,7 @@
  */
 package com.joblist.model;
 
-import com.joblist.model.facades.LoginFacadeLocal;
+import com.joblist.model.facades.JobSeekerLoginFacadeLocal;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
@@ -15,12 +15,12 @@ import javax.faces.context.FacesContext;
  * @author koulutus
  */
 @Stateless
-public class LoginManager {
+public class JobSeekerLoginManager {
     @EJB
-    LoginFacadeLocal loginFacade;
+    JobSeekerLoginFacadeLocal jobSeekerLoginFacade;
     
-    public Login authenticate(Login login) {
-        Login f = loginFacade.find(login.getUsername());
+    public JobSeekerLogin authenticate(JobSeekerLogin login) {
+        JobSeekerLogin f = jobSeekerLoginFacade.find(login.getUsername());
         if (f == null) {
             return null;
         }
@@ -32,10 +32,10 @@ public class LoginManager {
     }
     
     public boolean isUserNameReserved(String userName) {
-        return loginFacade.find(userName) != null;
+        return jobSeekerLoginFacade.find(userName) != null;
     }
     
-    public void register(Login login) {
-        loginFacade.create(login);
+    public void register(JobSeekerLogin login) {
+        jobSeekerLoginFacade.create(login);
     }
 }

@@ -5,7 +5,7 @@
  */
 package com.joblist.controllers.jobseeker;
 
-import com.joblist.model.LoginInfo;
+import com.joblist.model.JobSeekerLoginInfo;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -20,7 +20,8 @@ import javax.inject.Inject;
 @Named(value = "addToApplyListBean")
 @RequestScoped
 public class AddToApplyListBean {
-    @Inject LoginInfo loginInfo;
+    @Inject JobSeekerLoginInfo loginInfo;
+    @Inject JobFormBean jobForm;
     private String jobID;
 
     /**
@@ -32,7 +33,7 @@ public class AddToApplyListBean {
     public void add() throws IOException {
         System.out.println("AddJobBean.addJob: jobid = " + jobID);
         ExternalContext c = FacesContext.getCurrentInstance().getExternalContext();
-        loginInfo.addJobID(jobID);
+        jobForm.addJobID(jobID);
         if (loginInfo.isWizardDone()) {
             c.redirect("home.xhtml");
         } else {
