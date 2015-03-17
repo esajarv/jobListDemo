@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.joblist.controllers.jobseeker;
+package com.joblist.controllers.employer;
 
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -13,11 +13,9 @@ import javax.faces.context.FacesContext;
  *
  * @author esa
  */
-@Named(value = "jobSeekerTitleBarBean")
+@Named(value = "employerTitleBarBean")
 @RequestScoped
 public class TitleBarBean {
-    
-    private boolean showUploadCV;
 
     /**
      * Creates a new instance of TitleBarBean
@@ -25,32 +23,13 @@ public class TitleBarBean {
     public TitleBarBean() {
     }
     
-    public void show(boolean showUploadCV) 
-    {
-        setShowUploadCV(showUploadCV);
-    }
-    
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/jobseeker/login";
-    }
-
-    /**
-     * @return the showUploadCV
-     */
-    public boolean isShowUploadCV() {
-        return showUploadCV;
-    }
-
-    /**
-     * @param showUploadCV the showUploadCV to set
-     */
-    public void setShowUploadCV(boolean showUploadCV) {
-        this.showUploadCV = showUploadCV;
+        return "/employer/login";
     }
     
     public String getUsername() {
         return "user"; //todo
-    }
+    }    
     
 }
