@@ -24,10 +24,6 @@ public class JobSeekerLoginInfo {
         System.out.println("JobSeekerLoginInfo: username = " + login.getUsername());
     }
     
-    public void logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-    }
-    
     public JobSeekerLogin getLogin() {
         return login;
     }

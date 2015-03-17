@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -40,7 +41,7 @@ public class JobFormBean implements Serializable{
     }
     
     public String logout() {
-        loginInfo.logout();
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         System.out.println("logout");
         return "/jobseeker/login";
     }

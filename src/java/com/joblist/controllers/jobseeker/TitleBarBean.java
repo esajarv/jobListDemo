@@ -7,6 +7,7 @@ package com.joblist.controllers.jobseeker;
 
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -27,6 +28,10 @@ public class TitleBarBean {
     public void show(boolean showUploadCV) 
     {
         setShowUploadCV(showUploadCV);
+    }
+    
+    public void logout() {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     }
 
     /**

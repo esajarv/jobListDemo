@@ -18,7 +18,7 @@ import javax.faces.context.FacesContext;
  *
  * @author koulutus
  */
-@Named(value = "registerBean")
+@Named(value = "jobSeekerRegisterBean")
 @RequestScoped
 public class RegisterBean {
     @EJB JobSeekerLoginManager loginManager;

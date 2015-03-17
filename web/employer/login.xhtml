@@ -10,21 +10,51 @@
         <title>Employer Login</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h:panelGrid id="grid" columns="3" cellpadding="2" style="text-align: right">
-                <h:outputText value="User: *"/>
-                <p:inputText  id="username" value="#{loginEmployerBean.userName}" required="true" requiredMessage="field empty" />
-                <p:message for="username" display="icon" /> 
-                
-                <h:outputText value="password: *"/>
-                <p:password id="password" value="#{loginEmployerBean.password}" required="true" requiredMessage="field empty" />
-                <p:message for="password" display="icon" />
-                <f:facet name="footer">
-                    <h:panelGroup style="display:block; text-align:center">
-                        <p:commandButton value="Login" update="grid" action="#{loginEmployerBean.login()}" />
-                    </h:panelGroup>
-                </f:facet>                
-            </h:panelGrid>
+        <h:form id="form">
+            <p:tabView id="tabview" activeIndex="#{employerRegisterBean.tabActiveIndex}">
+                <p:tab id="login_tab" title="Log in">
+                    <h:panelGrid id="login_grid" columns="3" cellpadding="2" style="text-align: right; margin-left: auto; margin-right: auto" >
+                        <h:outputText value="User: *"/>
+                        <p:inputText  id="username" value="#{loginEmployerBean.userName}" required="true" requiredMessage="field empty" />
+                        <p:message for="username" display="icon" /> 
+
+                        <h:outputText value="Password: *"/>
+                        <p:password id="password" value="#{loginEmployerBean.password}" required="true" requiredMessage="field empty" />
+                        <p:message for="password" display="icon" />
+                        <f:facet name="footer">
+                            <h:panelGroup style="display:block; text-align:center">
+                                <p:commandButton id="login_button" value="Login" 
+                                                 update="login_grid" process="login_grid" action="#{loginEmployerBean.login()}" />
+                            </h:panelGroup>
+                        </f:facet>
+                    </h:panelGrid>
+                </p:tab>
+                <p:tab id="register_tab" title="Register">
+                    <h:panelGrid id="register_grid" columns="3" cellpadding="2" style="text-align: right; margin-left: auto; margin-right: auto" >
+                        <h:outputLabel value="User: *" />
+                        <p:inputText id="register_username" binding="#{employerRegisterBean.userNameInput}" value="#{employerRegisterBean.userName}" required="true" requiredMessage="field empty" />
+                        <p:message for="register_username" display="icon" />
+
+                        <h:outputText value="Email: *"/>
+                        <p:inputText  id="register_email" value="#{employerRegisterBean.email}" required="true" requiredMessage="field empty" />
+                        <p:message for="register_email" display="icon" />
+
+                        <h:outputLabel for="pwd1" value="Password: *" />
+                        <p:password id="pwd1" value="#{employerRegisterBean.password}" match="pwd2" label="Password 1" required="true" />
+                        <p:message for="pwd1" display="icon" />
+
+                        <h:outputLabel for="pwd2" value="Retype password: *" />
+                        <p:password id="pwd2" value="#{employerRegisterBean.password}" label="Password 2" required="true" />
+                        <p:message for="pwd2" display="icon" />
+                        <f:facet name="footer">
+                            <h:panelGroup style="display:block; text-align:center">
+                                <p:commandButton id="register_button" value="Register" 
+                                                 update="register_grid,tabview" process="register_grid" action="#{employerRegisterBean.register()}" />
+                            </h:panelGroup>
+                        </f:facet>
+                    </h:panelGrid>
+                </p:tab>
+            </p:tabView>
         </h:form>
     </h:body>
 </html>

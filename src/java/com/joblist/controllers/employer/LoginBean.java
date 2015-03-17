@@ -5,8 +5,8 @@
  */
 package com.joblist.controllers.employer;
 
-import com.joblist.model.JobSeekerLogin;
-import com.joblist.model.JobSeekerLoginManager;
+import com.joblist.model.EmployerLogin;
+import com.joblist.model.EmployerLoginManager;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -18,8 +18,8 @@ import javax.inject.Named;
 @Named(value = "loginEmployerBean")
 @RequestScoped
 public class LoginBean {
-    private final JobSeekerLogin login = new JobSeekerLogin();
-    @EJB JobSeekerLoginManager loginManager;
+    private final EmployerLogin login = new EmployerLogin();
+    @EJB EmployerLoginManager loginManager;
 
     /**
      * Creates a new instance of LoginBean
