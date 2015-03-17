@@ -20,7 +20,7 @@ public class EmployerLoginInfo {
     public EmployerLoginInfo() {
         Map<String,Object> sessionMap = 
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        login = (EmployerLogin) sessionMap.get("login");
+        login = (EmployerLogin) sessionMap.get("employerlogin");
         System.out.println("EmployerLoginInfo: username = " + login.getUsername());
     }
     

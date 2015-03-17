@@ -30,6 +30,7 @@ public class AuthorizationFilter implements Filter {
     private String loginPagePath;
     private String loginUrlParameter;
     private String loggedInRedirectPath;
+    private String loginAttributeName;
     
     private URI createRedirectUri(ServletRequest request, String path) {
         UriBuilder ub = UriBuilder.fromPath(path);
@@ -73,6 +74,7 @@ public class AuthorizationFilter implements Filter {
             loginPagePath = filterConfig.getInitParameter("loginPagePath");
             loggedInRedirectPath = filterConfig.getInitParameter("loggedInRedirectPath");
             loginUrlParameter = filterConfig.getInitParameter("loginUrlParameter");
+            loginAttributeName = filterConfig.getInitParameter("loginAttributeName");
         }
     }
 
@@ -86,7 +88,7 @@ public class AuthorizationFilter implements Filter {
         HttpSession session = httpServletRequest.getSession(false);
         Object userObj = null;
         if (session != null) {
-            userObj = session.getAttribute("login");
+            userObj = session.getAttribute(loginAttributeName);
         }
         if (userObj == null) {
             if (loginPagePath != null) {

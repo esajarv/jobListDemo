@@ -6,6 +6,7 @@
 package com.joblist.model;
 
 import com.joblist.model.facades.JobSeekerLoginFacadeLocal;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
@@ -20,13 +21,16 @@ public class JobSeekerLoginManager {
     JobSeekerLoginFacadeLocal jobSeekerLoginFacade;
     
     public JobSeekerLogin authenticate(JobSeekerLogin login) {
-        JobSeekerLogin f = jobSeekerLoginFacade.find(login.getUsername());
-        if (f == null) {
+        JobSeekerLogin jsl = jobSeekerLoginFacade.find(login.getUsername());
+        if (jsl == null) {
             return null;
         }
-        if (login.getPassword().compareTo(f.getPassword()) == 0) {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("login", f);
-            return f;
+        if (login.getPassword().compareTo(jsl.getPassword()) == 0) {
+            Map<String, Object> sessionMap = 
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            sessionMap.put("jobseekerlogin", jsl);
+            sessionMap.put("username", jsl.getUsername());
+            return jsl;
         }
         return null;
     }

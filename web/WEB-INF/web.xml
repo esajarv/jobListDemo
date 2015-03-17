@@ -28,6 +28,10 @@
             <param-name>loggedInRedirectPath</param-name>
             <param-value>/joblist/faces/jobseeker/forms/home.xhtml</param-value>
         </init-param>
+        <init-param>
+            <param-name>loginAttributeName</param-name>
+            <param-value>jobseekerlogin</param-value>
+        </init-param>        
     </filter>
     <filter>
         <filter-name>AuthorizationFilterForJobseeker</filter-name>
@@ -40,6 +44,10 @@
             <param-name>loginUrlParameter</param-name>
             <param-value>jobid</param-value>
         </init-param>
+        <init-param>
+            <param-name>loginAttributeName</param-name>
+            <param-value>jobseekerlogin</param-value>
+        </init-param>
     </filter>
     <filter>
         <filter-name>AuthorizationFilterForEmployerLogin</filter-name>
@@ -48,6 +56,10 @@
             <param-name>loggedInRedirectPath</param-name>
             <param-value>/joblist/faces/employer/forms/home.xhtml</param-value>
         </init-param>
+        <init-param>
+            <param-name>loginAttributeName</param-name>
+            <param-value>employerlogin</param-value>
+        </init-param>
     </filter>
     <filter>
         <filter-name>AuthorizationFilterForEmployer</filter-name>
@@ -55,6 +67,10 @@
         <init-param>
             <param-name>loginPagePath</param-name>
             <param-value>/joblist/faces/employer/login.xhtml</param-value>
+        </init-param>
+        <init-param>
+            <param-name>loginAttributeName</param-name>
+            <param-value>employerlogin</param-value>
         </init-param>
     </filter>
     <filter-mapping>

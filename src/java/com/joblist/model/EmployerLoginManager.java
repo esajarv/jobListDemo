@@ -6,6 +6,7 @@
 package com.joblist.model;
 
 import com.joblist.model.facades.EmployerLoginFacadeLocal;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
@@ -25,7 +26,10 @@ public class EmployerLoginManager {
             return null;
         }
         if (login.getPassword().compareTo(el.getPassword()) == 0) {
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("login", el);
+            Map<String, Object> sessionMap = 
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            sessionMap.put("employerlogin", el);
+            sessionMap.put("username", el.getUsername());
             return el;
         }
         return null;
