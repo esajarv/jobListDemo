@@ -6,6 +6,9 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"      
       >
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{employerTitleBarBean.show(false, 'home?faces-redirect=true')}" />
+    </f:metadata>
     <h:head>
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>        
         <title>Add new job</title>
@@ -31,7 +34,7 @@
                 Link to job advertisement:
             </div>
             <div>
-                <h:outputText id="formlink" value="#{newJobBean.formLink}" />
+                <p:inputTextarea id="formlink" readonly="true" cols="40" value="#{newJobBean.formLink}" />
             </div>
         </h:form>
     </h:body>

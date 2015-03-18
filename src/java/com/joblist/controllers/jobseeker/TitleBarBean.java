@@ -5,6 +5,7 @@
  */
 package com.joblist.controllers.jobseeker;
 
+import java.util.Map;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -32,7 +33,7 @@ public class TitleBarBean {
     
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        return "/jobseeker/login";
+        return "/jobseeker/login?faces-redirect=true";
     }
 
     /**
@@ -50,7 +51,9 @@ public class TitleBarBean {
     }
     
     public String getUsername() {
-        return "user"; //todo
+        Map<String, Object> sessionMap =
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+        return sessionMap.get("username").toString();
     }
     
 }

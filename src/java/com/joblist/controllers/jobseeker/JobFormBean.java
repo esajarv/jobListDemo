@@ -40,12 +40,6 @@ public class JobFormBean implements Serializable{
         return jobs.entrySet();
     }
     
-    public String logout() {
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-        System.out.println("logout");
-        return "/jobseeker/login";
-    }
-    
     public void applyJob(Integer jobID) {
         removeJob(jobID);
     }

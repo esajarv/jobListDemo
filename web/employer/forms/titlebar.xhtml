@@ -10,6 +10,8 @@
         <header style="position: fixed;z-index: 100;left:0; top:0; width: 100%;">
             <h:form>
                 <p:menubar style="font-size:70%" >
+                    <p:menuitem value="Add new job" url="newjob.xhtml" icon="ui-icon-pencil" rendered="#{employerTitleBarBean.showAddJob}" />
+                    <p:menuitem value="back" icon="fa fa-arrow-left" action="#{employerTitleBarBean.back()}" rendered="#{employerTitleBarBean.showBack}"/>
                     <f:facet name="options">
                         <p:menuButton value="#{employerTitleBarBean.username}">
                             <p:menuitem value="Settings" icon="ui-icon-gear"/>

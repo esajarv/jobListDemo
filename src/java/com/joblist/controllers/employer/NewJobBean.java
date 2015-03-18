@@ -5,8 +5,13 @@
  */
 package com.joblist.controllers.employer;
 
+import com.joblist.model.EmployerLoginInfo;
+import com.joblist.model.Job;
+import com.joblist.model.facades.JobFacadeLocal;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -16,8 +21,15 @@ import javax.inject.Named;
 @Named(value = "newJobBean")
 @RequestScoped
 public class NewJobBean implements Serializable {
-    private String title;
-    private String advertisementLink;
+    private Job job = new Job();
+    
+    @Inject
+    HomeBean homeBean;
+    
+    @EJB
+    EmployerLoginInfo loginInfo;
+    @EJB
+    JobFacadeLocal jobFacade;
     private String formLink;
 
     /**
@@ -30,33 +42,37 @@ public class NewJobBean implements Serializable {
      * @return the title
      */
     public String getTitle() {
-        return title;
+        return job.getTitle();
     }
 
     /**
      * @param title the title to set
      */
     public void setTitle(String title) {
-        this.title = title;
+        job.setTitle(title);
     }
 
     /**
      * @return the advertisementLink
      */
     public String getAdvertisementLink() {
-        return advertisementLink;
+        return job.getAdvertisementLink();
     }
 
     /**
      * @param advertisementLink the advertisementLink to set
      */
     public void setAdvertisementLink(String advertisementLink) {
-        this.advertisementLink = advertisementLink;
+        job.setAdvertisementLink(advertisementLink);
     }
     
     public void submit()
     {
-        formLink = "<a href=\"http://localhost:8080/Joblist/faces/jobseeker/forms/apply.xhtml?jobid=123\"> Apply </a>";
+        job.setEmployerID(loginInfo.getLogin().getId());
+        jobFacade.create(job);
+        homeBean.notifyJobsModified();
+        formLink = "<a href=\"http://localhost:8080/Joblist/faces/jobseeker/forms/apply.xhtml?jobid="
+                + job.getId() + "\"> Apply </a>";
     }
 
     /**

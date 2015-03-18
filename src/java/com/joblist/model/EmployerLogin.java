@@ -7,6 +7,8 @@ package com.joblist.model;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -16,6 +18,9 @@ import javax.persistence.Id;
 @Entity
 public class EmployerLogin implements Serializable {
     private static final long serialVersionUID = 1L;
+    
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     @Id
     private String username;
     private String password;
@@ -86,6 +91,20 @@ public class EmployerLogin implements Serializable {
     @Override
     public String toString() {
         return "com.joblist.model.EmployerLogin[ username=" + username + " ]";
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
     
 }
