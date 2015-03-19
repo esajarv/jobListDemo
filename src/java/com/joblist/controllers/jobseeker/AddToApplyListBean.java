@@ -5,7 +5,6 @@
  */
 package com.joblist.controllers.jobseeker;
 
-import com.joblist.model.JobSeekerLoginInfo;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -20,7 +19,7 @@ import javax.inject.Inject;
 @Named(value = "addToApplyListBean")
 @RequestScoped
 public class AddToApplyListBean {
-    @Inject JobSeekerLoginInfo loginInfo;
+    @Inject LoginInfoBean loginInfo;
     @Inject JobFormBean jobForm;
     private String jobID;
 

@@ -5,9 +5,10 @@
  */
 package com.joblist.controllers.jobseeker;
 
+import java.io.Serializable;
 import java.util.Map;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
 /**
@@ -15,8 +16,8 @@ import javax.faces.context.FacesContext;
  * @author esa
  */
 @Named(value = "jobSeekerTitleBarBean")
-@RequestScoped
-public class TitleBarBean {
+@SessionScoped
+public class TitleBarBean implements Serializable {
     
     private boolean showUploadCV;
 

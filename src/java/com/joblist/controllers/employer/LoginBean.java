@@ -7,8 +7,10 @@ package com.joblist.controllers.employer;
 
 import com.joblist.model.EmployerLogin;
 import com.joblist.model.EmployerLoginManager;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -18,8 +20,9 @@ import javax.inject.Named;
 @Named(value = "loginEmployerBean")
 @RequestScoped
 public class LoginBean {
-    private final EmployerLogin login = new EmployerLogin();
-    @EJB EmployerLoginManager loginManager;
+    private EmployerLogin login = new EmployerLogin();
+    @EJB 
+    EmployerLoginManager loginManager;
 
     /**
      * Creates a new instance of LoginBean
@@ -56,7 +59,13 @@ public class LoginBean {
     }
     
     public String login() {
-        if (loginManager.authenticate(login) != null) {
+        EmployerLogin tmp = loginManager.authenticate(login);
+        if (tmp != null) {
+            login = tmp;
+            Map<String, Object> sessionMap = 
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            sessionMap.put("employerlogin", login);
+            sessionMap.put("username", login.getUsername());
             return "forms/home?faces-redirect=true";
         }
         return null;

@@ -7,7 +7,6 @@ package com.joblist.controllers.jobseeker;
 
 import com.joblist.model.Job;
 import com.joblist.model.JobSeeker;
-import com.joblist.model.JobSeekerLoginInfo;
 import com.joblist.model.facades.JobFacadeLocal;
 import com.joblist.model.facades.JobSeekerFacadeLocal;
 import java.io.Serializable;
@@ -35,8 +34,8 @@ class JobComparator implements Comparator<Job> {
 @Named(value = "jobFormBean")
 @SessionScoped
 public class JobFormBean implements Serializable{
-    @Inject 
-    JobSeekerLoginInfo loginInfo;
+    @Inject
+    LoginInfoBean loginInfo;
     
     @EJB
     JobFacadeLocal jobFacade;
@@ -66,10 +65,6 @@ public class JobFormBean implements Serializable{
         js.getJobs().add(jobIDs.get(jobID));
         jobSeekerLocal.edit(js);
         removeJob(jobID);
-    }
-    
-    public String getUser() {
-        return loginInfo.getUserName();
     }
     
     public void removeJob(Long jobID) {

@@ -5,7 +5,6 @@
  */
 package com.joblist.controllers.employer;
 
-import com.joblist.model.EmployerLoginInfo;
 import com.joblist.model.Job;
 import com.joblist.model.facades.JobFacadeLocal;
 import java.io.Serializable;
@@ -26,8 +25,8 @@ public class NewJobBean implements Serializable {
     @Inject
     HomeBean homeBean;
     
-    @EJB
-    EmployerLoginInfo loginInfo;
+    @Inject
+    LoginInfoBean loginInfo;
     @EJB
     JobFacadeLocal jobFacade;
     private String formLink;
@@ -71,7 +70,7 @@ public class NewJobBean implements Serializable {
         job.setEmployerID(loginInfo.getLogin().getId());
         jobFacade.create(job);
         homeBean.notifyJobsModified();
-        formLink = "<a href=\"http://localhost:8080/Joblist/faces/jobseeker/forms/apply.xhtml?jobid="
+        formLink = "<a href=\"http://localhost:8080/joblist/faces/jobseeker/forms/apply.xhtml?jobid="
                 + job.getId() + "\"> Apply </a>";
     }
 

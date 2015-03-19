@@ -8,8 +8,10 @@ package com.joblist.controllers.jobseeker;
 import com.joblist.model.JobSeekerLogin;
 import com.joblist.model.JobSeekerLoginManager;
 import java.io.Serializable;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 /**
@@ -63,6 +65,11 @@ public class LoginBean implements Serializable{
         JobSeekerLogin tmp = loginManager.authenticate(login);
         if (tmp != null) {
             login = tmp;
+            Map<String, Object> sessionMap = 
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            sessionMap.put("jobseekerlogin", login);
+            sessionMap.put("username", login.getUsername());
+            
             if (jobID != null && !jobID.isEmpty()) {
                 return "forms/apply?faces-redirect=true&jobid=" + jobID;
             }

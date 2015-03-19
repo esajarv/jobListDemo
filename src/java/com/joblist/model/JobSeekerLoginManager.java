@@ -26,10 +26,6 @@ public class JobSeekerLoginManager {
             return null;
         }
         if (login.getPassword().compareTo(jsl.getPassword()) == 0) {
-            Map<String, Object> sessionMap = 
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-            sessionMap.put("jobseekerlogin", jsl);
-            sessionMap.put("username", jsl.getUsername());
             return jsl;
         }
         return null;

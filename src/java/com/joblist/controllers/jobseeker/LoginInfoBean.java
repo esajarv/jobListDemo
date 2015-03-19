@@ -3,33 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.joblist.model;
+package com.joblist.controllers.jobseeker;
 
+import com.joblist.model.JobSeekerLogin;
+import javax.inject.Named;
+import javax.enterprise.context.SessionScoped;
+import java.io.Serializable;
 import java.util.Map;
-import javax.ejb.Stateful;
+import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 
 /**
  *
- * @author koulutus
+ * @author esa
  */
-@Stateful
-public class JobSeekerLoginInfo {
+@Named(value = "jobSeekerLoginInfoBean")
+@SessionScoped
+public class LoginInfoBean implements Serializable {
     private JobSeekerLogin login;
     
-    public JobSeekerLoginInfo() {
+    /**
+     * Creates a new instance of LoginInfoBean
+     */
+    public LoginInfoBean() {
+    }
+    
+    @PostConstruct
+    void init() {
         Map<String,Object> sessionMap = 
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         login = (JobSeekerLogin) sessionMap.get("jobseekerlogin");
-        System.out.println("JobSeekerLoginInfo: username = " + login.getUsername());
+        System.out.println("LoginInfoBean.init: user = " + login.getUsername() );
     }
     
     public JobSeekerLogin getLogin() {
         return login;
-    }
-
-    public String getUserName() {
-        return login.getUsername();
     }
     /**
      * @return the wizardDone
