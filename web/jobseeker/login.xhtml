@@ -27,7 +27,9 @@
                         <f:facet name="footer">
                             <h:panelGroup style="display:block; text-align:center">
                                 <p:commandButton id="login_button" value="Login" 
-                                                 update="login_grid" process="login_grid" action="#{loginJobseekerBean.login()}" />
+                                                 update="login_grid" process="login_grid" action="#{loginJobseekerBean.login()}" >
+                                    <f:param name="jobid" value="#{loginJobseekerBean.jobID}" />
+                                </p:commandButton>
                             </h:panelGroup>
                         </f:facet>
                     </h:panelGrid>
@@ -52,7 +54,9 @@
                         <f:facet name="footer">
                             <h:panelGroup style="display:block; text-align:center">
                                 <p:commandButton id="register_button" value="Register" 
-                                                 update="register_grid,tabview" process="register_grid" action="#{jobSeekerRegisterBean.register()}" />
+                                                 update="register_grid,tabview" process="register_grid" action="#{jobSeekerRegisterBean.register()}">
+                                    <f:param name="jobid" value="#{loginJobseekerBean.jobID}" />
+                                </p:commandButton>
                             </h:panelGroup>
                         </f:facet>
                     </h:panelGrid> 

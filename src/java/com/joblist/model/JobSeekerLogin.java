@@ -6,9 +6,11 @@
 package com.joblist.model;
 
 import java.io.Serializable;
+import static javax.persistence.CascadeType.REMOVE;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -20,7 +22,10 @@ public class JobSeekerLogin implements Serializable {
     
     @Id
     private String username;
+    
+    @NotNull
     private String password;
+    @NotNull
     private String email;
     @OneToOne
     private JobSeeker jobSeeker;

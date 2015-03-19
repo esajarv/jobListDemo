@@ -6,10 +6,14 @@
 package com.joblist.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -31,6 +35,12 @@ public class JobSeeker implements Serializable {
     private String info;
     private String email;
     private String phone;
+    
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "jobSeeker")
+    private JobSeekerLogin login;
+    
+    @ManyToMany
+    private List<Job> jobs;
 
     public Long getId() {
         return id;
@@ -135,6 +145,27 @@ public class JobSeeker implements Serializable {
     @Override
     public String toString() {
         return "com.joblist.model.JobSeeker[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the login
+     */
+    public JobSeekerLogin getLogin() {
+        return login;
+    }
+
+    /**
+     * @param login the login to set
+     */
+    public void setLogin(JobSeekerLogin login) {
+        this.login = login;
+    }
+
+    /**
+     * @return the jobs
+     */
+    public List<Job> getJobs() {
+        return jobs;
     }
     
 }

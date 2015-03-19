@@ -6,10 +6,12 @@
 package com.joblist.model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -27,6 +29,8 @@ public class Job implements Serializable {
     private String advertisementLink;
     private boolean closed;
     
+    @ManyToMany(mappedBy = "jobs")
+    List<JobSeeker> jobSeekers;
 
     public Long getId() {
         return id;
