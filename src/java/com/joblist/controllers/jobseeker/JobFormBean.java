@@ -46,6 +46,8 @@ public class JobFormBean implements Serializable{
     final private Map<Job, Long> jobs = new TreeMap<>(new JobComparator());
     final private Map<Long, Job> jobIDs = new HashMap<>();
     
+    Iterable<Job> appliedToList = null;
+    
     /**
      * Creates a new instance of JobFormBean
      */
@@ -56,7 +58,15 @@ public class JobFormBean implements Serializable{
         return !jobIDs.isEmpty();
     }
     
-    public Iterable<Job> getJobs() {
+    public Iterable<Job> getAppliedToListJobs() {
+        if (appliedToList == null) {
+            JobSeeker js = loginInfo.getLogin().getJobSeeker();
+            appliedToList = js.getJobs();
+        }
+        return appliedToList;
+    }
+    
+    public Iterable<Job> getApplyListJobs() {
         return jobs.keySet();
     }
     
@@ -64,6 +74,7 @@ public class JobFormBean implements Serializable{
         JobSeeker js = loginInfo.getLogin().getJobSeeker();
         js.getJobs().add(jobIDs.get(jobID));
         jobSeekerLocal.edit(js);
+        appliedToList = null;
         removeJob(jobID);
     }
     
@@ -74,7 +85,7 @@ public class JobFormBean implements Serializable{
     
     public void addJobID(Long jobID) {
         Job j = jobFacade.find(jobID);
-        if (j != null) {
+        if (j != null && !j.isClosed()) {
             jobIDs.put(jobID, j);
             jobs.put(j, jobID);
         }

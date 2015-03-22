@@ -61,7 +61,7 @@ public class WizardBean implements Serializable {
         JobSeekerLogin l = loginInfo.getLogin();
         l.setJobSeeker(applicant);
         loginFacade.edit(l);
-        return "home.xhtml";
+        return "home?faces-redirect=true";
     }
      
     public String onFlowProcess(FlowEvent event) {

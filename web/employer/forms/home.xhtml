@@ -16,12 +16,14 @@
     <h:body>
         <ui:include src="titlebar.xhtml" />
 
-        <p:dataTable id="jobsTable" value="#{employerHomeBean.jobs}" emptyMessage="No jobs" var="job">
-            <p:column headerText="Title">
+        <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobsTable" value="#{employerHomeBean.jobs}" emptyMessage="No jobs" var="job">
+            <p:column headerText="Jobs added" >
                 <h:outputText value="#{job.title}" />
             </p:column>
-            <p:column headerText="State">
-                <p:commandLink rendered="#{!job.closed}" update="jobsTable" value="close" action="#{employerHomeBean.closeJob(job)}" style="color: blue" />
+            <p:column style="width: 3em">
+                <p:commandLink rendered="#{!job.closed}" update="jobsTable" action="#{employerHomeBean.closeJob(job)}" >
+                    <h:outputText style="color: blue" value="close" />
+                </p:commandLink>
                 <h:outputText rendered="#{job.closed}" value="closed" style="color: graytext" />
             </p:column>
         </p:dataTable>
