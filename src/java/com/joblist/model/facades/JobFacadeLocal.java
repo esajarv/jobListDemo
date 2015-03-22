@@ -25,7 +25,7 @@ public interface JobFacadeLocal {
     Job find(Object id);
 
     List<Job> findAll();
-
+    List<Job> findAll(Object employerId);
     List<Job> findRange(int[] range);
 
     int count();

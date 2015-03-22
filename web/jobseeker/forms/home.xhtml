@@ -18,7 +18,7 @@
         <h:form id = "form" >
             <p:dataTable id="appliedTo" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobFormBean.appliedToListJobs}">
                 <p:column headerText="Jobs applied to">
-                    <p:link  href="http://#{e.advertisementLink}" value="#{e.title}" />
+                    <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
                 </p:column>
                 <p:column style="width: 3em">
                     <h:outputText value="#{e.closed ? 'closed' : 'opened'}" />
@@ -27,7 +27,7 @@
             <h:panelGroup layout="block" rendered="#{jobFormBean.loggedWithJob}" >
                 <p:dataTable id="applyList" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobFormBean.applyListJobs}">
                     <p:column headerText="Apply list">
-                        <p:link  href="http://#{e.advertisementLink}" value="#{e.title}" />
+                        <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
                     </p:column>
                     <p:column style="width: 3em">
                         <p:commandLink action="#{jobFormBean.applyJob(e.id)}" update=":form:appliedTo,applyList">

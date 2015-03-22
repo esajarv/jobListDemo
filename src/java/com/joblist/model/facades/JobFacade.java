@@ -6,6 +6,7 @@
 package com.joblist.model.facades;
 
 import com.joblist.model.Job;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,13 @@ public class JobFacade extends AbstractFacade<Job> implements JobFacadeLocal {
 
     public JobFacade() {
         super(Job.class);
+    }
+    
+    @Override
+    public List<Job> findAll(Object employerId) {
+        return em.createQuery("SELECT j FROM Job j WHERE j.employerID=?1", Job.class)
+                .setParameter(1, employerId)
+                .getResultList();
     }
     
 }

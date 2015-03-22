@@ -12,7 +12,7 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.event.ActionEvent;
+import javax.inject.Inject;
 
 /**
  *
@@ -21,6 +21,8 @@ import javax.faces.event.ActionEvent;
 @Named(value = "employerHomeBean")
 @SessionScoped
 public class HomeBean implements Serializable {
+    @Inject
+    LoginInfoBean loginInfo;
     
     @EJB
     JobFacadeLocal jobFacade;
@@ -48,7 +50,7 @@ public class HomeBean implements Serializable {
      */
     public List<Job> getJobs() {
         if (jobs == null) {
-            jobs = jobFacade.findAll();
+            jobs = jobFacade.findAll(loginInfo.getLogin().getId());
         }
         return jobs;
     }
