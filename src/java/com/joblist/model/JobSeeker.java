@@ -28,7 +28,6 @@ public class JobSeeker implements Serializable {
     
     private String firstname;
     private String lastname;
-    private Integer age;
     private String street;
     private String city;
     private String postalCode;
@@ -85,14 +84,6 @@ public class JobSeeker implements Serializable {
  
     public void setLastname(String lastname) {
         this.lastname = lastname;
-    }
- 
-    public Integer getAge() {
-        return age;
-    }
- 
-    public void setAge(Integer age) {
-        this.age = age;
     }
  
     public String getStreet() {

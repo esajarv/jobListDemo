@@ -6,6 +6,7 @@
 package com.joblist.model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,9 +20,10 @@ import javax.persistence.Id;
 public class EmployerLogin implements Serializable {
     private static final long serialVersionUID = 1L;
     
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Id
+    @Column(unique=true)
     private String username;
     private String password;
     private String email;
@@ -29,7 +31,7 @@ public class EmployerLogin implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (username != null ? username.hashCode() : 0);
+        hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
 
@@ -39,8 +41,8 @@ public class EmployerLogin implements Serializable {
             return false;
         }
         EmployerLogin other = (EmployerLogin) object;
-        if ((this.username == null && other.username != null) || 
-                (this.username != null && !this.username.equals(other.username))) {
+        if ((this.id == null && other.id != null) || 
+                (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;

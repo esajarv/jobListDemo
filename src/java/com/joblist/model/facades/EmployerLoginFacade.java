@@ -8,6 +8,7 @@ package com.joblist.model.facades;
 import com.joblist.model.EmployerLogin;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -26,6 +27,20 @@ public class EmployerLoginFacade extends AbstractFacade<EmployerLogin> implement
 
     public EmployerLoginFacade() {
         super(EmployerLogin.class);
+    }
+    
+    @Override
+    public EmployerLogin findByUsername(String username)
+    {
+        EmployerLogin l = null;
+        try {
+            l = em.createQuery("SELECT l FROM EmployerLogin l WHERE l.username=?1", EmployerLogin.class)
+                    .setParameter(1, username)
+                    .getSingleResult();
+        } catch(NoResultException e) {
+            
+        }
+        return l;
     }
     
 }

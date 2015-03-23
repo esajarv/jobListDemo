@@ -6,10 +6,8 @@
 package com.joblist.model;
 
 import com.joblist.model.facades.EmployerLoginFacadeLocal;
-import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
 
 /**
  *
@@ -21,7 +19,7 @@ public class EmployerLoginManager {
     EmployerLoginFacadeLocal employerLoginFacade;    
 
     public EmployerLogin authenticate(EmployerLogin login) {
-        EmployerLogin el = employerLoginFacade.find(login.getUsername());
+        EmployerLogin el = employerLoginFacade.findByUsername(login.getUsername());
         if (el == null) {
             return null;
         }
@@ -32,7 +30,7 @@ public class EmployerLoginManager {
     }
     
     public boolean isUserNameReserved(String userName) {
-        return employerLoginFacade.find(userName) != null;
+        return employerLoginFacade.findByUsername(userName) != null;
     }
     
     public void register(EmployerLogin login) {

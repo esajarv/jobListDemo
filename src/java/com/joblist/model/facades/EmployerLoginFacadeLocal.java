@@ -23,6 +23,8 @@ public interface EmployerLoginFacadeLocal {
     void remove(EmployerLogin employerLogin);
 
     EmployerLogin find(Object id);
+    
+    EmployerLogin findByUsername(String username);
 
     List<EmployerLogin> findAll();
 
