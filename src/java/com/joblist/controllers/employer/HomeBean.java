@@ -24,6 +24,9 @@ public class HomeBean implements Serializable {
     @Inject
     LoginInfoBean loginInfo;
     
+    @Inject
+    JobDetailsBean detailsBean;
+    
     @EJB
     JobFacadeLocal jobFacade;
     
@@ -43,6 +46,11 @@ public class HomeBean implements Serializable {
     
     public void notifyJobsModified() {
         jobs = null;
+    }
+    
+    public String showDetailsPage(Job job) {
+        detailsBean.setJob(job);
+        return "jobdetails?faces-redirect=true";
     }
 
     /**

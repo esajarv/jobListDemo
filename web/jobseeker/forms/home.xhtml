@@ -21,26 +21,24 @@
                     <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
                 </p:column>
                 <p:column style="width: 3em">
-                    <h:outputText value="#{e.closed ? 'closed' : 'opened'}" />
+                    <h:outputText value="#{e.closed ? 'closed' : 'open'}" />
                 </p:column>
             </p:dataTable>
-            <h:panelGroup layout="block" rendered="#{jobFormBean.loggedWithJob}" >
-                <p:dataTable id="applyList" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobFormBean.applyListJobs}">
-                    <p:column headerText="Apply list">
-                        <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
-                    </p:column>
-                    <p:column style="width: 3em">
-                        <p:commandLink action="#{jobFormBean.applyJob(e.id)}" update=":form:appliedTo,applyList">
-                            <h:outputText value="Apply" />
-                        </p:commandLink>
-                    </p:column>
-                    <p:column style="width: 4em">
-                        <p:commandLink action="#{jobFormBean.removeJob(e.id)}">
-                            <h:outputText value="Remove" />
-                        </p:commandLink>
-                    </p:column>
-                </p:dataTable>
-            </h:panelGroup>
+            <p:dataTable id="applyList" rendered="#{jobFormBean.loggedWithJob}" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobFormBean.applyListJobs}">
+                <p:column headerText="Apply list">
+                    <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
+                </p:column>
+                <p:column style="width: 3em">
+                    <p:commandLink action="#{jobFormBean.applyJob(e.id)}" update=":form:appliedTo,:form:applyList">
+                        <h:outputText value="Apply" />
+                    </p:commandLink>
+                </p:column>
+                <p:column style="width: 4em">
+                    <p:commandLink action="#{jobFormBean.removeJob(e.id)}" update="form:applyList">
+                        <h:outputText value="Remove" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
         </h:form>
     </h:body>
 </html>

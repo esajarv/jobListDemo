@@ -30,7 +30,7 @@ public class Job implements Serializable {
     private boolean closed;
     
     @ManyToMany(mappedBy = "jobs")
-    List<JobSeeker> jobSeekers;
+    private List<JobSeeker> jobSeekers;
 
     public Long getId() {
         return id;
@@ -119,5 +119,19 @@ public class Job implements Serializable {
      */
     public void setEmployerID(Long employerID) {
         this.employerID = employerID;
+    }
+
+    /**
+     * @return the jobSeekers
+     */
+    public List<JobSeeker> getJobSeekers() {
+        return jobSeekers;
+    }
+
+    /**
+     * @param jobSeekers the jobSeekers to set
+     */
+    public void setJobSeekers(List<JobSeeker> jobSeekers) {
+        this.jobSeekers = jobSeekers;
     }
 }

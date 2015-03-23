@@ -10,7 +10,7 @@
         <f:event type="preRenderView" listener="#{employerTitleBarBean.show(true)}" />
     </f:metadata>
     <h:head>
-        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>        
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
         <title>Home</title>
     </h:head>
     <h:body>
@@ -25,6 +25,11 @@
                     <h:outputText style="color: blue" value="close" />
                 </p:commandLink>
                 <h:outputText rendered="#{job.closed}" value="closed" style="color: graytext" />
+            </p:column>
+            <p:column style="width: 3em">
+                <p:commandLink action="#{employerHomeBean.showDetailsPage(job)}" >
+                    <h:outputText style="color: blue" value="details" />
+                </p:commandLink>
             </p:column>
         </p:dataTable>
     </h:body>
