@@ -16,7 +16,7 @@
     <h:body>
         <ui:include src="titlebar.xhtml" />
         <h:form id = "form" >
-            <p:dataTable id="appliedTo" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobFormBean.appliedToListJobs}">
+            <p:dataTable id="appliedTo" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobSeekerHomeBean.appliedToListJobs}">
                 <p:column headerText="Jobs applied to">
                     <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
                 </p:column>
@@ -24,17 +24,17 @@
                     <h:outputText value="#{e.closed ? 'closed' : 'open'}" />
                 </p:column>
             </p:dataTable>
-            <p:dataTable id="applyList" rendered="#{jobFormBean.loggedWithJob}" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobFormBean.applyListJobs}">
+            <p:dataTable id="applyList" rendered="#{jobSeekerHomeBean.loggedWithJob}" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobSeekerHomeBean.applyListJobs}">
                 <p:column headerText="Apply list">
                     <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
                 </p:column>
                 <p:column style="width: 3em">
-                    <p:commandLink action="#{jobFormBean.applyJob(e.id)}" update=":form:appliedTo,:form:applyList">
+                    <p:commandLink action="#{jobSeekerHomeBean.applyJob(e.id)}" update=":form:appliedTo,:form:applyList">
                         <h:outputText value="Apply" />
                     </p:commandLink>
                 </p:column>
                 <p:column style="width: 4em">
-                    <p:commandLink action="#{jobFormBean.removeJob(e.id)}" update="form:applyList">
+                    <p:commandLink action="#{jobSeekerHomeBean.removeJob(e.id)}" update="form:applyList">
                         <h:outputText value="Remove" />
                     </p:commandLink>
                 </p:column>

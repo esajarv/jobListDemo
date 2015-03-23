@@ -5,7 +5,7 @@
  */
 package com.joblist.controllers.jobseeker;
 
-import com.joblist.model.JobSeekerLogin;
+import com.joblist.model.JobSeeker;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -20,7 +20,8 @@ import javax.faces.context.FacesContext;
 @Named(value = "jobSeekerLoginInfoBean")
 @SessionScoped
 public class LoginInfoBean implements Serializable {
-    private JobSeekerLogin login;
+    private JobSeeker login;
+    private String userName;
     
     /**
      * Creates a new instance of LoginInfoBean
@@ -32,17 +33,32 @@ public class LoginInfoBean implements Serializable {
     void init() {
         Map<String,Object> sessionMap = 
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-        login = (JobSeekerLogin) sessionMap.get("jobseekerlogin");
-        System.out.println("LoginInfoBean.init: user = " + login.getUsername() );
+        login = (JobSeeker) sessionMap.get("jobseeker");
+        userName = sessionMap.get("username").toString();
+        System.out.println("LoginInfoBean.init: user = " + userName);
     }
     
-    public JobSeekerLogin getLogin() {
+    public JobSeeker getJobSeeker() {
         return login;
     }
     /**
      * @return the wizardDone
      */
-    public boolean isWizardDone() {
-        return login.isWizardDone();
+    public boolean isWizardSubmitted() {
+        return login.isWizardSubmitted();
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName() {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

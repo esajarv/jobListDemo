@@ -6,10 +6,8 @@
 package com.joblist.model;
 
 import com.joblist.model.facades.JobSeekerLoginFacadeLocal;
-import java.util.Map;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.faces.context.FacesContext;
 
 /**
  *

@@ -5,6 +5,7 @@
  */
 package com.joblist.controllers.jobseeker;
 
+import com.joblist.model.JobSeeker;
 import com.joblist.model.JobSeekerLogin;
 import com.joblist.model.JobSeekerLoginManager;
 import javax.ejb.EJB;
@@ -25,6 +26,7 @@ public class RegisterBean {
     private final JobSeekerLogin login = new JobSeekerLogin();
     private UIComponent userNameInput;
     private int tabActiveIndex;
+    private String email;
     
     public UIComponent getUserNameInput() {
         return userNameInput;
@@ -49,11 +51,11 @@ public class RegisterBean {
     }
 
     public String getEmail() {
-        return login.getEmail();
+        return email;
     }
 
     public void setEmail(String email) {
-        login.setEmail(email);
+        this.email = email;
     }
     
     public String getPassword() {
@@ -71,6 +73,9 @@ public class RegisterBean {
             FacesContext.getCurrentInstance().addMessage(userNameInput.getClientId(
                     FacesContext.getCurrentInstance()), msg);
         } else {
+            JobSeeker jobSeeker = new JobSeeker();
+            jobSeeker.setEmail(email);
+            login.setJobSeeker(jobSeeker);
             loginManager.register(login);
             tabActiveIndex = 0;
         }

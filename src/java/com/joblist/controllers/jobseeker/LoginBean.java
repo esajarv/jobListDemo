@@ -67,13 +67,13 @@ public class LoginBean implements Serializable{
             login = tmp;
             Map<String, Object> sessionMap = 
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
-            sessionMap.put("jobseekerlogin", login);
+            sessionMap.put("jobseeker", login.getJobSeeker());
             sessionMap.put("username", login.getUsername());
             
             if (jobID != null && !jobID.isEmpty()) {
                 return "forms/apply?faces-redirect=true&jobid=" + jobID;
             }
-            if (login.isWizardDone()) {
+            if (login.isWizardSubmitted()) {
                 return "forms/home?faces-redirect=true";
             }
             return "forms/wizard?faces-redirect=true";

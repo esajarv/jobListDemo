@@ -6,7 +6,7 @@
 package com.joblist.model;
 
 import java.io.Serializable;
-import static javax.persistence.CascadeType.REMOVE;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -22,12 +22,9 @@ public class JobSeekerLogin implements Serializable {
     
     @Id
     private String username;
-    
     @NotNull
     private String password;
-    @NotNull
-    private String email;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private JobSeeker jobSeeker;
 
     @Override
@@ -86,22 +83,8 @@ public class JobSeekerLogin implements Serializable {
     /**
      * @return the wizardDone
      */
-    public boolean isWizardDone() {
-        return jobSeeker != null;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
+    public boolean isWizardSubmitted() {
+        return jobSeeker != null && jobSeeker.isWizardSubmitted();
     }
 
     /**

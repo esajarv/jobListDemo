@@ -20,7 +20,7 @@ import javax.inject.Inject;
 @RequestScoped
 public class AddToApplyListBean {
     @Inject LoginInfoBean loginInfo;
-    @Inject JobFormBean jobForm;
+    @Inject HomeBean jobForm;
     private String jobID;
 
     /**
@@ -33,7 +33,7 @@ public class AddToApplyListBean {
         System.out.println("AddJobBean.addJob: jobid = " + jobID);
         ExternalContext c = FacesContext.getCurrentInstance().getExternalContext();
         jobForm.addJobID(jobID);
-        if (loginInfo.isWizardDone()) {
+        if (loginInfo.isWizardSubmitted()) {
             c.redirect("home.xhtml");
         } else {
             c.redirect("wizard.xhtml");

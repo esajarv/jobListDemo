@@ -34,7 +34,7 @@
         </init-param>
         <init-param>
             <param-name>loginAttributeName</param-name>
-            <param-value>jobseekerlogin</param-value>
+            <param-value>jobseeker</param-value>
         </init-param>        
     </filter>
     <filter>
@@ -50,7 +50,7 @@
         </init-param>
         <init-param>
             <param-name>loginAttributeName</param-name>
-            <param-value>jobseekerlogin</param-value>
+            <param-value>jobseeker</param-value>
         </init-param>
     </filter>
     <filter>

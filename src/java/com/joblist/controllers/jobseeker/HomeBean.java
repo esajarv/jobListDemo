@@ -31,9 +31,9 @@ class JobComparator implements Comparator<Job> {
  *
  * @author esa
  */
-@Named(value = "jobFormBean")
+@Named(value = "jobSeekerHomeBean")
 @SessionScoped
-public class JobFormBean implements Serializable{
+public class HomeBean implements Serializable{
     @Inject
     LoginInfoBean loginInfo;
     
@@ -51,7 +51,7 @@ public class JobFormBean implements Serializable{
     /**
      * Creates a new instance of JobFormBean
      */
-    public JobFormBean() {
+    public HomeBean() {
     }
     
     public boolean getLoggedWithJob() {
@@ -60,7 +60,7 @@ public class JobFormBean implements Serializable{
     
     public Iterable<Job> getAppliedToListJobs() {
         if (appliedToList == null) {
-            JobSeeker js = loginInfo.getLogin().getJobSeeker();
+            JobSeeker js = loginInfo.getJobSeeker();
             appliedToList = js.getJobs();
         }
         return appliedToList;
@@ -71,7 +71,7 @@ public class JobFormBean implements Serializable{
     }
     
     public void applyJob(Long jobID) {
-        JobSeeker js = loginInfo.getLogin().getJobSeeker();
+        JobSeeker js = loginInfo.getJobSeeker();
         js.getJobs().add(jobIDs.get(jobID));
         jobSeekerLocal.edit(js);
         appliedToList = null;

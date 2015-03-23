@@ -35,8 +35,9 @@ public class JobSeeker implements Serializable {
     private String info;
     private String email;
     private String phone;
+    private boolean wizardSubmitted;
     
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "jobSeeker")
+    @OneToOne(mappedBy = "jobSeeker")
     private JobSeekerLogin login;
     
     @ManyToMany
@@ -166,6 +167,20 @@ public class JobSeeker implements Serializable {
      */
     public List<Job> getJobs() {
         return jobs;
+    }
+
+    /**
+     * @return the wizardSubmitted
+     */
+    public boolean isWizardSubmitted() {
+        return wizardSubmitted;
+    }
+
+    /**
+     * @param wizardSubmitted the wizardSubmitted to set
+     */
+    public void setWizardSubmitted(boolean wizardSubmitted) {
+        this.wizardSubmitted = wizardSubmitted;
     }
     
 }
