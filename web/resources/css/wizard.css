@@ -15,5 +15,10 @@ and open the template in the editor.
  .label {
      text-align: right;
  }
+ 
+ .confirmation-grid tr, .confirmation-grid td {
+     border-style: none !important;
+     background-color: transparent !important
+ }
 
  

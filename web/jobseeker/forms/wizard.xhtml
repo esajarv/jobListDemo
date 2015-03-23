@@ -67,45 +67,50 @@
                 </p:tab>
  
                 <p:tab id="confirm" title="Confirmation">
-                    <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <h:outputText value="Firstname: " />
-                            <h:outputText value="#{wizardBean.applicant.firstname}"/>
-
-                            <h:outputText value="Lastname: " />
-                            <h:outputText value="#{wizardBean.applicant.lastname}" />
-
-                            <h:outputText value="Age: " />
-                            <h:outputText value="#{wizardBean.applicant.age}" />
-                        </h:panelGrid>
-
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <h:outputText value="Street: " />
-                            <h:outputText value="#{wizardBean.applicant.street}"/>
-
-                            <h:outputText value="Postal: " />
-                            <h:outputText value="#{wizardBean.applicant.postalCode}" />
-
-                            <h:outputText value="City: " />
-                            <h:outputText value="#{wizardBean.applicant.city}" />
-                        </h:panelGrid>
-
-                        <h:panelGrid columns="2" columnClasses="label, value">
-                            <h:outputText value="Email: " />
-                            <h:outputText value="#{wizardBean.applicant.email}" />
-
-                            <h:outputText value="Phone: " />
-                            <h:outputText value="#{wizardBean.applicant.phone}" />
-
-                            <h:outputText value="Info: " />
-                            <h:outputText value="#{wizardBean.applicant.info}" />
-                        </h:panelGrid>
-                        <f:facet name="footer">
-                            <h:panelGroup style="display:block; text-align:center">
-                                <p:commandButton class="submit-button" value="Submit" action="#{wizardBean.save()}" />
-                            </h:panelGroup>
+                    <p:panelGrid styleClass="confirmation-grid">
+                        <f:facet name="header">
+                            <p:row>
+                                <p:column colspan="4">Personal Information</p:column>
+                            </p:row>
                         </f:facet>
-                    </h:panelGrid>
+                        <p:row>
+                            <p:column>First Name:</p:column>
+                            <p:column>#{wizardBean.applicant.firstname}</p:column>
+                            <p:column>Last Name:</p:column>
+                            <p:column>#{wizardBean.applicant.lastname}</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Street:</p:column>
+                            <p:column colspan="3">#{wizardBean.applicant.street}</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Postal Code:</p:column>
+                            <p:column colspan="3">#{wizardBean.applicant.postalCode}</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>City:</p:column>
+                            <p:column colspan="3">#{wizardBean.applicant.city}</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Email:</p:column>
+                            <p:column colspan="3">#{wizardBean.applicant.email}</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Phone:</p:column>
+                            <p:column colspan="3" >#{wizardBean.applicant.phone}</p:column>
+                        </p:row>
+                        <p:row>
+                            <p:column>Info:</p:column>
+                            <p:column colspan="3">#{wizardBean.applicant.info}</p:column>
+                        </p:row>
+                        <f:facet name="footer">
+                            <p:row>
+                                <p:column style="text-align:center" colspan="4">
+                                    <p:commandButton class="submit-button" value="Submit" action="#{wizardBean.save()}" />
+                                </p:column>
+                            </p:row>
+                        </f:facet>
+                    </p:panelGrid>
                 </p:tab>
             </p:wizard>
         </h:form>
