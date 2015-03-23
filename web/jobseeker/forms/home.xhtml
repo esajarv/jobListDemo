@@ -24,17 +24,17 @@
                     <h:outputText value="#{e.closed ? 'closed' : 'open'}" />
                 </p:column>
             </p:dataTable>
-            <p:dataTable id="applyList" rendered="#{jobSeekerHomeBean.loggedWithJob}" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobSeekerHomeBean.applyListJobs}">
+            <p:dataTable id="applyList" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobSeekerHomeBean.applyListJobs}">
                 <p:column headerText="Apply list">
                     <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
                 </p:column>
                 <p:column style="width: 3em">
-                    <p:commandLink action="#{jobSeekerHomeBean.applyJob(e.id)}" update=":form:appliedTo,:form:applyList">
+                    <p:commandLink action="#{jobSeekerHomeBean.applyJob(e.id)}" update=":form:appliedTo,applyList">
                         <h:outputText value="Apply" />
                     </p:commandLink>
                 </p:column>
                 <p:column style="width: 4em">
-                    <p:commandLink action="#{jobSeekerHomeBean.removeJob(e.id)}" update="form:applyList">
+                    <p:commandLink action="#{jobSeekerHomeBean.removeJob(e.id)}" update="applyList">
                         <h:outputText value="Remove" />
                     </p:commandLink>
                 </p:column>

@@ -72,8 +72,11 @@ public class HomeBean implements Serializable{
     
     public void applyJob(Long jobID) {
         JobSeeker js = loginInfo.getJobSeeker();
-        js.getJobs().add(jobIDs.get(jobID));
+        Job j = jobIDs.get(jobID);
+        js.getJobs().add(j);
+        j.getJobSeekers().add(js);
         jobSeekerLocal.edit(js);
+        jobFacade.edit(j);
         appliedToList = null;
         removeJob(jobID);
     }
