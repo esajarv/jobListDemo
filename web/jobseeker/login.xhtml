@@ -14,7 +14,7 @@
     </h:head>
     <h:body>
         <h:form id="form">
-            <p:tabView id="tabview" activeIndex="#{jobSeekerRegisterBean.tabActiveIndex}">
+            <p:tabView id="tabview" style="max-width: 40em" activeIndex="#{jobSeekerRegisterBean.tabActiveIndex}">
                 <p:tab id="login_tab" title="Log in">
                     <h:panelGrid id="login_grid" columns="3" cellpadding="2" style="text-align: right; margin-left: auto; margin-right: auto" >
                         <h:outputText value="User: *"/>
@@ -26,8 +26,13 @@
                         <p:message for="password" display="icon" />
                         <f:facet name="footer">
                             <h:panelGroup style="display:block; text-align:center">
-                                <p:commandButton id="login_button" value="Login" 
-                                                 update="login_grid" process="login_grid" action="#{loginJobseekerBean.login()}" >
+                                <p:message for="login_button" />
+                                <p:commandButton id="login_button" value="Login"
+                                                 binding="#{loginJobseekerBean.loginButton}"
+                                                 update="login_grid" 
+                                                 process="login_grid"
+                                                 style="margin-top: 7px"
+                                                 action="#{loginJobseekerBean.login()}" >
                                     <f:param name="jobid" value="#{loginJobseekerBean.jobID}" />
                                 </p:commandButton>
                             </h:panelGroup>
@@ -62,6 +67,9 @@
                     </h:panelGrid> 
                 </p:tab>
             </p:tabView>
+            <p style="color: red; margin-top: 2px">
+                This is a demo. Do not give any personal information here.
+            </p>
         </h:form>
     </h:body>
 </html>

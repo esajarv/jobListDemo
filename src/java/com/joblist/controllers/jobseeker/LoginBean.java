@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -24,6 +26,7 @@ public class LoginBean implements Serializable{
     @EJB JobSeekerLoginManager loginManager;
     private JobSeekerLogin login = new JobSeekerLogin();
     private String jobID;
+    private UIComponent loginButton;
 
     /**
      * Creates a new instance of LoginBean
@@ -77,6 +80,10 @@ public class LoginBean implements Serializable{
             }
             return "forms/wizard?faces-redirect=true";
         }
+        FacesMessage msg = new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "Invalid user or password. Try Again.", "Invalid user or password. Try Again.");
+            FacesContext.getCurrentInstance().addMessage(loginButton.getClientId(
+                    FacesContext.getCurrentInstance()), msg);
         return null;
     }
     
@@ -93,4 +100,18 @@ public class LoginBean implements Serializable{
     public void setJobID(String jobId) {
         this.jobID = jobId;
     }
+    
+    /**
+     * @return the loginButton
+     */
+    public UIComponent getLoginButton() {
+        return loginButton;
+    }
+
+    /**
+     * @param loginButton the loginButton to set
+     */
+    public void setLoginButton(UIComponent loginButton) {
+        this.loginButton = loginButton;
+    }    
 }

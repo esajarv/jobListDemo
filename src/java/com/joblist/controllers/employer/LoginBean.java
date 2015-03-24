@@ -10,6 +10,8 @@ import com.joblist.model.EmployerLoginManager;
 import java.util.Map;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -23,6 +25,7 @@ public class LoginBean {
     private EmployerLogin login = new EmployerLogin();
     @EJB 
     EmployerLoginManager loginManager;
+    private UIComponent loginButton;
 
     /**
      * Creates a new instance of LoginBean
@@ -68,6 +71,24 @@ public class LoginBean {
             sessionMap.put("username", login.getUsername());
             return "forms/home?faces-redirect=true";
         }
+        FacesMessage msg = new FacesMessage(
+                FacesMessage.SEVERITY_ERROR, "Invalid user or password. Try Again.", "Invalid user or password. Try Again.");
+            FacesContext.getCurrentInstance().addMessage(loginButton.getClientId(
+                    FacesContext.getCurrentInstance()), msg);
         return null;
+    }
+
+    /**
+     * @return the loginButton
+     */
+    public UIComponent getLoginButton() {
+        return loginButton;
+    }
+
+    /**
+     * @param loginButton the loginButton to set
+     */
+    public void setLoginButton(UIComponent loginButton) {
+        this.loginButton = loginButton;
     }
 }
