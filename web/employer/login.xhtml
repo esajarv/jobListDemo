@@ -11,7 +11,8 @@
     </h:head>
     <h:body>
         <h:form id="form">
-            <p:tabView id="tabview" style="max-width: 40em" activeIndex="#{employerRegisterBean.tabActiveIndex}">
+            <p:growl id="growl" globalOnly="true" life="2000"  showDetail="true" sticky="false" />
+            <p:tabView id="tabview" style="max-width: 40em">
                 <p:tab id="login_tab" title="Log in">
                     <h:panelGrid id="login_grid" columns="3" cellpadding="2" style="text-align: right; margin-left: auto; margin-right: auto" >
                         <h:outputText value="User: *"/>
@@ -40,7 +41,12 @@
                         <p:message for="register_username" display="icon" />
 
                         <h:outputText value="Email: *"/>
-                        <p:inputText  id="register_email" value="#{employerRegisterBean.email}" required="true" requiredMessage="field empty" />
+                        <p:inputText  id="register_email" value="#{employerRegisterBean.email}" 
+                                      validatorMessage="valid email address is required."
+                                      required="true" requiredMessage="field empty">
+                            <f:validateRegex pattern="^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"  />
+                            <p:ajax event="blur" update="register_email" />
+                        </p:inputText>
                         <p:message for="register_email" display="icon" />
 
                         <h:outputLabel for="pwd1" value="Password: *" />
@@ -52,8 +58,10 @@
                         <p:message for="pwd2" display="icon" />
                         <f:facet name="footer">
                             <h:panelGroup style="display:block; text-align:center">
-                                <p:commandButton id="register_button" value="Register" 
-                                                 update="register_grid,tabview" process="register_grid" action="#{employerRegisterBean.register()}" />
+                                <p:commandButton id="register_button" value="Register"
+                                                 process="register_grid"
+                                                 update="register_grid,:form:growl"
+                                                 action="#{employerRegisterBean.register()}" />
                             </h:panelGroup>
                         </f:facet>
                     </h:panelGrid>

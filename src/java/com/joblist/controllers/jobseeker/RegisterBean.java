@@ -23,9 +23,8 @@ import javax.faces.context.FacesContext;
 @RequestScoped
 public class RegisterBean {
     @EJB JobSeekerLoginManager loginManager;
-    private final JobSeekerLogin login = new JobSeekerLogin();
+    private JobSeekerLogin login = new JobSeekerLogin();
     private UIComponent userNameInput;
-    private int tabActiveIndex;
     private String email;
     
     public UIComponent getUserNameInput() {
@@ -66,33 +65,20 @@ public class RegisterBean {
         login.setPassword(password);
     }
     
-    public String register() {
+    public void register() {
+        FacesContext fc = FacesContext.getCurrentInstance();
         if (loginManager.isUserNameReserved(login.getUsername())) {
             FacesMessage msg = new FacesMessage(
                     FacesMessage.SEVERITY_ERROR, "User name is reserved", "User name is reserved");
-            FacesContext.getCurrentInstance().addMessage(userNameInput.getClientId(
-                    FacesContext.getCurrentInstance()), msg);
+            fc.addMessage(userNameInput.getClientId(fc), msg);
         } else {
             JobSeeker jobSeeker = new JobSeeker();
             jobSeeker.setEmail(email);
             login.setJobSeeker(jobSeeker);
             loginManager.register(login);
-            tabActiveIndex = 0;
+            login = new JobSeekerLogin();
+            email = null;
+            fc.addMessage(null, new FacesMessage("register successful", "You can now log in"));
         }
-        return "login";
-    }
-
-    /**
-     * @return the tabActiveIndex
-     */
-    public int getTabActiveIndex() {
-        return tabActiveIndex;
-    }
-
-    /**
-     * @param tabActiveIndex the tabActiveIndex to set
-     */
-    public void setTabActiveIndex(int tabActiveIndex) {
-        this.tabActiveIndex = tabActiveIndex;
     }
 }
