@@ -10,11 +10,11 @@
         <header style="position: fixed;z-index: 100;left:0; top:0; width: 100%;">
             <h:form>
                 <p:menubar style="font-size:70%" >
-                    <p:menuitem value="Upload CV" icon="ui-icon-pencil" rendered="#{jobSeekerTitleBarBean.showUploadCV}" >
-                    </p:menuitem>
+                    <p:menuitem value="Upload CV" icon="ui-icon-pencil" rendered="#{jobSeekerTitleBarBean.showUploadCV}" />
+                    <p:menuitem value="back" icon="fa fa-arrow-left" onclick="window.history.back()" rendered="#{jobSeekerTitleBarBean.showBrowserHistoryBack}"/>
                     <f:facet name="options">
                         <p:menuButton value="#{jobSeekerTitleBarBean.username}">
-                            <p:menuitem value="Settings" icon="ui-icon-gear"/>
+                            <p:menuitem value="Settings" icon="ui-icon-gear" action="settings.xhtml?faces-redirect=true"/>
                             <p:menuitem value="Log out" action="#{jobSeekerTitleBarBean.logout()}" icon="ui-icon-extlink" />
                         </p:menuButton>
                     </f:facet>

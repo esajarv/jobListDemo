@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.joblist.controllers.employer;
+package com.joblist.controllers.jobseeker;
 
-import com.joblist.model.EmployerLogin;
-import com.joblist.model.facades.EmployerLoginFacadeLocal;
-import com.joblist.model.facades.JobFacadeLocal;
+import com.joblist.model.JobSeeker;
+import com.joblist.model.JobSeekerLogin;
+import com.joblist.model.facades.JobSeekerFacadeLocal;
+import com.joblist.model.facades.JobSeekerLoginFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -18,7 +19,7 @@ import javax.inject.Inject;
  *
  * @author esa
  */
-@Named(value = "employerSettingsBean")
+@Named(value = "jobSeekerSettingsBean")
 @SessionScoped
 public class SettingsBean implements Serializable {
     @Inject
@@ -26,9 +27,9 @@ public class SettingsBean implements Serializable {
     @Inject 
     TitleBarBean titleBar;
     @EJB
-    EmployerLoginFacadeLocal loginFacade;
+    JobSeekerLoginFacadeLocal jobSeekerLoginFacade;
     @EJB
-    JobFacadeLocal jobFacade;    
+    JobSeekerFacadeLocal jobSeekerFacade;
 
     /**
      * Creates a new instance of SettingsBean
@@ -37,9 +38,12 @@ public class SettingsBean implements Serializable {
     }
     
     public String deleteAccount() {
-        EmployerLogin login = loginInfo.getLogin();
-        jobFacade.deleteAll(login.getId());
-        loginFacade.remove(login);
+        JobSeekerLogin login = jobSeekerLoginFacade.find(loginInfo.getUserName());
+        JobSeeker jobSeeker = loginInfo.getJobSeeker();
+        jobSeeker.getJobs().clear();
+        jobSeekerFacade.edit(jobSeeker);
+        jobSeekerLoginFacade.remove(login);
+        jobSeekerFacade.remove(jobSeeker);
         return titleBar.logout();
     }
 }

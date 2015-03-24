@@ -18,8 +18,8 @@ import javax.faces.context.FacesContext;
 @Named(value = "jobSeekerTitleBarBean")
 @SessionScoped
 public class TitleBarBean implements Serializable {
-    
     private boolean showUploadCV;
+    private boolean showBack;
 
     /**
      * Creates a new instance of TitleBarBean
@@ -32,6 +32,12 @@ public class TitleBarBean implements Serializable {
         setShowUploadCV(showUploadCV);
     }
     
+    public void withBrowserHistoryBackShow(boolean showUploadCV)
+    {
+        setShowUploadCV(showUploadCV);
+        showBack = true;
+    }
+
     public String logout() {
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         return "/jobseeker/login?faces-redirect=true";
@@ -57,4 +63,10 @@ public class TitleBarBean implements Serializable {
         return sessionMap.get("username").toString();
     }
     
+    /**
+     * @return the showBack
+     */
+    public boolean isShowBrowserHistoryBack() {
+        return showBack;
+    }
 }

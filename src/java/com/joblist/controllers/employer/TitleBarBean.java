@@ -45,7 +45,7 @@ public class TitleBarBean implements Serializable {
     {
         setShowAddJob(showAddJob);
         this.previousPage = null;
-        this.showBack = true;
+        showBack = true;
     }
     
     public String back() {
