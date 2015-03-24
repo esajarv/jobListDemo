@@ -39,7 +39,6 @@ public class HomeBean implements Serializable {
     }
     
     public void closeJob(Job job) {
-        System.out.println("close job");
         job.setClosed(true);
         jobFacade.edit(job);
     }

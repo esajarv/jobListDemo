@@ -20,6 +20,7 @@ import javax.faces.context.FacesContext;
 public class TitleBarBean implements Serializable {
     private boolean showAddJob;
     private String previousPage;
+    private boolean showBack;
 
     /**
      * Creates a new instance of TitleBarBean
@@ -31,17 +32,23 @@ public class TitleBarBean implements Serializable {
     {
         setShowAddJob(showAddJob);
         this.previousPage = null;
+        showBack = false;
     }
     
-    public void show(boolean showAddJob, String previousPage)
+    public void show(boolean showAddJob, String previousPage) {
+        setShowAddJob(showAddJob);
+        this.previousPage = previousPage;
+        showBack = false;
+    }
+    
+    public void withBrowserHistoryBackShow(boolean showAddJob)
     {
         setShowAddJob(showAddJob);
-        System.out.println(previousPage);
-        this.previousPage = previousPage;
+        this.previousPage = null;
+        this.showBack = true;
     }
     
-    public String back(){
-        System.out.println(previousPage);
+    public String back() {
         return previousPage;
     }
     
@@ -69,11 +76,15 @@ public class TitleBarBean implements Serializable {
     public void setShowAddJob(boolean showAddJob) {
         this.showAddJob = showAddJob;
     }
+    
+    public boolean isShowBack() {
+        return previousPage != null;
+    }
 
     /**
      * @return the showBack
      */
-    public boolean isShowBack() {
-        return previousPage != null;
+    public boolean isShowBrowserHistoryBack() {
+        return showBack;
     }
 }

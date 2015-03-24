@@ -8,6 +8,8 @@ package com.joblist.controllers.employer;
 import com.joblist.model.Job;
 import com.joblist.model.facades.JobFacadeLocal;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -20,21 +22,33 @@ import javax.inject.Named;
 @Named(value = "newJobBean")
 @RequestScoped
 public class NewJobBean implements Serializable {
-    private Job job = new Job();
+    private Job job;
     
     @Inject
     HomeBean homeBean;
-    
     @Inject
     LoginInfoBean loginInfo;
     @EJB
     JobFacadeLocal jobFacade;
-    private String formLink;
+    private String applyURL;
 
     /**
      * Creates a new instance of NewJobBean
      */
     public NewJobBean() {
+    }
+    
+    @PostConstruct
+    void init() {
+        System.out.println("construct newjobbean: ");
+        job = new Job();
+        job.setAdvertisementLink("http://");
+    }
+    
+    @PreDestroy
+    void free() {
+        System.out.println("destroy newjobbean: ");
+        job = null;
     }
 
     /**
@@ -70,21 +84,23 @@ public class NewJobBean implements Serializable {
         job.setEmployerID(loginInfo.getLogin().getId());
         jobFacade.create(job);
         homeBean.notifyJobsModified();
-        formLink = "<a href=\"http://localhost:8080/joblist/faces/jobseeker/forms/apply.xhtml?jobid="
-                + job.getId() + "\"> Apply </a>";
+        
+        applyURL = "http://localhost:8080/joblist/faces/jobseeker/forms/apply.xhtml?jobid="
+                + job.getId();
+        init();
     }
 
     /**
-     * @return the formLink
+     * @return the applyURL
      */
-    public String getFormLink() {
-        return formLink;
+    public String getApplyURL() {
+        return applyURL;
     }
 
     /**
-     * @param formLink the formLink to set
+     * @param applyURL the applyURL to set
      */
-    public void setFormLink(String formLink) {
-        this.formLink = formLink;
+    public void setApplyURL(String applyURL) {
+        this.applyURL = applyURL;
     }
 }

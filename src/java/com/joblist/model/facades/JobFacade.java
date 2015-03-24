@@ -36,4 +36,11 @@ public class JobFacade extends AbstractFacade<Job> implements JobFacadeLocal {
                 .getResultList();
     }
     
+    @Override
+    public void deleteAll(Object employerId) {
+        em.createQuery("DELETE FROM Job j WHERE j.employerID=?1", Job.class)
+                .setParameter(1, employerId)
+                .executeUpdate();
+    }
+    
 }

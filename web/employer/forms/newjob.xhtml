@@ -26,7 +26,7 @@
                 <p:message for="advertisement" display="icon" />
                 <f:facet name="footer">
                     <h:panelGroup style="display:block; text-align:center">
-                        <p:commandButton id="submit" value="Submit" update="grid,formlink" action="#{newJobBean.submit()}" />
+                        <p:commandButton id="submit" value="Submit" update="grid,apply-url" action="#{newJobBean.submit()}" />
                     </h:panelGroup>
                 </f:facet>
             </h:panelGrid>
@@ -34,7 +34,7 @@
                 Link to job advertisement:
             </div>
             <div>
-                <p:inputTextarea id="formlink" readonly="true" cols="40" value="#{newJobBean.formLink}" />
+                <p:inputTextarea id="apply-url" readonly="true" cols="40" value="#{newJobBean.applyURL}" />
             </div>
         </h:form>
     </h:body>
