@@ -61,7 +61,6 @@ public class LoginBean implements Serializable{
     
     public String login()
     {
-        System.out.println("login: jobID = " + jobID);
         JobSeekerLogin tmp = loginManager.authenticate(login);
         if (tmp != null) {
             login = tmp;
@@ -92,7 +91,6 @@ public class LoginBean implements Serializable{
      * @param jobId the jobId to set
      */
     public void setJobID(String jobId) {
-        System.out.println("login.setJobId: jodID = " + jobId);
         this.jobID = jobId;
     }
 }

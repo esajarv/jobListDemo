@@ -11,6 +11,7 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -20,6 +21,7 @@ import java.util.List;
 @SessionScoped
 public class JobDetailsBean implements Serializable {
     private Job job;
+    private String applyURL;
 
     /**
      * Creates a new instance of JobDetailsBean
@@ -43,6 +45,20 @@ public class JobDetailsBean implements Serializable {
     
     public List<JobSeeker> getJobSeekers() {
         return job.getJobSeekers();
+    }
+
+    /**
+     * @return the applyURL
+     */
+    public String getApplyURL() {
+        if (applyURL == null) {
+            String serverRoot = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("JOB_SEEKER_SERVER_ROOT");
+            applyURL = serverRoot 
+                    + "jobseeker/forms/apply.xhtml?jobid="
+                    + job.getId();
+            
+        }
+        return applyURL;
     }
     
 }

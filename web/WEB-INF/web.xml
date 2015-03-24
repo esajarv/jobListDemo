@@ -5,6 +5,10 @@
         <param-value>Development</param-value>
     </context-param>
     <context-param>
+        <param-name>JOB_SEEKER_SERVER_ROOT</param-name>
+        <param-value>http://localhost:8080/joblist/faces/</param-value>
+    </context-param>
+    <context-param>
         <param-name>primefaces.FONT_AWESOME</param-name>
         <param-value>true</param-value>
     </context-param>

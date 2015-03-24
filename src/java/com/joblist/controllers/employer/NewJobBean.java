@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -85,7 +86,9 @@ public class NewJobBean implements Serializable {
         jobFacade.create(job);
         homeBean.notifyJobsModified();
         
-        applyURL = "http://localhost:8080/joblist/faces/jobseeker/forms/apply.xhtml?jobid="
+        String serverRoot = FacesContext.getCurrentInstance().getExternalContext().getInitParameter("JOB_SEEKER_SERVER_ROOT");
+        applyURL = serverRoot 
+                + "jobseeker/forms/apply.xhtml?jobid="
                 + job.getId();
         init();
     }

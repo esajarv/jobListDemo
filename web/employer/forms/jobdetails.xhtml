@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui"
       >
     <f:metadata>
-        <f:event type="preRenderView" listener="#{employerTitleBarBean.show(false, true)}" />
+        <f:event type="preRenderView" listener="#{employerTitleBarBean.show(false, 'home?faces-redirect=true')}" />
     </f:metadata>
     <h:head>
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
@@ -15,13 +15,22 @@
     </h:head>
     <h:body>
         <ui:include src="titlebar.xhtml" />
-        
+        <h:form>
+            <div style="float: right;right: 0;z-index: 100">
+                <div>
+                    Job Apply URL:
+                </div>
+                <div>
+                    <p:inputTextarea id="apply-url" cols="30" readonly="true" value="#{employerJobDetailsBean.applyURL}" />
+                </div>
+            </div>
+        </h:form>
         <h2>Applicants</h2>
-        <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No applicants">
+        <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No-one has applied to this job yet.">
             <p:column headerText="Name" >
                 <h:outputText value="#{jobseeker.lastname}, #{jobseeker.firstname}" />
             </p:column>
-            <p:column headerText="CV">
+            <p:column headerText="CV" width="10px" style="width: 20px">
             </p:column>
             <p:column headerText="Email">
                 <p:link  href="mailto:#{jobseeker.email}" value="#{jobseeker.email}" />
