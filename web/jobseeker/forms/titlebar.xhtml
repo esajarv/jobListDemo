@@ -13,6 +13,7 @@
                     <p:menuitem value="Upload CV" icon="ui-icon-pencil" rendered="#{jobSeekerTitleBarBean.showUploadCV}" />
                     <p:menuitem value="back" icon="fa fa-arrow-left" onclick="window.history.back()" rendered="#{jobSeekerTitleBarBean.showBrowserHistoryBack}"/>
                     <f:facet name="options">
+                        <h:outputText style="color:red" value="demo  " />
                         <p:menuButton value="#{jobSeekerTitleBarBean.username}">
                             <p:menuitem value="Settings" icon="ui-icon-gear" action="settings.xhtml?faces-redirect=true"/>
                             <p:menuitem value="Log out" action="#{jobSeekerTitleBarBean.logout()}" icon="ui-icon-extlink" />

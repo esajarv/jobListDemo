@@ -6,7 +6,7 @@
     </context-param>
     <context-param>
         <param-name>JOB_SEEKER_SERVER_ROOT</param-name>
-        <param-value>http://localhost:8080/joblist/faces/</param-value>
+        <param-value>http://localhost:8080/joblistDemo/faces/</param-value>
     </context-param>
     <context-param>
         <param-name>primefaces.FONT_AWESOME</param-name>
@@ -34,7 +34,7 @@
         <filter-class>com.joblist.Filter.AuthorizationFilter</filter-class>
         <init-param>
             <param-name>loggedInRedirectPath</param-name>
-            <param-value>/joblist/faces/jobseeker/forms/home.xhtml</param-value>
+            <param-value>/joblistDemo/faces/jobseeker/forms/home.xhtml</param-value>
         </init-param>
         <init-param>
             <param-name>loginAttributeName</param-name>
@@ -46,7 +46,7 @@
         <filter-class> com.joblist.Filter.AuthorizationFilter </filter-class>
         <init-param>
             <param-name>loginPagePath</param-name>
-            <param-value>/joblist/faces/jobseeker/login.xhtml</param-value>
+            <param-value>/joblistDemo/faces/jobseeker/login.xhtml</param-value>
         </init-param>
         <init-param>
             <param-name>loginUrlParameter</param-name>
@@ -62,7 +62,7 @@
         <filter-class>com.joblist.Filter.AuthorizationFilter</filter-class>
         <init-param>
             <param-name>loggedInRedirectPath</param-name>
-            <param-value>/joblist/faces/employer/forms/home.xhtml</param-value>
+            <param-value>/joblistDemo/faces/employer/forms/home.xhtml</param-value>
         </init-param>
         <init-param>
             <param-name>loginAttributeName</param-name>
@@ -74,7 +74,7 @@
         <filter-class> com.joblist.Filter.AuthorizationFilter </filter-class>
         <init-param>
             <param-name>loginPagePath</param-name>
-            <param-value>/joblist/faces/employer/login.xhtml</param-value>
+            <param-value>/joblistDemo/faces/employer/login.xhtml</param-value>
         </init-param>
         <init-param>
             <param-name>loginAttributeName</param-name>
