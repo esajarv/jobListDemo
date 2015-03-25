@@ -60,7 +60,7 @@ public class TitleBarBean implements Serializable {
     public String getUsername() {
         Map<String, Object> sessionMap = 
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap();        
-        return sessionMap.get("username").toString();
+        return sessionMap.get("e_username").toString();
     }
 
     /**

@@ -34,7 +34,7 @@ public class LoginInfoBean implements Serializable {
         Map<String,Object> sessionMap = 
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
         login = (JobSeeker) sessionMap.get("jobseeker");
-        userName = sessionMap.get("username").toString();
+        userName = sessionMap.get("j_username").toString();
         System.out.println("LoginInfoBean.init: user = " + userName);
     }
     

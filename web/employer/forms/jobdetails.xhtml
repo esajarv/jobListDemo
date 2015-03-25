@@ -16,7 +16,7 @@
     <h:body>
         <ui:include src="titlebar.xhtml" />
         <h:form>
-            <div style="float: right;right: 0;z-index: 100">
+            <div style="position: absolute; right: 0px;">
                 <div>
                     Job Apply URL:
                 </div>
@@ -26,7 +26,7 @@
             </div>
         </h:form>
         <h2>Applicants</h2>
-        <p:dataTable tableStyle="table-layout: fixed; max-width: 500px; z-index: 0" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No-one has applied to this job yet.">
+        <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No-one has applied to this job yet.">
             <p:column headerText="Name" >
                 <h:outputText value="#{jobseeker.lastname}, #{jobseeker.firstname}" />
             </p:column>

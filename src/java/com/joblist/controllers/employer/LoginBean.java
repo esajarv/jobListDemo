@@ -68,7 +68,7 @@ public class LoginBean {
             Map<String, Object> sessionMap = 
                     FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
             sessionMap.put("employerlogin", login);
-            sessionMap.put("username", login.getUsername());
+            sessionMap.put("e_username", login.getUsername());
             return "forms/home?faces-redirect=true";
         }
         FacesMessage msg = new FacesMessage(

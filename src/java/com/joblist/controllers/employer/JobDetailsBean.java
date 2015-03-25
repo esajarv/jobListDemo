@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 public class JobDetailsBean implements Serializable {
     private Job job;
     private String applyURL;
+    List<JobSeeker> applicants;
 
     /**
      * Creates a new instance of JobDetailsBean
@@ -41,10 +42,14 @@ public class JobDetailsBean implements Serializable {
      */
     public void setJob(Job job) {
         this.job = job;
+        applicants = null;
     }
     
     public List<JobSeeker> getJobSeekers() {
-        return job.getJobSeekers();
+        if (applicants == null) {
+            applicants = job.getJobSeekers();
+        }
+        return applicants;
     }
 
     /**

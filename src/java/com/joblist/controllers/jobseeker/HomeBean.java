@@ -43,6 +43,10 @@ public class HomeBean implements Serializable{
     @EJB
     JobSeekerFacadeLocal jobSeekerLocal;
     
+    //quick-fix
+    @Inject
+    com.joblist.controllers.employer.HomeBean eHomeBean;
+    
     final private Map<Job, Long> jobs = new TreeMap<>(new JobComparator());
     final private Map<Long, Job> jobIDs = new HashMap<>();
     
@@ -79,6 +83,9 @@ public class HomeBean implements Serializable{
         jobFacade.edit(j);
         appliedToList = null;
         removeJob(jobID);
+        
+        //quick fix
+        eHomeBean.notifyJobsModified();
     }
     
     public void removeJob(Long jobID) {
