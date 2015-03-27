@@ -25,10 +25,10 @@
                 </div>
             </div>
         </h:form>
-        <h1><p:link  href="#{employerJobDetailsBean.job.advertisementLink}" value="#{employerJobDetailsBean.job.title}" /> </h1>
+        <h1 style="margin-bottom: 5px"><p:link  href="#{employerJobDetailsBean.job.advertisementLink}" value="#{employerJobDetailsBean.job.title}" /> </h1>
         <h:form>
-            <div style="margin-bottom: 10px">
-                <p:commandLink action="newjob.xhtml?faces-redirect=true">
+            <div style="margin-bottom: 15px">
+                <p:commandLink action="editjob.xhtml?faces-redirect=true">
                     <h:outputText value="Edit" />
                 </p:commandLink>
             </div>

@@ -51,37 +51,19 @@ public class NewJobBean implements Serializable {
         System.out.println("destroy newjobbean: ");
         job = null;
     }
-
+    
     /**
-     * @return the title
+     * @return the job
      */
-    public String getTitle() {
-        return job.getTitle();
-    }
-
-    /**
-     * @param title the title to set
-     */
-    public void setTitle(String title) {
-        job.setTitle(title);
-    }
-
-    /**
-     * @return the advertisementLink
-     */
-    public String getAdvertisementLink() {
-        return job.getAdvertisementLink();
-    }
-
-    /**
-     * @param advertisementLink the advertisementLink to set
-     */
-    public void setAdvertisementLink(String advertisementLink) {
-        job.setAdvertisementLink(advertisementLink);
+    public Job getJob() {
+        return job;
     }
     
-    public void submit()
-    {
+    public String getSubmitText() {
+        return "Submit";
+    }
+    
+    public void submit() {
         job.setEmployerID(loginInfo.getLogin().getId());
         jobFacade.create(job);
         homeBean.notifyJobsModified();

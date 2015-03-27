@@ -7,10 +7,12 @@ package com.joblist.controllers.employer;
 
 import com.joblist.model.Job;
 import com.joblist.model.JobSeeker;
+import com.joblist.model.facades.JobFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 
 /**
@@ -24,6 +26,8 @@ public class JobDetailsBean implements Serializable {
     private String applyURL;
     private int state;
     List<JobSeeker> applicants;
+    @EJB
+    JobFacadeLocal jobFacade;
 
     /**
      * Creates a new instance of JobDetailsBean
@@ -52,6 +56,15 @@ public class JobDetailsBean implements Serializable {
             applicants = job.getJobSeekers();
         }
         return applicants;
+    }
+    
+    public String getSubmitText() {
+        return "Change";
+    }
+    
+    public String submit() {
+        jobFacade.edit(job);
+        return "jobdetails?faces-redirect=true";
     }
 
     /**
