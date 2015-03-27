@@ -36,6 +36,16 @@ public class JobFacade extends AbstractFacade<Job> implements JobFacadeLocal {
                 .getResultList();
     }
     
+    private final static String cancelQuery =
+            "Update Job j SET j.state = " + Job.STATE_CANCELLED
+                + " WHERE j.employerID=?1 AND j.state <> " + Job.STATE_DONE;
+    @Override
+    public void cancelAll(Object employerId) {
+        em.createQuery(cancelQuery, Job.class)
+                .setParameter(1, employerId)
+                .executeUpdate();
+    }
+    
     @Override
     public void deleteAll(Object employerId) {
         em.createQuery("DELETE FROM Job j WHERE j.employerID=?1", Job.class)

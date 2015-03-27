@@ -19,6 +19,11 @@ import javax.persistence.ManyToMany;
  */
 @Entity
 public class Job implements Serializable {
+    public static final int STATE_OPEN = 0;      //open for apply
+    public static final int STATE_CLOSED = 1;    //closed for apply
+    public static final int STATE_CANCELLED = 2; //cancelled
+    public static final int STATE_DONE = 3;      //employee found
+    
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,7 +32,7 @@ public class Job implements Serializable {
     private Long employerID;
     private String title;
     private String advertisementLink;
-    private boolean closed;
+    private int state;
     
     @ManyToMany(mappedBy = "jobs")
     private List<JobSeeker> jobSeekers;
@@ -94,17 +99,17 @@ public class Job implements Serializable {
     }
 
     /**
-     * @return the closed
+     * @return the state
      */
-    public boolean isClosed() {
-        return closed;
+    public int getState() {
+        return state;
     }
 
     /**
-     * @param closed the closed to set
+     * @param state the closed to set
      */
-    public void setClosed(boolean closed) {
-        this.closed = closed;
+    public void setState(int state) {
+        this.state = state;
     }
 
     /**

@@ -38,8 +38,12 @@ public class HomeBean implements Serializable {
     public HomeBean() {
     }
     
+    public boolean isClosed(Job job) {
+        return job.getState() == Job.STATE_CLOSED;
+    }
+    
     public void closeJob(Job job) {
-        job.setClosed(true);
+        job.setState(Job.STATE_CLOSED);
         jobFacade.edit(job);
     }
     

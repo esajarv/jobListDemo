@@ -5,13 +5,16 @@
  */
 package com.joblist.controllers.jobseeker;
 
+import com.joblist.model.Job;
 import com.joblist.model.JobSeeker;
 import com.joblist.model.JobSeekerLogin;
+import com.joblist.model.facades.JobFacadeLocal;
 import com.joblist.model.facades.JobSeekerFacadeLocal;
 import com.joblist.model.facades.JobSeekerLoginFacadeLocal;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 
@@ -30,6 +33,8 @@ public class SettingsBean implements Serializable {
     JobSeekerLoginFacadeLocal jobSeekerLoginFacade;
     @EJB
     JobSeekerFacadeLocal jobSeekerFacade;
+    @EJB
+    JobFacadeLocal jobFacadeLocal;
 
     /**
      * Creates a new instance of SettingsBean
@@ -40,7 +45,12 @@ public class SettingsBean implements Serializable {
     public String deleteAccount() {
         JobSeekerLogin login = jobSeekerLoginFacade.find(loginInfo.getUserName());
         JobSeeker jobSeeker = loginInfo.getJobSeeker();
-        jobSeeker.getJobs().clear();
+        List<Job> jobs = jobSeeker.getJobs();
+        for(Job j : jobs) {
+            j.getJobSeekers().remove(jobSeeker);
+            jobFacadeLocal.edit(j);
+        }
+        jobs.clear();
         jobSeekerFacade.edit(jobSeeker);
         jobSeekerLoginFacade.remove(login);
         jobSeekerFacade.remove(jobSeeker);

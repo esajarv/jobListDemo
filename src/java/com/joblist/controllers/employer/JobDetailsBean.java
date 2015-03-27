@@ -43,6 +43,7 @@ public class JobDetailsBean implements Serializable {
     public void setJob(Job job) {
         this.job = job;
         applicants = null;
+        applyURL = null;
     }
     
     public List<JobSeeker> getJobSeekers() {

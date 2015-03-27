@@ -21,10 +21,10 @@
                 <h:outputText value="#{job.title}" />
             </p:column>
             <p:column style="width: 3em">
-                <p:commandLink rendered="#{!job.closed}" update="jobsTable" action="#{employerHomeBean.closeJob(job)}" >
+                <p:commandLink rendered="#{!employerHomeBean.isClosed(job)}" update="jobsTable" action="#{employerHomeBean.closeJob(job)}" >
                     <h:outputText style="color: blue" value="close" />
                 </p:commandLink>
-                <h:outputText rendered="#{job.closed}" value="closed" style="color: graytext" />
+                <h:outputText rendered="#{employerHomeBean.isClosed(job)}" value="closed" style="color: graytext" />
             </p:column>
             <p:column style="width: 3em">
                 <p:commandLink action="#{employerHomeBean.showDetailsPage(job)}" >

@@ -62,6 +62,28 @@ public class HomeBean implements Serializable{
         return !jobIDs.isEmpty();
     }
     
+    public String getJobState(Job job)
+    {
+        String state;
+        switch(job.getState()) {
+            case Job.STATE_OPEN:
+                state = "Open"; 
+                break;
+            case Job.STATE_CLOSED:
+                state = "Closed";
+                break;
+            case Job.STATE_CANCELLED:
+                state = "Cancelled";
+                break;
+            case Job.STATE_DONE:
+                state = "Done";
+                break;
+            default:
+                state = "Error";
+        }
+        return state;
+    }
+    
     public Iterable<Job> getAppliedToListJobs() {
         if (appliedToList == null) {
             JobSeeker js = loginInfo.getJobSeeker();
@@ -95,7 +117,7 @@ public class HomeBean implements Serializable{
     
     public void addJobID(Long jobID) {
         Job j = jobFacade.find(jobID);
-        if (j != null && !j.isClosed()) {
+        if (j != null && j.getState() == Job.STATE_OPEN) {
             jobIDs.put(jobID, j);
             jobs.put(j, jobID);
         }
