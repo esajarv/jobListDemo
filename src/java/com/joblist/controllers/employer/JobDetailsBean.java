@@ -22,6 +22,7 @@ import javax.faces.context.FacesContext;
 public class JobDetailsBean implements Serializable {
     private Job job;
     private String applyURL;
+    private int state;
     List<JobSeeker> applicants;
 
     /**
@@ -65,6 +66,20 @@ public class JobDetailsBean implements Serializable {
             
         }
         return applyURL;
+    }
+
+    /**
+     * @return the state
+     */
+    public int getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(int state) {
+        this.state = state;
     }
     
 }
