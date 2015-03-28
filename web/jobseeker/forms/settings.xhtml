@@ -13,10 +13,17 @@
         <title>Settings</title>
     </h:head>
     <h:body>
+	<f:facet name="last">
+            <h:outputStylesheet library="css" name="settings.css" />
+            <h:outputStylesheet library="css" name="changepasswordpanel.css" />
+	</f:facet>        
         <ui:include src="titlebar.xhtml" />
-        <h:form>
+        <h:form prependId="false">
+            <ui:include src="../../shared/changepasswordpanel.xhtml" >
+                <ui:param name="changePasswordBean" value="#{jobSeekerSettingsBean}" />
+            </ui:include>
             <p:commandLink action="#{jobSeekerSettingsBean.deleteAccount()}" >
-                <h:outputText style="color: blue" value="delete account" />
+                <h:outputText value="delete account" />
                 <p:confirm header="Confirm delete" message="All you data stored here is destroyed. Are you sure?" icon="ui-icon-alert" />
             </p:commandLink>
             <p:confirmDialog global="true" closeOnEscape="true" showEffect="fade" hideEffect="explode">

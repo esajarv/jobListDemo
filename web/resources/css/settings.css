@@ -7,8 +7,3 @@ and open the template in the editor.
     Created on : Mar 28, 2015, 10:08:35 AM
     Author     : esa
 */
-
- #change_password_form tr, #change_password_form td {
-     border-style: none;
-     background-color: transparent;
- }
