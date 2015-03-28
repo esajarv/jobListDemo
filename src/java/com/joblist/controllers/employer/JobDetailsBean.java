@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  *
@@ -28,6 +29,8 @@ public class JobDetailsBean implements Serializable {
     List<JobSeeker> applicants;
     @EJB
     JobFacadeLocal jobFacade;
+    @Inject
+    ApplicantDetailsBean applicantDetailsBean;
 
     /**
      * Creates a new instance of JobDetailsBean
@@ -65,6 +68,11 @@ public class JobDetailsBean implements Serializable {
     public String submit() {
         jobFacade.edit(job);
         return "jobdetails?faces-redirect=true";
+    }
+    
+    public String showDetailsPage(JobSeeker applicant) {
+        applicantDetailsBean.setApplicant(applicant);
+        return "applicantdetails?faces-redirect=true";
     }
 
     /**

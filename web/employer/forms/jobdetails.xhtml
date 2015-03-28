@@ -49,6 +49,11 @@
             <p:column headerText="Email">
                 <p:link  href="mailto:#{jobseeker.email}" value="#{jobseeker.email}" />
             </p:column>
+            <p:column style="text-align:center;width: 3em">
+                <p:commandLink action="#{employerJobDetailsBean.showDetailsPage(jobseeker)}" >
+                    <h:outputText value="details" />
+                </p:commandLink>
+            </p:column>
         </p:dataTable>        
     </h:body>
 </html>

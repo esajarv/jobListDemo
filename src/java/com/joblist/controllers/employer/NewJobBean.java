@@ -60,7 +60,7 @@ public class NewJobBean implements Serializable {
     }
     
     public String getSubmitText() {
-        return "Submit";
+        return "Add";
     }
     
     public void submit() {

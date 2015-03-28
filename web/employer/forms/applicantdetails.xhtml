@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{employerTitleBarBean.withBrowserHistoryBackShow(false)}" />
+    </f:metadata>    
+    <h:head>
+        <title>#{employerApplicantDetailsBean.applicant.lastname}, #{employerApplicantDetailsBean.applicant.firstname}</title>
+    </h:head>
+    <h:body>
+        <ui:include src="titlebar.xhtml" />
+        <h1>#{employerApplicantDetailsBean.applicant.lastname}, #{employerApplicantDetailsBean.applicant.firstname}</h1>
+        <p:panelGrid>
+            <f:facet name="header">
+                <p:row>
+                    <p:column colspan="4">Personal Information</p:column>
+                </p:row>
+            </f:facet>
+            <p:row>
+                <p:column>First Name:</p:column>
+                <p:column>#{employerApplicantDetailsBean.applicant.firstname}</p:column>
+                <p:column>Last Name:</p:column>
+                <p:column>#{employerApplicantDetailsBean.applicant.lastname}</p:column>
+            </p:row>
+            <p:row>
+                <p:column>Street:</p:column>
+                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.street}</p:column>
+            </p:row>
+            <p:row>
+                <p:column>Postal Code:</p:column>
+                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.postalCode}</p:column>
+            </p:row>
+            <p:row>
+                <p:column>City:</p:column>
+                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.city}</p:column>
+            </p:row>
+            <p:row>
+                <p:column>Email:</p:column>
+                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.email}</p:column>
+            </p:row>
+            <p:row>
+                <p:column>Phone:</p:column>
+                <p:column colspan="3" >#{employerApplicantDetailsBean.applicant.phone}</p:column>
+            </p:row>
+            <p:row>
+                <p:column>Info:</p:column>
+                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.info}</p:column>
+            </p:row>
+        </p:panelGrid>
+    </h:body>
+</html>
+
