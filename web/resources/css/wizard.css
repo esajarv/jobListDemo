@@ -16,9 +16,9 @@ and open the template in the editor.
      text-align: right;
  }
  
- .confirmation-grid tr, .confirmation-grid td {
-     border-style: none !important;
-     background-color: transparent !important
+ #confirmation-grid tr, #confirmation-grid td {
+     border-style: none;
+     background-color: transparent;
  }
 
  

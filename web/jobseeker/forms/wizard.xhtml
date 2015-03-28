@@ -15,7 +15,7 @@
             <h:outputStylesheet library="css" name="wizard.css" />
 	</f:facet>
         <ui:include src="titlebar.xhtml" />        
-        <h:form>
+        <h:form prependId="false">
             <p:wizard flowListener="#{wizardBean.onFlowProcess}" >
                 <p:tab id="personal" title="Personal information" >
                     <h:panelGrid columns="3" columnClasses="label, value, message"> 
@@ -59,7 +59,7 @@
                 </p:tab>
  
                 <p:tab id="confirm" title="Confirmation">
-                    <p:panelGrid styleClass="confirmation-grid">
+                    <p:panelGrid id="confirmation-grid">
                         <f:facet name="header">
                             <p:row>
                                 <p:column colspan="4">Personal Information</p:column>
