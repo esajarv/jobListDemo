@@ -42,6 +42,27 @@ public class HomeBean implements Serializable {
         return job.getState() == Job.STATE_CLOSED;
     }
     
+    public String getJobState(Job job) {
+        String state;
+        switch(job.getState()) {
+            case Job.STATE_OPEN:
+                state = "Open"; 
+                break;
+            case Job.STATE_CLOSED:
+                state = "Closed";
+                break;
+            case Job.STATE_CANCELLED:
+                state = "Cancelled";
+                break;
+            case Job.STATE_DONE:
+                state = "Done";
+                break;
+            default:
+                state = "Error";
+        }
+        return state;
+    }
+    
     public void closeJob(Job job) {
         job.setState(Job.STATE_CLOSED);
         jobFacade.edit(job);

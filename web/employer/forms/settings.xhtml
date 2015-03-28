@@ -13,10 +13,56 @@
         <title>Settings</title>
     </h:head>
     <h:body>
+	<f:facet name="last">
+            <h:outputStylesheet library="css" name="settings.css" />
+	</f:facet>
         <ui:include src="titlebar.xhtml" />
-        <h:form>
+        <h:form id="change_password_form">
+            <p:growl id="growl" globalOnly="true" life="2000"  showDetail="false" sticky="false" />
+            <p:panelGrid id="change_password" style="margin-bottom: 20px">
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="old_pwd" value="Old Password: *" />
+                    </p:column>
+                    <p:column>
+                        <p:password id="old_pwd" binding="#{employerSettingsBean.passwordField}" 
+                                    value="#{employerSettingsBean.oldPassword}" required="true" />
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:message for="old_pwd" display="icon" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="pwd1" value="New Password: *" />
+                    </p:column>
+                    <p:column>
+                        <p:password id="pwd1" value="#{employerSettingsBean.newPassword}" match="pwd2" label="'Password'" required="true" />
+                    </p:column>
+                    <p:column colspan="2">
+                        <p:message for="pwd1" display="icon" />
+                    </p:column>
+                </p:row>
+                <p:row>
+                    <p:column>
+                        <h:outputLabel for="pwd2" value="Retype New password: *" />
+                    </p:column>
+                    <p:column>
+                        <p:password id="pwd2" value="#{employerSettingsBean.newPassword}" label="'Retype Password'" required="true" />
+                    </p:column>
+                    <p:column>
+                        <p:message for="pwd2" display="icon" />
+                    </p:column>
+                    <p:column>
+                        <p:commandButton id="register_button" value="Change" 
+                                                     process="change_password"
+                                                     update="change_password, :change_password_form:growl"
+                                                     action="#{employerSettingsBean.changePassword()}" />
+                    </p:column>
+                </p:row>
+            </p:panelGrid>
             <p:commandLink action="#{employerSettingsBean.deleteAccount()}" >
-                <h:outputText style="color: blue" value="delete account" />
+                <h:outputText value="delete account" />
                 <p:confirm header="Confirm delete" message="All you data stored here is destroyed. Are you sure?" icon="ui-icon-alert" />
             </p:commandLink>
             <p:confirmDialog global="true" closeOnEscape="true" showEffect="fade" hideEffect="explode">

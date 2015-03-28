@@ -62,6 +62,7 @@ public class LoginBean {
     }
     
     public String login() {
+        FacesContext fc = FacesContext.getCurrentInstance();
         EmployerLogin tmp = loginManager.authenticate(login);
         if (tmp != null) {
             login = tmp;
@@ -73,8 +74,7 @@ public class LoginBean {
         }
         FacesMessage msg = new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "Invalid user or password. Try Again.", "Invalid user or password. Try Again.");
-            FacesContext.getCurrentInstance().addMessage(loginButton.getClientId(
-                    FacesContext.getCurrentInstance()), msg);
+        fc.addMessage(loginButton.getClientId(fc), msg);
         return null;
     }
 
