@@ -26,6 +26,7 @@ public class JobDetailsBean implements Serializable {
     private Job job;
     private String applyURL;
     List<JobSeeker> applicants;
+    private int state;
     @EJB
     JobFacadeLocal jobFacade;
     @Inject
@@ -48,26 +49,35 @@ public class JobDetailsBean implements Serializable {
      * @param job the job to set
      */
     public void setJob(Job job) {
-        this.job = jobFacade.find(job.getId());
+        this.job = job;
+        state = job.getState();
         applicants = null;
         applyURL = null;
     }
     
+    public boolean getStateNeedSave() {
+        return state != job.getState();
+    }
+    
     public List<JobSeeker> getJobSeekers() {
         if (applicants == null) {
-            applicants = job.getJobSeekers();
+            applicants = jobFacade.find(job.getId()).getJobSeekers();
         }
         return applicants;
     }
     
     public String refresh() {
-        this.job = jobFacade.find(job.getId());
         applicants = null;
         return "jobdetails";
     }
     
     public String getSubmitText() {
         return "Change";
+    }
+    
+    public void updateValue() {
+        job.setState(state);
+        jobFacade.edit(job);
     }
     
     public String submit() {
@@ -89,8 +99,37 @@ public class JobDetailsBean implements Serializable {
             applyURL = serverRoot 
                     + "jobseeker/forms/apply.xhtml?jobid="
                     + job.getId();
-            
         }
         return applyURL;
+    }
+    
+    public boolean stateDisabled(int state) {
+        switch(job.getState()) {
+            case Job.STATE_OPEN:
+                return false;
+            case Job.STATE_CLOSED:
+                return state == Job.STATE_CANCELLED;
+            case Job.STATE_CANCELLED:
+                return state == Job.STATE_CLOSED ||
+                       state == Job.STATE_DONE;
+            case Job.STATE_DONE:
+                return !(state == Job.STATE_DONE);
+            default:
+                return true;
+        }
+    }
+
+    /**
+     * @return the state
+     */
+    public int getState() {
+        return state;
+    }
+
+    /**
+     * @param state the state to set
+     */
+    public void setState(int state) {
+        this.state = state;
     }
 }

@@ -47,6 +47,7 @@ public class SettingsBean implements Serializable {
     }
     
     public String deleteAccount() {
+        System.out.println("delete account");
         EmployerLogin login = loginInfo.getLogin();
         jobFacade.cancelAll(login.getId());
         loginFacade.remove(login);

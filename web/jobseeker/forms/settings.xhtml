@@ -22,6 +22,8 @@
             <ui:include src="../../shared/changepasswordpanel.xhtml" >
                 <ui:param name="changePasswordBean" value="#{jobSeekerSettingsBean}" />
             </ui:include>
+        </h:form>
+        <h:form>
             <p:commandLink action="#{jobSeekerSettingsBean.deleteAccount()}" >
                 <h:outputText value="delete account" />
                 <p:confirm header="Confirm delete" message="All you data stored here is destroyed. Are you sure?" icon="ui-icon-alert" />

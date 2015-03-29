@@ -24,26 +24,36 @@
                     <p:inputTextarea id="apply-url" cols="30" readonly="true" value="#{employerJobDetailsBean.applyURL}" />
                 </div>
             </div>
-        </h:form>
-        <h1 style="margin-bottom: 5px"><p:link  href="#{employerJobDetailsBean.job.advertisementLink}" value="#{employerJobDetailsBean.job.title}" /> </h1>
-        <h:form>
+            <h1 style="margin-bottom: 5px">
+                <p:link  href="#{employerJobDetailsBean.job.advertisementLink}" value="#{employerJobDetailsBean.job.title}" /> 
+            </h1>
             <div style="margin-bottom: 15px">
                 <p:commandLink action="editjob.xhtml?faces-redirect=true">
                     <h:outputText value="Edit" />
                 </p:commandLink>
             </div>
-
-            <p:selectOneButton value="#{employerJobDetailsBean.job.state}">
-                <f:selectItem itemLabel="Close" itemValue="1" />
-                <f:selectItem itemLabel="Done" itemValue="3" />
-                <f:selectItem itemLabel="Cancel" itemValue="2" />
+        </h:form>
+        <h:form>
+            <p:selectOneButton id="state" value="#{employerJobDetailsBean.state}" onchange="submit()" >
+                <f:selectItem itemLabel="Close" itemValue="1" itemDisabled="#{employerJobDetailsBean.stateDisabled(1)}"  />
+                <f:selectItem itemLabel="Done" itemValue="3" itemDisabled="#{employerJobDetailsBean.stateDisabled(3)}"   />
+                <f:selectItem itemLabel="Cancel" itemValue="2" itemDisabled="#{employerJobDetailsBean.stateDisabled(2)}" />
             </p:selectOneButton>
-        
+            <p:commandButton id="save" 
+                             icon="ui-icon-disk" value="Save" 
+                             disabled="#{!employerJobDetailsBean.stateNeedSave}"
+                             process="state,save" update="state,save"
+                             style="font-size: small"
+                             action="#{employerJobDetailsBean.updateValue()}" />
+        </h:form>
+        <h:form>
             <h2 style="margin-bottom: 5px">Applicants
-                <h:commandLink action="#{employerJobDetailsBean.refresh()}">
+                <p:commandLink action="#{employerJobDetailsBean.refresh()}">
                     <i style="display: inline-block;" class="ui-icon ui-icon-refresh" />
-                </h:commandLink>
+                </p:commandLink>
             </h2>
+        </h:form>
+        <h:form>
             <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No-one has applied to this job yet.">
                 <p:column>
                     <f:facet name="header">
