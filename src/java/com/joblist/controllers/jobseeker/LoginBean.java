@@ -25,6 +25,7 @@ import javax.inject.Named;
 public class LoginBean implements Serializable{
     @EJB JobSeekerLoginManager loginManager;
     private JobSeekerLogin login = new JobSeekerLogin();
+    private String password;
     private String jobID;
     private UIComponent loginButton;
 
@@ -52,23 +53,30 @@ public class LoginBean implements Serializable{
      * @return the password
      */
     public String getPassword() {
-        return login.getPassword();
+        return password;
     }
 
     /**
      * @param password the password to set
      */
     public void setPassword(String password) {
-        login.setPassword(password);
+        this.password = password;
     }
     
     public String login()
     {
-        JobSeekerLogin tmp = loginManager.authenticate(login);
+        FacesContext fc = FacesContext.getCurrentInstance();
+        JobSeekerLogin tmp = null;
+        try {
+            tmp = loginManager.authenticate(login, password);
+        } catch (Exception ex) {
+            fc.addMessage(null, new FacesMessage("login failed for unknown reasons. Try again later.", 
+                    "login failed for unknown reasons. Try again later."));
+            return null;
+        }
         if (tmp != null) {
             login = tmp;
-            Map<String, Object> sessionMap = 
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+            Map<String, Object> sessionMap = fc.getExternalContext().getSessionMap();
             sessionMap.put("jobseeker", login.getJobSeeker());
             sessionMap.put("j_username", login.getUsername());
             
@@ -82,8 +90,7 @@ public class LoginBean implements Serializable{
         }
         FacesMessage msg = new FacesMessage(
                 FacesMessage.SEVERITY_ERROR, "Invalid user or password. Try Again.", "Invalid user or password. Try Again.");
-            FacesContext.getCurrentInstance().addMessage(loginButton.getClientId(
-                    FacesContext.getCurrentInstance()), msg);
+        fc.addMessage(loginButton.getClientId(fc), msg);
         return null;
     }
     

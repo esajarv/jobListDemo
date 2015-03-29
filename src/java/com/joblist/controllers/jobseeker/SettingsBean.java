@@ -73,16 +73,17 @@ public class SettingsBean implements Serializable {
     {
         FacesContext fc = FacesContext.getCurrentInstance();
         JobSeekerLogin login = jobSeekerLoginFacade.find(loginInfo.getUserName());
-        login.setPassword(oldPassword);
-        if (loginManager.authenticate(login) != null) {
-            login.setPassword(newPassword);
-            loginFacade.edit(login);
-            FacesContext.getCurrentInstance().addMessage(null, 
-                    new FacesMessage("Password changed."));
-        } else {
-            FacesMessage msg = new FacesMessage(
-                FacesMessage.SEVERITY_ERROR, "Invalid password", "Invalid password");
-            fc.addMessage(passwordField.getClientId(fc), msg);
+        try {
+            if (loginManager.authenticate(login, oldPassword) != null) {
+                loginManager.changePassword(login, newPassword);
+                fc.addMessage(null, new FacesMessage("Password changed."));
+            } else {
+                FacesMessage msg = new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, "Invalid password", "Invalid password");
+                fc.addMessage(passwordField.getClientId(fc), msg);
+            }
+        } catch(Exception e) {
+            fc.addMessage(null, new FacesMessage("Changing the password failed."));
         }
         oldPassword = null;
         newPassword = null;

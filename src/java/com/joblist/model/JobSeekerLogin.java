@@ -23,7 +23,12 @@ public class JobSeekerLogin implements Serializable {
     @Id
     private String username;
     @NotNull
-    private String password;
+    private byte[] password;
+    @NotNull
+    private byte[] IV;
+    @NotNull
+    private byte[] salt;
+    
     @OneToOne(cascade = CascadeType.ALL)
     private JobSeeker jobSeeker;
 
@@ -69,14 +74,14 @@ public class JobSeekerLogin implements Serializable {
     /**
      * @return the password
      */
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
     /**
      * @param password the password to set
      */
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.password = password;
     }
 
@@ -99,5 +104,33 @@ public class JobSeekerLogin implements Serializable {
      */
     public void setJobSeeker(JobSeeker jobSeeker) {
         this.jobSeeker = jobSeeker;
+    }
+
+    /**
+     * @return the IV
+     */
+    public byte[] getIV() {
+        return IV;
+    }
+
+    /**
+     * @param IV the IV to set
+     */
+    public void setIV(byte[] IV) {
+        this.IV = IV;
+    }
+
+    /**
+     * @return the salt
+     */
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    /**
+     * @param salt the salt to set
+     */
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 }

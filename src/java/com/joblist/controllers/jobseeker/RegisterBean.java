@@ -25,6 +25,7 @@ public class RegisterBean {
     @EJB JobSeekerLoginManager loginManager;
     private JobSeekerLogin login = new JobSeekerLogin();
     private UIComponent userNameInput;
+    private String password;
     private String email;
     
     public UIComponent getUserNameInput() {
@@ -58,11 +59,11 @@ public class RegisterBean {
     }
     
     public String getPassword() {
-        return login.getPassword();
+        return password;
     }
     
     public void setPassword(String password) {
-        login.setPassword(password);
+        this.password = password;
     }
     
     public void register() {
@@ -75,10 +76,16 @@ public class RegisterBean {
             JobSeeker jobSeeker = new JobSeeker();
             jobSeeker.setEmail(email);
             login.setJobSeeker(jobSeeker);
-            loginManager.register(login);
+            try {
+                loginManager.register(login, password);
+            } catch (Exception ex) {
+                fc.addMessage(null, new FacesMessage("Register failed. Try again later.", 
+                        "Register failed. Try again later."));
+                return;
+            }
+            fc.addMessage(null, new FacesMessage("register successful", "You can now log in"));
             login = new JobSeekerLogin();
             email = null;
-            fc.addMessage(null, new FacesMessage("register successful", "You can now log in"));
         }
     }
 }

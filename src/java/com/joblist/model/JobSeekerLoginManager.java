@@ -6,6 +6,7 @@
 package com.joblist.model;
 
 import com.joblist.model.facades.JobSeekerLoginFacadeLocal;
+import java.security.SecureRandom;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -18,12 +19,15 @@ public class JobSeekerLoginManager {
     @EJB
     JobSeekerLoginFacadeLocal jobSeekerLoginFacade;
     
-    public JobSeekerLogin authenticate(JobSeekerLogin login) {
+    public JobSeekerLogin authenticate(JobSeekerLogin login, String password) throws Exception {
         JobSeekerLogin jsl = jobSeekerLoginFacade.find(login.getUsername());
         if (jsl == null) {
             return null;
         }
-        if (login.getPassword().compareTo(jsl.getPassword()) == 0) {
+        if (PasswordEncryptor.match(password,
+                jsl.getPassword(),
+                jsl.getIV(),
+                jsl.getSalt())) {
             return jsl;
         }
         return null;
@@ -33,7 +37,21 @@ public class JobSeekerLoginManager {
         return jobSeekerLoginFacade.find(userName) != null;
     }
     
-    public void register(JobSeekerLogin login) {
+    public void changePassword(JobSeekerLogin login, String password) throws Exception {
+        byte result[][] = PasswordEncryptor.encrypt(password, new SecureRandom());
+        login.setPassword(result[0]);
+        login.setIV(result[1]);
+        login.setSalt(result[2]);
+        
+        jobSeekerLoginFacade.edit(login);
+    }
+    
+    public void register(JobSeekerLogin login, String password) throws Exception {
+        byte result[][] = PasswordEncryptor.encrypt(password, new SecureRandom());
+        login.setPassword(result[0]);
+        login.setIV(result[1]);
+        login.setSalt(result[2]);
+        
         jobSeekerLoginFacade.create(login);
     }
 }
