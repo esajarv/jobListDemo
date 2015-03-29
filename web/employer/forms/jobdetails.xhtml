@@ -33,28 +33,35 @@
                 </p:commandLink>
             </div>
 
-            <p:selectOneButton value="#{employerJobDetailsBean.state}">
+            <p:selectOneButton value="#{employerJobDetailsBean.job.state}">
                 <f:selectItem itemLabel="Close" itemValue="1" />
                 <f:selectItem itemLabel="Done" itemValue="3" />
                 <f:selectItem itemLabel="Cancel" itemValue="2" />
             </p:selectOneButton>
+        
+            <h2 style="margin-bottom: 5px">Applicants
+                <h:commandLink action="#{employerJobDetailsBean.refresh()}">
+                    <i style="display: inline-block;" class="ui-icon ui-icon-refresh" />
+                </h:commandLink>
+            </h2>
+            <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No-one has applied to this job yet.">
+                <p:column>
+                    <f:facet name="header">
+                        Name
+                    </f:facet>
+                    <h:outputText value="#{jobseeker.lastname}, #{jobseeker.firstname}" />
+                </p:column>
+                <p:column headerText="CV" width="10px" style="width: 20px">
+                </p:column>
+                <p:column headerText="Email">
+                    <p:link  href="mailto:#{jobseeker.email}" value="#{jobseeker.email}" />
+                </p:column>
+                <p:column style="text-align:center;width: 3em">
+                    <p:commandLink action="#{employerJobDetailsBean.showDetailsPage(jobseeker)}" >
+                        <h:outputText value="details" />
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
         </h:form>
-        <h2>Applicants</h2>
-        <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No-one has applied to this job yet.">
-            <p:column headerText="Name" >
-                <h:outputText value="#{jobseeker.lastname}, #{jobseeker.firstname}" />
-            </p:column>
-            <p:column headerText="CV" width="10px" style="width: 20px">
-            </p:column>
-            <p:column headerText="Email">
-                <p:link  href="mailto:#{jobseeker.email}" value="#{jobseeker.email}" />
-            </p:column>
-            <p:column style="text-align:center;width: 3em">
-                <p:commandLink action="#{employerJobDetailsBean.showDetailsPage(jobseeker)}" >
-                    <h:outputText value="details" />
-                </p:commandLink>
-            </p:column>
-        </p:dataTable>        
     </h:body>
 </html>
-

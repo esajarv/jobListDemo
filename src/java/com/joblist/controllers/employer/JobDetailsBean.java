@@ -25,7 +25,6 @@ import javax.inject.Inject;
 public class JobDetailsBean implements Serializable {
     private Job job;
     private String applyURL;
-    private int state;
     List<JobSeeker> applicants;
     @EJB
     JobFacadeLocal jobFacade;
@@ -49,7 +48,7 @@ public class JobDetailsBean implements Serializable {
      * @param job the job to set
      */
     public void setJob(Job job) {
-        this.job = job;
+        this.job = jobFacade.find(job.getId());
         applicants = null;
         applyURL = null;
     }
@@ -59,6 +58,12 @@ public class JobDetailsBean implements Serializable {
             applicants = job.getJobSeekers();
         }
         return applicants;
+    }
+    
+    public String refresh() {
+        this.job = jobFacade.find(job.getId());
+        applicants = null;
+        return "jobdetails";
     }
     
     public String getSubmitText() {
@@ -88,19 +93,4 @@ public class JobDetailsBean implements Serializable {
         }
         return applyURL;
     }
-
-    /**
-     * @return the state
-     */
-    public int getState() {
-        return state;
-    }
-
-    /**
-     * @param state the state to set
-     */
-    public void setState(int state) {
-        this.state = state;
-    }
-    
 }

@@ -23,6 +23,8 @@ public interface JobFacadeLocal {
     void remove(Job job);
 
     Job find(Object id);
+    
+    void refresh(Job job);
 
     List<Job> findAll();
     List<Job> findAll(Object employerId);
