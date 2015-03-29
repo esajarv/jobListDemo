@@ -24,6 +24,7 @@ public class RegisterBean {
     @EJB EmployerLoginManager loginManager;
     private EmployerLogin login = new EmployerLogin();
     private UIComponent userNameInput;
+    private String password;
     
     /**
      * Creates a new instance of RegisterBean
@@ -56,11 +57,11 @@ public class RegisterBean {
     }
     
     public String getPassword() {
-        return login.getPassword();
+        return password;
     }
     
     public void setPassword(String password) {
-        login.setPassword(password);
+        this.password = password;
     }
     
     public void register() {
@@ -70,9 +71,15 @@ public class RegisterBean {
                     FacesMessage.SEVERITY_ERROR, "User name is reserved", "User name is reserved");
             fc.addMessage(userNameInput.getClientId(fc), msg);
         } else {
-            loginManager.register(login);
-            login = new EmployerLogin();
+            try {
+                loginManager.register(login, password);
+            } catch (Exception ex) {
+                fc.addMessage(null, new FacesMessage("Register failed. Try again later.", 
+                        "Register failed. Try again later."));
+                return;
+            }
             fc.addMessage(null, new FacesMessage("register successful", "You can now log in"));
+            login = new EmployerLogin();
         }
     }
 }

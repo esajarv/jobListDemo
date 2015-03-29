@@ -26,6 +26,7 @@ public class LoginBean {
     @EJB 
     EmployerLoginManager loginManager;
     private UIComponent loginButton;
+    private String password;
 
     /**
      * Creates a new instance of LoginBean
@@ -51,19 +52,26 @@ public class LoginBean {
      * @return the password
      */
     public String getPassword() {
-        return login.getPassword();
+        return password;
     }
 
     /**
      * @param password the password to set
      */
     public void setPassword(String password) {
-        login.setPassword(password);
+        this.password = password;
     }
     
     public String login() {
         FacesContext fc = FacesContext.getCurrentInstance();
-        EmployerLogin tmp = loginManager.authenticate(login);
+        EmployerLogin tmp;
+        try {
+            tmp = loginManager.authenticate(login, password);
+        } catch (Exception e) {
+            fc.addMessage(null, new FacesMessage("login failed for unknown reasons. Try again later.", 
+                    "login failed for unknown reasons. Try again later."));
+            return null;
+        }
         if (tmp != null) {
             login = tmp;
             Map<String, Object> sessionMap = 

@@ -66,7 +66,7 @@ public class LoginBean implements Serializable{
     public String login()
     {
         FacesContext fc = FacesContext.getCurrentInstance();
-        JobSeekerLogin tmp = null;
+        JobSeekerLogin tmp;
         try {
             tmp = loginManager.authenticate(login, password);
         } catch (Exception ex) {

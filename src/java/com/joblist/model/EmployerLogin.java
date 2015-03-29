@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -25,7 +26,12 @@ public class EmployerLogin implements Serializable {
     private Long id;
     @Column(unique=true)
     private String username;
-    private String password;
+    @NotNull
+    private byte[] password;
+    @NotNull
+    private byte[] IV;
+    @NotNull
+    private byte[] salt;
     private String email;
 
     @Override
@@ -65,14 +71,14 @@ public class EmployerLogin implements Serializable {
     /**
      * @return the password
      */
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
     /**
      * @param password the password to set
      */
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.password = password;
     }
 
@@ -107,6 +113,34 @@ public class EmployerLogin implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the IV
+     */
+    public byte[] getIV() {
+        return IV;
+    }
+
+    /**
+     * @param IV the IV to set
+     */
+    public void setIV(byte[] IV) {
+        this.IV = IV;
+    }
+
+    /**
+     * @return the salt
+     */
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    /**
+     * @param salt the salt to set
+     */
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
     
 }
