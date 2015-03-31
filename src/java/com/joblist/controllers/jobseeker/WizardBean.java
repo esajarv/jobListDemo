@@ -5,8 +5,10 @@
  */
 package com.joblist.controllers.jobseeker;
 
+import com.joblist.model.CVStoreLocal;
 import com.joblist.model.JobSeeker;
 import com.joblist.model.facades.JobSeekerFacadeLocal;
+import java.io.IOException;
 import javax.inject.Named;
 import java.io.Serializable;
 import javax.annotation.PostConstruct;
@@ -31,6 +33,9 @@ public class WizardBean implements Serializable {
     @Inject LoginInfoBean loginInfo;
     @EJB
     JobSeekerFacadeLocal jobSeekerFacade;
+    @EJB
+    CVStoreLocal CVStore;
+    
     private JobSeeker applicant;
     private UploadedFile CV;
     
@@ -55,10 +60,21 @@ public class WizardBean implements Serializable {
     }
     
     public void upload(FileUploadEvent event) {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        
+        try {
+            CVStore.storeCV(event.getFile().getFileName(), 
+                    applicant.getId(), event.getFile().getInputstream());
+        } catch (IOException e) {
+            FacesMessage message = new FacesMessage("uploading failed.");
+            fc.addMessage(null, message);
+            return;
+        }
         FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        fc.addMessage(null, message);
+        System.out.println("upload done");
     }
-    
+
     public String save() {
         applicant.setWizardSubmitted(true);
         jobSeekerFacade.edit(applicant);

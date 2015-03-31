@@ -15,7 +15,8 @@
             <h:outputStylesheet library="css" name="wizard.css" />
 	</f:facet>
         <ui:include src="titlebar.xhtml" />        
-        <h:form prependId="false">
+        <h:form id="form" prependId="false">
+            <p:growl id="growl" globalOnly="true" life="2000"  showDetail="true" sticky="false" />
             <p:wizard flowListener="#{wizardBean.onFlowProcess}" >
                 <p:tab id="personal" title="Personal information" >
                     <h:panelGrid columns="3" columnClasses="label, value, message"> 
@@ -52,8 +53,12 @@
                     <p:messages />
                     <h:panelGrid columns="1">
                         <h:form enctype="multipart/form-data">
-                            <p:fileUpload value="#{wizardBean.CV}" label="Select CV" mode="advanced" required="true" requiredMessage="CV is required." 
-                                          fileUploadListener="#{wizardBean.upload}" fileLimit="1" />
+                            <p:fileUpload id="file-upload"  value="#{wizardBean.CV}" label="Select CV" mode="advanced" auto="true"  required="true" requiredMessage="CV is required." 
+                                          allowTypes="/(\.|\/)(pdf)$/" 
+                                          sizeLimit="50000"
+                                          update=":form:growl"
+                                          invalidSizeMessage="too big file"
+                                          fileUploadListener="#{wizardBean.upload}" fileLimit="100" />
                         </h:form>
                     </h:panelGrid>
                 </p:tab>

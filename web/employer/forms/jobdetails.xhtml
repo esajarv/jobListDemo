@@ -53,7 +53,8 @@
                 </p:commandLink>
             </h2>
         </h:form>
-        <h:form>
+        <h:form id="jobseekers">
+            <p:growl id="growl" globalOnly="true" life="2000"  showDetail="true" sticky="false" />
             <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No-one has applied to this job yet.">
                 <p:column>
                     <f:facet name="header">
@@ -61,7 +62,10 @@
                     </f:facet>
                     <h:outputText value="#{jobseeker.lastname}, #{jobseeker.firstname}" />
                 </p:column>
-                <p:column headerText="CV" width="10px" style="width: 20px">
+                <p:column headerText="CV" width="40px" style="width: 40px">
+                    <p:commandButton style="font: smaller" update=":jobseekers:growl" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                        <p:fileDownload value="#{employerJobDetailsBean.getCVFile(jobseeker)}" />
+                    </p:commandButton>
                 </p:column>
                 <p:column headerText="Email">
                     <p:link  href="mailto:#{jobseeker.email}" value="#{jobseeker.email}" />

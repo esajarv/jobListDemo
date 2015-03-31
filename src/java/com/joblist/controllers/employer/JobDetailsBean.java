@@ -5,16 +5,24 @@
  */
 package com.joblist.controllers.employer;
 
+import com.joblist.model.CVStoreLocal;
 import com.joblist.model.Job;
 import com.joblist.model.JobSeeker;
 import com.joblist.model.facades.JobFacadeLocal;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -29,6 +37,8 @@ public class JobDetailsBean implements Serializable {
     private int state;
     @EJB
     JobFacadeLocal jobFacade;
+    @EJB
+    CVStoreLocal CVStore;
     @Inject
     ApplicantDetailsBean applicantDetailsBean;
 
@@ -131,5 +141,23 @@ public class JobDetailsBean implements Serializable {
      */
     public void setState(int state) {
         this.state = state;
+    }
+
+    /**
+     * @param applicant
+     * @return the CV File
+     */
+    public StreamedContent getCVFile(JobSeeker applicant) {
+        System.out.println("getCVFile: " + applicant.getId());
+        StreamedContent file = null;
+        try {
+            InputStream in = CVStore.loadCV(applicant.getId());
+            file = new DefaultStreamedContent(in, "application/pdf", "cv.pdf");
+        } catch (IOException ex) {
+            FacesMessage message = new FacesMessage("download failed.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+        
+        return file;
     }
 }
