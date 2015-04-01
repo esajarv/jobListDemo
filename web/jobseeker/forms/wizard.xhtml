@@ -50,16 +50,18 @@
                     </h:panelGrid>
                 </p:tab>
                 <p:tab id="cv" title="CV" >
-                    <p:messages />
                     <h:panelGrid columns="1">
-                        <h:form enctype="multipart/form-data">
-                            <p:fileUpload id="file-upload"  value="#{wizardBean.CV}" label="Select CV" mode="advanced" auto="true"  required="true" requiredMessage="CV is required." 
+                        <h:form prependId="false" enctype="multipart/form-data">
+                            <p:fileUpload id="file-upload"  value="#{wizardBean.CV}" label="Select CV" 
+                                          mode="advanced" auto="true"  required="true" requiredMessage="CV is required."
                                           allowTypes="/(\.|\/)(pdf)$/" 
                                           sizeLimit="50000"
-                                          update=":form:growl"
+                                          update=":form:growl,:form:CV-name"
                                           invalidSizeMessage="too big file"
                                           fileUploadListener="#{wizardBean.upload}" />
                         </h:form>
+                        <p:inputText id="CV-name" readonly="true" value="#{wizardBean.CVName}"
+                                     required="true" requiredMessage="CV is required." />
                     </h:panelGrid>
                 </p:tab>
  

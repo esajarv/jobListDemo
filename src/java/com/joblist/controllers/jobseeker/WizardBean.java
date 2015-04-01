@@ -38,6 +38,7 @@ public class WizardBean implements Serializable {
     
     private JobSeeker applicant;
     private UploadedFile CV;
+    private String CVName;
     
     public WizardBean() {
     }
@@ -59,6 +60,10 @@ public class WizardBean implements Serializable {
         this.CV = CV;
     }
     
+    public String getCVName() {
+        return CVName;
+    }
+    
     public void upload(FileUploadEvent event) {
         FacesContext fc = FacesContext.getCurrentInstance();
         
@@ -72,7 +77,7 @@ public class WizardBean implements Serializable {
         }
         FacesMessage message = new FacesMessage("Succesful", event.getFile().getFileName() + " is uploaded.");
         fc.addMessage(null, message);
-        System.out.println("upload done");
+        CVName = event.getFile().getFileName();
     }
 
     public String save() {
