@@ -5,6 +5,7 @@
  */
 package com.joblist.controllers.jobseeker;
 
+import com.joblist.model.CVStoreLocal;
 import com.joblist.model.Job;
 import com.joblist.model.JobSeeker;
 import com.joblist.model.JobSeekerLogin;
@@ -47,6 +48,8 @@ public class SettingsBean implements Serializable {
     JobSeekerLoginManager loginManager;
     @EJB
     JobSeekerLoginFacadeLocal loginFacade;
+    @EJB
+    CVStoreLocal CVStore;
 
     /**
      * Creates a new instance of SettingsBean
@@ -57,6 +60,7 @@ public class SettingsBean implements Serializable {
     public String deleteAccount() {
         JobSeekerLogin login = jobSeekerLoginFacade.find(loginInfo.getUserName());
         JobSeeker jobSeeker = loginInfo.getJobSeeker();
+        CVStore.remove(jobSeeker.getId());
         List<Job> jobs = jobSeeker.getJobs();
         for(Job j : jobs) {
             j.getJobSeekers().remove(jobSeeker);

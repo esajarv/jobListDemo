@@ -11,6 +11,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 
@@ -32,19 +36,8 @@ public class CVStore implements CVStoreLocal {
     
     @Override
     public void storeCV(String fileName, Long id, InputStream in) throws IOException {
-        String filePath = CV_directory + id + ".pdf";
-        
-        File f = new File(filePath);
-        OutputStream out = new FileOutputStream(f);
-
-        int read;
-        byte[] bytes = new byte[1024];
-        while ((read = in.read(bytes)) != -1) {
-            out.write(bytes, 0, read);
-        }
-        in.close();
-        out.flush();
-        out.close();
+        Path path = Paths.get(CV_directory, id + ".pdf");
+        Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
     }
     
     @Override
@@ -56,5 +49,12 @@ public class CVStore implements CVStoreLocal {
             in = new FileInputStream(f);
         }
         return in;
+    }
+    
+    @Override
+    public boolean remove(Long id) {
+        String filePath = CV_directory + id + ".pdf";
+        File f = new File(filePath);
+        return f.delete();
     }
 }
