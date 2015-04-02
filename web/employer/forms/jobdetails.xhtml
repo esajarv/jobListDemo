@@ -6,76 +6,76 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-    <f:metadata>
-        <f:event type="preRenderView" listener="#{employerTitleBarBean.show(false, 'home?faces-redirect=true')}" />
-    </f:metadata>
-    <h:head>
-        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-        <title>#{employerJobDetailsBean.job.title}</title>
-    </h:head>
     <h:body>
-        <ui:include src="titlebar.xhtml" />
-        <h:form>
-            <div style="position: absolute; right: 0px;">
-                <div>
-                    Job Apply URL:
-                </div>
-                <div>
-                    <p:inputTextarea id="apply-url" cols="30" readonly="true" value="#{employerJobDetailsBean.applyURL}" />
-                </div>
-            </div>
-            <h1 style="margin-bottom: 5px">
-                <p:link  href="#{employerJobDetailsBean.job.advertisementLink}" value="#{employerJobDetailsBean.job.title}" /> 
-            </h1>
-            <div style="margin-bottom: 15px">
-                <p:commandLink action="editjob.xhtml?faces-redirect=true">
-                    <h:outputText value="Edit" />
-                </p:commandLink>
-            </div>
-        </h:form>
-        <h:form>
-            <p:selectOneButton id="state" value="#{employerJobDetailsBean.state}" onchange="submit()" >
-                <f:selectItem itemLabel="Close" itemValue="1" itemDisabled="#{employerJobDetailsBean.stateDisabled(1)}"  />
-                <f:selectItem itemLabel="Done" itemValue="2" itemDisabled="#{employerJobDetailsBean.stateDisabled(2)}"   />
-                <f:selectItem itemLabel="Cancel" itemValue="3" itemDisabled="#{employerJobDetailsBean.stateDisabled(3)}" />
-            </p:selectOneButton>
-            <p:commandButton id="save" 
-                             icon="ui-icon-disk" value="Save" 
-                             disabled="#{!employerJobDetailsBean.stateNeedSave}"
-                             process="state,save" update="state,save"
-                             style="font-size: small"
-                             action="#{employerJobDetailsBean.updateValue()}" />
-        </h:form>
-        <h:form>
-            <h2 style="margin-bottom: 5px">Applicants
-                <p:commandLink action="#{employerJobDetailsBean.refresh()}">
-                    <i style="display: inline-block;" class="ui-icon ui-icon-refresh" />
-                </p:commandLink>
-            </h2>
-        </h:form>
-        <h:form id="jobseekers">
-            <p:growl id="growl" globalOnly="true" life="2000"  showDetail="true" sticky="false" />
-            <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No-one has applied to this job yet.">
-                <p:column>
-                    <f:facet name="header">
-                        Name
-                    </f:facet>
-                    <h:outputText value="#{jobseeker.lastname}, #{jobseeker.firstname}" />
-                </p:column>
-                <p:column headerText="CV" width="40px" style="width: 40px">
-                    <p:commandButton style="font: smaller; border: none;background-color: transparent" update=":jobseekers:growl" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
-                        <p:fileDownload value="#{employerJobDetailsBean.getCVFile(jobseeker)}" />
-                    </p:commandButton>
-                </p:column>
-                <p:column headerText="Email">
-                    <p:link  href="mailto:#{jobseeker.email}" value="#{jobseeker.email}" />
-                </p:column>
-                <p:column style="text-align:center;width: 3em">
-                    <p:commandLink action="#{employerJobDetailsBean.showDetailsPage(jobseeker)}" >
-                        <h:outputText value="details" />
-                    </p:commandLink>
-                </p:column>
-            </p:dataTable>
-        </h:form>
+        <ui:composition template="maintemplate.xhtml">
+            <ui:param name="title" value="#{employerJobDetailsBean.job.title}" />
+            <ui:define name="titlebar">
+                <p:menuitem value="back" icon="fa fa-arrow-left" action="home?faces-redirect=true" />
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <div style="position: absolute; right: 0px;">
+                        <div>
+                            Job Apply URL:
+                        </div>
+                        <div>
+                            <p:inputTextarea id="apply-url" cols="30" readonly="true" value="#{employerJobDetailsBean.applyURL}" />
+                        </div>
+                    </div>
+                    <h1 style="margin-bottom: 5px">
+                        <p:link  href="#{employerJobDetailsBean.job.advertisementLink}" value="#{employerJobDetailsBean.job.title}" /> 
+                    </h1>
+                    <div style="margin-bottom: 15px">
+                        <p:commandLink action="editjob.xhtml?faces-redirect=true">
+                            <h:outputText value="Edit" />
+                        </p:commandLink>
+                    </div>
+                </h:form>
+                <h:form>
+                    <p:selectOneButton id="state" value="#{employerJobDetailsBean.state}" onchange="submit()" >
+                        <f:selectItem itemLabel="Close" itemValue="1" itemDisabled="#{employerJobDetailsBean.stateDisabled(1)}"  />
+                        <f:selectItem itemLabel="Done" itemValue="2" itemDisabled="#{employerJobDetailsBean.stateDisabled(2)}"   />
+                        <f:selectItem itemLabel="Cancel" itemValue="3" itemDisabled="#{employerJobDetailsBean.stateDisabled(3)}" />
+                    </p:selectOneButton>
+                    <p:commandButton id="save" 
+                                     icon="ui-icon-disk" value="Save" 
+                                     disabled="#{!employerJobDetailsBean.stateNeedSave}"
+                                     process="state,save" update="state,save"
+                                     style="font-size: small"
+                                     action="#{employerJobDetailsBean.updateValue()}" />
+                </h:form>
+                <h:form>
+                    <h2 style="margin-bottom: 5px">Applicants
+                        <p:commandLink action="#{employerJobDetailsBean.refresh()}">
+                            <i style="display: inline-block;" class="ui-icon ui-icon-refresh" />
+                        </p:commandLink>
+                    </h2>
+                </h:form>
+                <h:form id="jobseekers">
+                    <p:growl id="growl" globalOnly="true" life="2000"  showDetail="true" sticky="false" />
+                    <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobseekers" var="jobseeker" value="#{employerJobDetailsBean.jobSeekers}" emptyMessage="No-one has applied to this job yet.">
+                        <p:column>
+                            <f:facet name="header">
+                                Name
+                            </f:facet>
+                            <h:outputText value="#{jobseeker.lastname}, #{jobseeker.firstname}" />
+                        </p:column>
+                        <p:column headerText="CV" width="40px" style="width: 40px">
+                            <p:commandButton style="font: smaller; border: none;background-color: transparent" update=":jobseekers:growl" onclick="PrimeFaces.monitorDownload(start, stop);" icon="ui-icon-arrowthick-1-s">
+                                <p:fileDownload value="#{employerJobDetailsBean.getCVFile(jobseeker)}" />
+                            </p:commandButton>
+                        </p:column>
+                        <p:column headerText="Email">
+                            <p:link  href="mailto:#{jobseeker.email}" value="#{jobseeker.email}" />
+                        </p:column>
+                        <p:column style="text-align:center;width: 3em">
+                            <p:commandLink action="#{employerJobDetailsBean.showDetailsPage(jobseeker)}" >
+                                <h:outputText value="details" />
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>

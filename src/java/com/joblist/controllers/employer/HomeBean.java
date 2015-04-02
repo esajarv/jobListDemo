@@ -63,11 +63,6 @@ public class HomeBean implements Serializable {
         return state;
     }
     
-    public void closeJob(Job job) {
-        job.setState(Job.STATE_CLOSED);
-        jobFacade.edit(job);
-    }
-    
     public void notifyJobsModified() {
         jobs = null;
     }

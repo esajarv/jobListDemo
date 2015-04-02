@@ -6,29 +6,28 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-    <f:metadata>
-        <f:event type="preRenderView" listener="#{employerTitleBarBean.show(true)}" />
-    </f:metadata>
-    <h:head>
-        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-        <title>Home</title>
-    </h:head>
     <h:body>
-        <ui:include src="titlebar.xhtml" />
-
-        <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobsTable" value="#{employerHomeBean.jobs}" emptyMessage="No jobs" var="job">
-            <p:column headerText="Your Jobs" >
-                <h:outputText value="#{job.title}" />
-            </p:column>
-            <p:column style="text-align:center;width: 5em">
-                <h:outputText value="#{employerHomeBean.getJobState(job)}" />
-            </p:column>
-            <p:column style="text-align:center;width: 3em">
-                <p:commandLink action="#{employerHomeBean.showDetailsPage(job)}" >
-                    <h:outputText value="details" />
-                </p:commandLink>
-            </p:column>
-        </p:dataTable>
+        <ui:composition template="maintemplate.xhtml">
+            <ui:param name="title" value="Home" />
+            <ui:define name="titlebar">
+                <p:menuitem value="Add new job" url="newjob.xhtml" icon="ui-icon-pencil" />                
+            </ui:define>
+            <ui:define name="content">
+                <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobsTable" value="#{employerHomeBean.jobs}" emptyMessage="No jobs" var="job">
+                    <p:column headerText="Your Jobs" >
+                        <h:outputText value="#{job.title}" />
+                    </p:column>
+                    <p:column style="text-align:center;width: 5em">
+                        <h:outputText value="#{employerHomeBean.getJobState(job)}" />
+                    </p:column>
+                    <p:column style="text-align:center;width: 3em">
+                        <p:commandLink action="#{employerHomeBean.showDetailsPage(job)}" >
+                            <h:outputText value="details" />
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

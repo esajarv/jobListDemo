@@ -6,32 +6,32 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-    <f:metadata>
-        <f:event type="preRenderView" listener="#{employerTitleBarBean.show(false, 'home?faces-redirect=true')}" />
-    </f:metadata>
-    <h:head>
-        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>        
-        <title>Add new job</title>
-    </h:head>
     <h:body>
-        <ui:include src="titlebar.xhtml" />
-        <h:form>
-            <ui:include src="editjobpanel.xhtml">
-                <ui:param name="editJobBean" value="#{newJobBean}" />
-                <ui:param name="submitButtonExtraUpdate" value="apply-url" />
-            </ui:include>
-            <div>
-                <div>
-                    Job Apply URL:
-                </div>
-                <div>
-                    <p:inputTextarea id="apply-url" readonly="true" cols="40" value="#{newJobBean.applyURL}" />
-                </div>
-                <div style="font-size: small">
-                    Add a link to this URL to your job advertisement page. 
-                </div>
-            </div>
-        </h:form>
+        <ui:composition template="maintemplate.xhtml">
+            <ui:param name="title" value="Add new job" />
+            <ui:define name="titlebar">
+                <p:menuitem value="back" icon="fa fa-arrow-left" action="home?faces-redirect=true" />
+            </ui:define>
+            <ui:define name="content">
+                <h:form>
+                    <ui:include src="editjobpanel.xhtml">
+                        <ui:param name="editJobBean" value="#{newJobBean}" />
+                        <ui:param name="submitButtonExtraUpdate" value="apply-url" />
+                    </ui:include>
+                    <p:outputPanel>
+                        <p:outputPanel>
+                            Job Apply URL:
+                        </p:outputPanel>
+                        <p:outputPanel>
+                            <p:inputTextarea id="apply-url" readonly="true" cols="40" value="#{newJobBean.applyURL}" />
+                        </p:outputPanel>
+                        <p:outputPanel style="font-size: small">
+                            Add a link to this URL to your job advertisement page. 
+                        </p:outputPanel>
+                    </p:outputPanel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

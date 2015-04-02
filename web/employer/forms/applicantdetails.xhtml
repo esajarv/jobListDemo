@@ -6,52 +6,53 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-    <f:metadata>
-        <f:event type="preRenderView" listener="#{employerTitleBarBean.withBrowserHistoryBackShow(false)}" />
-    </f:metadata>    
-    <h:head>
-        <title>#{employerApplicantDetailsBean.applicant.lastname}, #{employerApplicantDetailsBean.applicant.firstname}</title>
-    </h:head>
     <h:body>
-        <ui:include src="titlebar.xhtml" />
-        <h1>#{employerApplicantDetailsBean.applicant.lastname}, #{employerApplicantDetailsBean.applicant.firstname}</h1>
-        <p:panelGrid>
-            <f:facet name="header">
-                <p:row>
-                    <p:column colspan="4">Personal Information</p:column>
-                </p:row>
-            </f:facet>
-            <p:row>
-                <p:column>First Name:</p:column>
-                <p:column>#{employerApplicantDetailsBean.applicant.firstname}</p:column>
-                <p:column>Last Name:</p:column>
-                <p:column>#{employerApplicantDetailsBean.applicant.lastname}</p:column>
-            </p:row>
-            <p:row>
-                <p:column>Street:</p:column>
-                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.street}</p:column>
-            </p:row>
-            <p:row>
-                <p:column>Postal Code:</p:column>
-                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.postalCode}</p:column>
-            </p:row>
-            <p:row>
-                <p:column>City:</p:column>
-                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.city}</p:column>
-            </p:row>
-            <p:row>
-                <p:column>Email:</p:column>
-                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.email}</p:column>
-            </p:row>
-            <p:row>
-                <p:column>Phone:</p:column>
-                <p:column colspan="3" >#{employerApplicantDetailsBean.applicant.phone}</p:column>
-            </p:row>
-            <p:row>
-                <p:column>Info:</p:column>
-                <p:column colspan="3">#{employerApplicantDetailsBean.applicant.info}</p:column>
-            </p:row>
-        </p:panelGrid>
+        <ui:composition template="maintemplate.xhtml">
+            <ui:param name="title" value="#{employerApplicantDetailsBean.applicant.lastname}, #{employerApplicantDetailsBean.applicant.firstname}" />
+            <ui:define name="titlebar">
+                <p:menuitem value="Back" icon="fa fa-arrow-left" onclick="window.history.back()" />                
+            </ui:define>
+            <ui:define name="content">
+                <h1>#{employerApplicantDetailsBean.applicant.lastname}, #{employerApplicantDetailsBean.applicant.firstname}</h1>
+                <p:panelGrid>
+                    <f:facet name="header">
+                        <p:row>
+                            <p:column colspan="4">Personal Information</p:column>
+                        </p:row>
+                    </f:facet>
+                    <p:row>
+                        <p:column>First Name:</p:column>
+                        <p:column>#{employerApplicantDetailsBean.applicant.firstname}</p:column>
+                        <p:column>Last Name:</p:column>
+                        <p:column>#{employerApplicantDetailsBean.applicant.lastname}</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>Street:</p:column>
+                        <p:column colspan="3">#{employerApplicantDetailsBean.applicant.street}</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>Postal Code:</p:column>
+                        <p:column colspan="3">#{employerApplicantDetailsBean.applicant.postalCode}</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>City:</p:column>
+                        <p:column colspan="3">#{employerApplicantDetailsBean.applicant.city}</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>Email:</p:column>
+                        <p:column colspan="3">#{employerApplicantDetailsBean.applicant.email}</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>Phone:</p:column>
+                        <p:column colspan="3" >#{employerApplicantDetailsBean.applicant.phone}</p:column>
+                    </p:row>
+                    <p:row>
+                        <p:column>Info:</p:column>
+                        <p:column colspan="3">#{employerApplicantDetailsBean.applicant.info}</p:column>
+                    </p:row>
+                </p:panelGrid>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 
