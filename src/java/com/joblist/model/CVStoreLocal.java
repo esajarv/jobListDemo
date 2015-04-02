@@ -17,5 +17,5 @@ import javax.ejb.Local;
 public interface CVStoreLocal {
     public void storeCV(String fileName, Long id, InputStream in) throws IOException;
     public InputStream loadCV(Long id) throws IOException;
-    public boolean remove(Long id);
+    public boolean remove(Long id) throws IOException;
 }

@@ -16,15 +16,7 @@
     <h:body>
         <ui:include src="titlebar.xhtml" />
         <h:form id = "form" >
-            <p:dataTable id="appliedTo" tableStyle="table-layout: fixed; max-width: 500px;margin-bottom: 10px" var="e" value="#{jobSeekerHomeBean.appliedToListJobs}">
-                <p:column headerText="Jobs applied to">
-                    <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
-                </p:column>
-                <p:column style="width: 5em">
-                    <h:outputText value="#{jobSeekerHomeBean.getJobState(e)}" />
-                </p:column>
-            </p:dataTable>
-            <p:dataTable id="applyList" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobSeekerHomeBean.applyListJobs}">
+            <p:dataTable id="applyList" tableStyle="table-layout: fixed; max-width: 500px; margin-bottom: 10px" var="e" value="#{jobSeekerHomeBean.applyListJobs}">
                 <p:column headerText="Apply list">
                     <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
                 </p:column>
@@ -37,6 +29,14 @@
                     <p:commandLink action="#{jobSeekerHomeBean.removeJob(e.id)}" update="applyList">
                         <h:outputText value="Remove" />
                     </p:commandLink>
+                </p:column>
+            </p:dataTable>            
+            <p:dataTable id="appliedTo" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobSeekerHomeBean.appliedToListJobs}">
+                <p:column headerText="Jobs applied to">
+                    <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
+                </p:column>
+                <p:column style="width: 5em">
+                    <h:outputText value="#{jobSeekerHomeBean.getJobState(e)}" />
                 </p:column>
             </p:dataTable>
         </h:form>

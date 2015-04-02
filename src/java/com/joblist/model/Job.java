@@ -6,12 +6,15 @@
 package com.joblist.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -21,8 +24,8 @@ import javax.persistence.ManyToMany;
 public class Job implements Serializable {
     public static final int STATE_OPEN = 0;      //open for apply
     public static final int STATE_CLOSED = 1;    //closed for apply
-    public static final int STATE_CANCELLED = 2; //cancelled
-    public static final int STATE_DONE = 3;      //employee found
+    public static final int STATE_DONE = 2;      //employee found
+    public static final int STATE_CANCELLED = 3; //cancelled
     
     private static final long serialVersionUID = 1L;
     @Id
@@ -32,7 +35,9 @@ public class Job implements Serializable {
     private Long employerID;
     private String title;
     private String advertisementLink;
-    private int state;
+    private int jobState;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created;
     
     @ManyToMany(mappedBy = "jobs")
     private List<JobSeeker> jobSeekers;
@@ -102,14 +107,14 @@ public class Job implements Serializable {
      * @return the state
      */
     public int getState() {
-        return state;
+        return jobState;
     }
 
     /**
      * @param state the closed to set
      */
     public void setState(int state) {
-        this.state = state;
+        this.jobState = state;
     }
 
     /**
@@ -138,5 +143,19 @@ public class Job implements Serializable {
      */
     public void setJobSeekers(List<JobSeeker> jobSeekers) {
         this.jobSeekers = jobSeekers;
+    }
+
+    /**
+     * @return the created
+     */
+    public Date getCreated() {
+        return created;
+    }
+
+    /**
+     * @param created the created to set
+     */
+    public void setCreated(Date created) {
+        this.created = created;
     }
 }

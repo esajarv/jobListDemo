@@ -9,12 +9,12 @@
     <h:body>
         <header style="position: fixed;z-index: 100;left:0; top:0; width: 100%;">
             <h:form>
-                <p:menubar style="font-size:70%" >
+                <p:menubar style="font-size:80%" >
                     <p:menuitem value="Add new job" url="newjob.xhtml" icon="ui-icon-pencil" rendered="#{employerTitleBarBean.showAddJob}" />
                     <p:menuitem value="back" icon="fa fa-arrow-left" onclick="window.history.back()" rendered="#{employerTitleBarBean.showBrowserHistoryBack}"/>
                     <p:menuitem value="back" icon="fa fa-arrow-left" action="#{employerTitleBarBean.back()}" rendered="#{employerTitleBarBean.showBack}"/>
                     <f:facet name="options">
-                        <h:outputText style="color:red" value="demo  " />
+                        <h:outputText style="color:red" value="Demo  " />
                         <p:menuButton value="#{employerTitleBarBean.username}">
                             <p:menuitem value="Settings" icon="ui-icon-gear" action="settings.xhtml?faces-redirect=true"/>
                             <p:menuitem value="Log out" action="#{employerTitleBarBean.logout()}" icon="ui-icon-extlink" />

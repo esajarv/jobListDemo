@@ -39,6 +39,8 @@ public class JobDetailsBean implements Serializable {
     CVStoreLocal CVStore;
     @Inject
     ApplicantDetailsBean applicantDetailsBean;
+    @Inject
+    HomeBean homeBean;
 
     /**
      * Creates a new instance of JobDetailsBean
@@ -86,6 +88,7 @@ public class JobDetailsBean implements Serializable {
     public void updateValue() {
         job.setState(state);
         jobFacade.edit(job);
+        homeBean.notifyJobsModified();
     }
     
     public String submit() {

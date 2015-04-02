@@ -13,6 +13,7 @@ import com.joblist.model.JobSeekerLoginManager;
 import com.joblist.model.facades.JobFacadeLocal;
 import com.joblist.model.facades.JobSeekerFacadeLocal;
 import com.joblist.model.facades.JobSeekerLoginFacadeLocal;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -60,7 +61,10 @@ public class SettingsBean implements Serializable {
     public String deleteAccount() {
         JobSeekerLogin login = jobSeekerLoginFacade.find(loginInfo.getUserName());
         JobSeeker jobSeeker = loginInfo.getJobSeeker();
-        CVStore.remove(jobSeeker.getId());
+        try {
+            CVStore.remove(jobSeeker.getId());
+        } catch (IOException ex) {
+        }
         List<Job> jobs = jobSeeker.getJobs();
         for(Job j : jobs) {
             j.getJobSeekers().remove(jobSeeker);

@@ -24,37 +24,34 @@ import javax.faces.context.FacesContext;
  */
 @Stateless
 public class CVStore implements CVStoreLocal {
-    private String CV_directory;    
+    private final Path CV_directory;
     
     public CVStore() {
-        CV_directory = FacesContext.getCurrentInstance().getExternalContext()
+        String CV_dir = FacesContext.getCurrentInstance().getExternalContext()
                 .getInitParameter("CVSTORE.CV_DIRECTORY_PATH");
-        if (CV_directory == null || CV_directory.isEmpty()) {
-            CV_directory = System.getProperty("user.home") + "/CV/";
+        if (CV_dir == null || CV_dir.isEmpty()) {
+            CV_directory = Paths.get(System.getProperty("user.home"), "CV");
+            System.out.println("home: " + CV_directory);
+        } else {
+            CV_directory = Paths.get(CV_dir);
         }
     }
     
     @Override
     public void storeCV(String fileName, Long id, InputStream in) throws IOException {
-        Path path = Paths.get(CV_directory, id + ".pdf");
+        Path path = CV_directory.resolve(id + ".pdf");
         Files.copy(in, path, StandardCopyOption.REPLACE_EXISTING);
     }
     
     @Override
     public InputStream loadCV(Long id) throws IOException {
-        String filePath = CV_directory + id + ".pdf";
-        InputStream in = null;
-        File f = new File(filePath);
-        if (f.exists()) {
-            in = new FileInputStream(f);
-        }
-        return in;
+        Path path = CV_directory.resolve(id + ".pdf");
+        return Files.newInputStream(path);
     }
     
     @Override
-    public boolean remove(Long id) {
-        String filePath = CV_directory + id + ".pdf";
-        File f = new File(filePath);
-        return f.delete();
+    public boolean remove(Long id) throws IOException {
+        Path path = CV_directory.resolve(id + ".pdf");
+        return path.getFileSystem().provider().deleteIfExists(path);
     }
 }

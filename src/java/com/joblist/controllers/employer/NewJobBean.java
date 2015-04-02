@@ -8,6 +8,7 @@ package com.joblist.controllers.employer;
 import com.joblist.model.Job;
 import com.joblist.model.facades.JobFacadeLocal;
 import java.io.Serializable;
+import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
@@ -65,6 +66,7 @@ public class NewJobBean implements Serializable {
     
     public void submit() {
         job.setEmployerID(loginInfo.getLogin().getId());
+        job.setCreated(new Date());
         jobFacade.create(job);
         homeBean.notifyJobsModified();
         

@@ -31,7 +31,7 @@ public class JobFacade extends AbstractFacade<Job> implements JobFacadeLocal {
     
     @Override
     public List<Job> findAll(Object employerId) {
-        return em.createQuery("SELECT j FROM Job j WHERE j.employerID=?1", Job.class)
+        return em.createQuery("SELECT j FROM Job j WHERE j.employerID=?1 ORDER BY j.jobState, j.created DESC", Job.class)
                 .setParameter(1, employerId)
                 .getResultList();
     }
