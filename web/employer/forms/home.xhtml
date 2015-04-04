@@ -10,7 +10,7 @@
         <ui:composition template="maintemplate.xhtml">
             <ui:param name="title" value="Home" />
             <ui:define name="titlebar">
-                <p:menuitem value="Add new job" url="newjob.xhtml" icon="ui-icon-pencil" />                
+                <p:menuitem value="Add new job" url="newjob.xhtml" icon="ui-icon-pencil" />
             </ui:define>
             <ui:define name="content">
                 <p:dataTable tableStyle="table-layout: fixed; max-width: 500px" id="jobsTable" value="#{employerHomeBean.jobs}" emptyMessage="No jobs" var="job">

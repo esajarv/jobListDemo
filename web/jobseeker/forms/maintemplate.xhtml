@@ -1,19 +1,22 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       >
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <title>#{title}</title>
+    </h:head>
     <h:body>
         <header style="position: fixed;z-index: 100;left:0; top:0; width: 100%;">
             <h:form>
                 <p:menubar style="font-size:80%" >
-                    <p:menuitem value="Upload CV" icon="ui-icon-pencil" rendered="#{jobSeekerTitleBarBean.showUploadCV}" />
-                    <p:menuitem value="back" icon="fa fa-arrow-left" onclick="window.history.back()" rendered="#{jobSeekerTitleBarBean.showBrowserHistoryBack}"/>
+                    <ui:insert name="titlebar" />
                     <f:facet name="options">
-                        <h:outputText style="color:red" value="demo  " />
+                        <h:outputText style="color:red" value="Demo  " />
                         <p:menuButton value="#{jobSeekerTitleBarBean.username}">
                             <p:menuitem value="Settings" icon="ui-icon-gear" action="settings.xhtml?faces-redirect=true"/>
                             <p:menuitem value="Log out" action="#{jobSeekerTitleBarBean.logout()}" icon="ui-icon-extlink" />
@@ -23,6 +26,7 @@
             </h:form>
         </header>
         <div style="position: relative; height: 40px"> </div>
+        <ui:insert name="content" />
     </h:body>
-</ui:composition>
+</html>
 

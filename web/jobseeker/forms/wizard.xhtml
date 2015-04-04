@@ -6,113 +6,113 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-    <h:head>
-        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-        <title>Profile Form</title>
-    </h:head>
     <h:body>
-	<f:facet name="last">
-            <h:outputStylesheet library="css" name="wizard.css" />
-	</f:facet>
-        <ui:include src="titlebar.xhtml" />        
-        <h:form id="form" prependId="false">
-            <p:growl id="growl" globalOnly="true" life="2000"  showDetail="true" sticky="false" />
-            <p:wizard flowListener="#{wizardBean.onFlowProcess}" >
-                <p:tab id="personal" title="Personal information" >
-                    <h:panelGrid columns="3" columnClasses="label, value, message"> 
-                        <h:outputText value="First name: *" />
-                        <p:inputText id="firstname" value="#{wizardBean.applicant.firstname}" required="true" requiredMessage="field empty" />
-                        <p:message for="firstname" display="icon" />
+        <ui:composition template="maintemplate.xhtml">
+            <ui:param name="title" value="Profile" />
+            <ui:define name="content">
+                <f:facet name="last">
+                    <h:outputStylesheet library="css" name="wizard.css" />
+                </f:facet>
+                <h:form id="form" prependId="false">
+                    <p:growl id="growl" globalOnly="true" life="2000"  showDetail="true" sticky="false" />
+                    <p:wizard flowListener="#{wizardBean.onFlowProcess}" >
+                        <p:tab id="personal" title="Personal information" >
+                            <h:panelGrid columns="3" columnClasses="label, value, message"> 
+                                <h:outputText value="First name: *" />
+                                <p:inputText id="firstname" value="#{wizardBean.applicant.firstname}" required="true" requiredMessage="field empty" />
+                                <p:message for="firstname" display="icon" />
 
-                        <h:outputText value="Last name: *" />
-                        <p:inputText id="lastname" value="#{wizardBean.applicant.lastname}" required="true" requiredMessage="field empty"/>
-                        <p:message for="lastname" display="icon" />
+                                <h:outputText value="Last name: *" />
+                                <p:inputText id="lastname" value="#{wizardBean.applicant.lastname}" required="true" requiredMessage="field empty"/>
+                                <p:message for="lastname" display="icon" />
 
-                        <h:outputText value="Phone: *" />
-                        <p:inputText id="phone" value="#{wizardBean.applicant.phone}" required="true" requiredMessage="field empty" />
-                        <p:message for="phone" display="icon" />
+                                <h:outputText value="Phone: *" />
+                                <p:inputText id="phone" value="#{wizardBean.applicant.phone}" required="true" requiredMessage="field empty" />
+                                <p:message for="phone" display="icon" />
 
-                        <h:outputText value="Street: " />
-                        <p:inputText id="street"  value="#{wizardBean.applicant.street}" />
-                        <p:message for="street"/>
+                                <h:outputText value="Street: " />
+                                <p:inputText id="street"  value="#{wizardBean.applicant.street}" />
+                                <p:message for="street"/>
 
-                        <h:outputText value="Postal Code: " />
-                        <p:inputText id="postalcode"  value="#{wizardBean.applicant.postalCode}" />
-                        <p:message for="postalcode"/>
+                                <h:outputText value="Postal Code: " />
+                                <p:inputText id="postalcode"  value="#{wizardBean.applicant.postalCode}" />
+                                <p:message for="postalcode"/>
 
-                        <h:outputText value="City: " />
-                        <p:inputText id="city" value="#{wizardBean.applicant.city}" />
-                        <p:message for="city" />
+                                <h:outputText value="City: " />
+                                <p:inputText id="city" value="#{wizardBean.applicant.city}" />
+                                <p:message for="city" />
 
-                        <h:outputText value="Additional Info: " />
-                        <p:inputText id="additional" value="#{wizardBean.applicant.info}"/>
-                        <p:message for="additional"/>
-                    </h:panelGrid>
-                </p:tab>
-                <p:tab id="cv" title="CV" >
-                    <h:panelGrid columns="1">
-                        <h:form prependId="false" enctype="multipart/form-data">
-                            <p:fileUpload id="file-upload"  value="#{wizardBean.CV}" label="Select CV" 
-                                          mode="advanced" auto="true"  required="true" requiredMessage="CV is required."
-                                          allowTypes="/(\.|\/)(pdf)$/" 
-                                          sizeLimit="50000"
-                                          update=":form:growl,:form:CV-name"
-                                          invalidSizeMessage="too big file"
-                                          fileUploadListener="#{wizardBean.upload}" />
-                        </h:form>
-                        <p:inputText id="CV-name" readonly="true" value="#{wizardBean.CVName}"
-                                     required="true" requiredMessage="CV is required." />
-                    </h:panelGrid>
-                </p:tab>
- 
-                <p:tab id="confirm" title="Confirmation">
-                    <p:panelGrid id="confirmation-grid">
-                        <f:facet name="header">
-                            <p:row>
-                                <p:column colspan="4">Personal Information</p:column>
-                            </p:row>
-                        </f:facet>
-                        <p:row>
-                            <p:column>First Name:</p:column>
-                            <p:column>#{wizardBean.applicant.firstname}</p:column>
-                            <p:column>Last Name:</p:column>
-                            <p:column>#{wizardBean.applicant.lastname}</p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>Street:</p:column>
-                            <p:column colspan="3">#{wizardBean.applicant.street}</p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>Postal Code:</p:column>
-                            <p:column colspan="3">#{wizardBean.applicant.postalCode}</p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>City:</p:column>
-                            <p:column colspan="3">#{wizardBean.applicant.city}</p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>Email:</p:column>
-                            <p:column colspan="3">#{wizardBean.applicant.email}</p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>Phone:</p:column>
-                            <p:column colspan="3" >#{wizardBean.applicant.phone}</p:column>
-                        </p:row>
-                        <p:row>
-                            <p:column>Info:</p:column>
-                            <p:column colspan="3">#{wizardBean.applicant.info}</p:column>
-                        </p:row>
-                        <f:facet name="footer">
-                            <p:row>
-                                <p:column style="text-align:center" colspan="4">
-                                    <p:commandButton class="submit-button" value="Submit" action="#{wizardBean.save()}" />
-                                </p:column>
-                            </p:row>
-                        </f:facet>
-                    </p:panelGrid>
-                </p:tab>
-            </p:wizard>
-        </h:form>
+                                <h:outputText value="Additional Info: " />
+                                <p:inputText id="additional" value="#{wizardBean.applicant.info}"/>
+                                <p:message for="additional"/>
+                            </h:panelGrid>
+                        </p:tab>
+                        <p:tab id="cv" title="CV" >
+                            <h:panelGrid columns="1">
+                                <h:form prependId="false" enctype="multipart/form-data">
+                                    <p:fileUpload id="file-upload"  value="#{wizardBean.CV}" label="Select CV" 
+                                                  mode="advanced" auto="true"  required="true" requiredMessage="CV is required."
+                                                  allowTypes="/(\.|\/)(pdf)$/" 
+                                                  sizeLimit="50000"
+                                                  update=":form:growl,:form:CV-name"
+                                                  invalidSizeMessage="too big file"
+                                                  fileUploadListener="#{wizardBean.upload}" />
+                                </h:form>
+                                <p:inputText id="CV-name" readonly="true" value="#{wizardBean.CVName}"
+                                             required="true" requiredMessage="CV is required." />
+                            </h:panelGrid>
+                        </p:tab>
+
+                        <p:tab id="confirm" title="Confirmation">
+                            <p:panelGrid id="confirmation-grid">
+                                <f:facet name="header">
+                                    <p:row>
+                                        <p:column colspan="4">Personal Information</p:column>
+                                    </p:row>
+                                </f:facet>
+                                <p:row>
+                                    <p:column>First Name:</p:column>
+                                    <p:column>#{wizardBean.applicant.firstname}</p:column>
+                                    <p:column>Last Name:</p:column>
+                                    <p:column>#{wizardBean.applicant.lastname}</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>Street:</p:column>
+                                    <p:column colspan="3">#{wizardBean.applicant.street}</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>Postal Code:</p:column>
+                                    <p:column colspan="3">#{wizardBean.applicant.postalCode}</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>City:</p:column>
+                                    <p:column colspan="3">#{wizardBean.applicant.city}</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>Email:</p:column>
+                                    <p:column colspan="3">#{wizardBean.applicant.email}</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>Phone:</p:column>
+                                    <p:column colspan="3" >#{wizardBean.applicant.phone}</p:column>
+                                </p:row>
+                                <p:row>
+                                    <p:column>Info:</p:column>
+                                    <p:column colspan="3">#{wizardBean.applicant.info}</p:column>
+                                </p:row>
+                                <f:facet name="footer">
+                                    <p:row>
+                                        <p:column style="text-align:center" colspan="4">
+                                            <p:commandButton class="submit-button" value="Submit" action="#{wizardBean.save()}" />
+                                        </p:column>
+                                    </p:row>
+                                </f:facet>
+                            </p:panelGrid>
+                        </p:tab>
+                    </p:wizard>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

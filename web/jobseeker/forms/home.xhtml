@@ -6,40 +6,40 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui"
       >
-    <f:metadata>
-        <f:event type="preRenderView" listener="#{jobSeekerTitleBarBean.show(false)}" />
-    </f:metadata>
-    <h:head>
-        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>        
-        <title>home</title>
-    </h:head>
     <h:body>
-        <ui:include src="titlebar.xhtml" />
-        <h:form id = "form" >
-            <p:dataTable id="applyList" tableStyle="table-layout: fixed; max-width: 500px; margin-bottom: 10px" var="e" value="#{jobSeekerHomeBean.applyListJobs}">
-                <p:column headerText="Apply list">
-                    <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
-                </p:column>
-                <p:column style="width: 3em">
-                    <p:commandLink action="#{jobSeekerHomeBean.applyJob(e.id)}" update=":form:appliedTo,applyList">
-                        <h:outputText value="Apply" />
-                    </p:commandLink>
-                </p:column>
-                <p:column style="width: 4em">
-                    <p:commandLink action="#{jobSeekerHomeBean.removeJob(e.id)}" update="applyList">
-                        <h:outputText value="Remove" />
-                    </p:commandLink>
-                </p:column>
-            </p:dataTable>            
-            <p:dataTable id="appliedTo" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobSeekerHomeBean.appliedToListJobs}">
-                <p:column headerText="Jobs applied to">
-                    <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
-                </p:column>
-                <p:column style="width: 5em">
-                    <h:outputText value="#{jobSeekerHomeBean.getJobState(e)}" />
-                </p:column>
-            </p:dataTable>
-        </h:form>
+        <ui:composition template="maintemplate.xhtml">
+            <ui:param name="title" value="Home" />
+            <ui:define name="titlebar">
+                <p:menuitem value="Edit profile" url="wizard.xhtml" icon="ui-icon-pencil" />
+            </ui:define>            
+            <ui:define name="content">
+                <h:form id = "form" >
+                    <p:dataTable id="applyList" tableStyle="table-layout: fixed; max-width: 500px; margin-bottom: 10px" var="e" value="#{jobSeekerHomeBean.applyListJobs}">
+                        <p:column headerText="Apply list">
+                            <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
+                        </p:column>
+                        <p:column style="width: 3em">
+                            <p:commandLink action="#{jobSeekerHomeBean.applyJob(e.id)}" update=":form:appliedTo,applyList">
+                                <h:outputText value="Apply" />
+                            </p:commandLink>
+                        </p:column>
+                        <p:column style="width: 4em">
+                            <p:commandLink action="#{jobSeekerHomeBean.removeJob(e.id)}" update="applyList">
+                                <h:outputText value="Remove" />
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>
+                    <p:dataTable id="appliedTo" tableStyle="table-layout: fixed; max-width: 500px" var="e" value="#{jobSeekerHomeBean.appliedToListJobs}">
+                        <p:column headerText="Jobs applied to">
+                            <p:link  href="#{e.advertisementLink}" value="#{e.title}" />
+                        </p:column>
+                        <p:column style="width: 5em">
+                            <h:outputText value="#{jobSeekerHomeBean.getJobState(e)}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

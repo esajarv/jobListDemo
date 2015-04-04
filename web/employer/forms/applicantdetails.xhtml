@@ -10,7 +10,7 @@
         <ui:composition template="maintemplate.xhtml">
             <ui:param name="title" value="#{employerApplicantDetailsBean.applicant.lastname}, #{employerApplicantDetailsBean.applicant.firstname}" />
             <ui:define name="titlebar">
-                <p:menuitem value="Back" icon="fa fa-arrow-left" onclick="window.history.back()" />                
+                <p:menuitem value="Back" icon="fa fa-arrow-left" onclick="window.history.back()" />
             </ui:define>
             <ui:define name="content">
                 <h1>#{employerApplicantDetailsBean.applicant.lastname}, #{employerApplicantDetailsBean.applicant.firstname}</h1>
