@@ -11,9 +11,12 @@
         <title>#{title}</title>
     </h:head>
     <h:body>
+        <f:facet name="last">
+            <h:outputStylesheet library="css" name="common.css" />
+        </f:facet>
         <header style="position: fixed;z-index: 100;left:0; top:0; width: 100%;">
             <h:form>
-                <p:menubar style="font-size:80%" >
+                <p:menubar style="font-size:95%" >
                     <ui:insert name="titlebar" />
                     <f:facet name="options">
                         <h:outputText style="color:red" value="Demo  " />
